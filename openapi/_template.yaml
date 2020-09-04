@@ -1,0 +1,8 @@
+includes:
+  - base.openapi.yaml
+  - common.parameters.yaml
+  - common.responses.yaml
+  - common.schemas.yaml
+  - common.response-headers.yaml
+  - common.security-schemes.yaml
+  - channels/_template.yaml

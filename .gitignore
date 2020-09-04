@@ -1,0 +1,7 @@
+/bin
+/.gobincache
+/slack-specs
+/.idea
+.DS_store
+reports/
+__debug_bin
