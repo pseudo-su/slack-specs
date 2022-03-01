@@ -122,15 +122,15 @@ paths:
             application/json:
               schema:
                 title: reactions.get success schema
+                description: Schema for successful response from reactions.get method
                 type: object
-                properties:
-                  temp_oneof_01:
+                oneOf:
+                  - type: object
                     required:
-                    - channel
-                    - message
-                    - ok
-                    - type
-                    type: object
+                      - channel
+                      - message
+                      - ok
+                      - type
                     properties:
                       channel:
                         $ref: '#/components/schemas/defs_channel'
@@ -142,12 +142,11 @@ paths:
                         type: string
                         enum:
                         - message
-                  temp_oneof_02:
+                  - type: object
                     required:
                     - file
                     - ok
                     - type
-                    type: object
                     properties:
                       file:
                         $ref: '#/components/schemas/objs_file'
@@ -157,13 +156,12 @@ paths:
                         type: string
                         enum:
                         - file
-                  temp_oneof_03:
+                  - type: object
                     required:
                     - comment
                     - file
                     - ok
                     - type
-                    type: object
                     properties:
                       comment:
                         $ref: '#/components/schemas/objs_comment'
@@ -175,7 +173,6 @@ paths:
                         type: string
                         enum:
                         - file_comment
-                description: Schema for successful response from reactions.get method
         default:
           description: Typical error response
           content:
