@@ -1,0 +1,175 @@
+paths:
+  /pins.add:
+    post:
+      tags:
+      - pins
+      description: Pins an item to a channel.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/pins.add
+      operationId: pins_add
+      parameters:
+      - name: token
+        in: header
+        description: 'Authentication token. Requires scope: `pins:write`'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+              - channel
+              properties:
+                channel:
+                  type: string
+                  description: Channel to pin the item in.
+                timestamp:
+                  type: string
+                  description: Timestamp of the message to pin.
+          application/json:
+            schema:
+              required:
+              - channel
+              properties:
+                channel:
+                  type: string
+                  description: Channel to pin the item in.
+                timestamp:
+                  type: string
+                  description: Timestamp of the message to pin.
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: pins.add schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from pins.add method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: pins.add error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from pins.add method
+      security:
+      - slackAuth:
+        - pins:write
+  /pins.list:
+    get:
+      tags:
+      - pins
+      description: Lists items pinned to a channel.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/pins.list
+      operationId: pins_list
+      parameters:
+      - name: token
+        in: query
+        description: 'Authentication token. Requires scope: `pins:read`'
+        required: true
+        schema:
+          type: string
+      - name: channel
+        in: query
+        description: Channel to get pinned items for.
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: pins.list success schema
+                type: object
+                description: Schema for successful response from pins.list method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: pins.list error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from pins.list method
+      security:
+      - slackAuth:
+        - pins:read
+  /pins.remove:
+    post:
+      tags:
+      - pins
+      description: Un-pins an item from a channel.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/pins.remove
+      operationId: pins_remove
+      parameters:
+      - name: token
+        in: header
+        description: 'Authentication token. Requires scope: `pins:write`'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+              - channel
+              properties:
+                channel:
+                  type: string
+                  description: Channel where the item is pinned to.
+                timestamp:
+                  type: string
+                  description: Timestamp of the message to un-pin.
+          application/json:
+            schema:
+              required:
+              - channel
+              properties:
+                channel:
+                  type: string
+                  description: Channel where the item is pinned to.
+                timestamp:
+                  type: string
+                  description: Timestamp of the message to un-pin.
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: pins.remove schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from pins.remove method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: pins.remove error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from pins.remove method
+      security:
+      - slackAuth:
+        - pins:write

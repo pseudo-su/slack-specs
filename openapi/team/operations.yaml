@@ -1,0 +1,267 @@
+paths:
+  /team.accessLogs:
+    get:
+      tags:
+      - team
+      description: Gets the access logs for the current team.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/team.accessLogs
+      operationId: team_accessLogs
+      parameters:
+      - name: token
+        in: query
+        description: 'Authentication token. Requires scope: `admin`'
+        required: true
+        schema:
+          type: string
+      - name: before
+        in: query
+        description: End of time range of logs to include in results (inclusive).
+        schema:
+          type: string
+      - name: count
+        in: query
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: This response demonstrates pagination and two access log entries.
+          content:
+            application/json:
+              schema:
+                title: team.accessLogs schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from team.accessLogs method
+        default:
+          description: 'A workspace must be on a paid plan to use this method, otherwise
+            the `paid_only` error is thrown:'
+          content:
+            application/json:
+              schema:
+                title: team.accessLogs error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from team.accessLogs method
+      security:
+      - slackAuth:
+        - admin
+  /team.billableInfo:
+    get:
+      tags:
+      - team
+      description: Gets billable users information for the current team.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/team.billableInfo
+      operationId: team_billableInfo
+      parameters:
+      - name: token
+        in: query
+        description: 'Authentication token. Requires scope: `admin`'
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: query
+        description: A user to retrieve the billable information for. Defaults to
+          all users.
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+      - slackAuth:
+        - admin
+  /team.info:
+    get:
+      tags:
+      - team
+      description: Gets information about the current team.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/team.info
+      operationId: team_info
+      parameters:
+      - name: token
+        in: query
+        description: 'Authentication token. Requires scope: `team:read`'
+        required: true
+        schema:
+          type: string
+      - name: team
+        in: query
+        description: Team to get info on, if omitted, will return information about
+          the current team. Will only return team that the authenticated token is
+          allowed to see through external shared channels
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: team.info schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from team.info method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: team.info error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from team.info method
+      security:
+      - slackAuth:
+        - team:read
+  /team.integrationLogs:
+    get:
+      tags:
+      - team
+      description: Gets the integration logs for the current team.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/team.integrationLogs
+      operationId: team_integrationLogs
+      parameters:
+      - name: token
+        in: query
+        description: 'Authentication token. Requires scope: `admin`'
+        required: true
+        schema:
+          type: string
+      - name: app_id
+        in: query
+        description: Filter logs to this Slack app. Defaults to all logs.
+        schema:
+          type: string
+      - name: change_type
+        in: query
+        description: Filter logs with this change type. Defaults to all logs.
+        schema:
+          type: string
+      - name: count
+        in: query
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          type: string
+      - name: service_id
+        in: query
+        description: Filter logs to this service. Defaults to all logs.
+        schema:
+          type: string
+      - name: user
+        in: query
+        description: Filter logs generated by this user’s actions. Defaults to all
+          logs.
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: team.integrationLogs schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from team.integrationLogs
+                  method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: team.integrationLogs error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from team.integrationLogs method
+      security:
+      - slackAuth:
+        - admin
+  /team.profile.get:
+    get:
+      tags:
+      - team.profile
+      - team
+      description: Retrieve a team's profile.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/team.profile.get
+      operationId: team_profile_get
+      parameters:
+      - name: token
+        in: query
+        description: 'Authentication token. Requires scope: `users.profile:read`'
+        required: true
+        schema:
+          type: string
+      - name: visibility
+        in: query
+        description: Filter by visibility.
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: team.profile.get success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from team.profile.get
+                  method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: team.profile.get error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from team.profile.get method
+      security:
+      - slackAuth:
+        - users.profile:read

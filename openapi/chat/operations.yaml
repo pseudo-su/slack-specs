@@ -1,0 +1,1078 @@
+paths:
+  /chat.delete:
+    post:
+      tags:
+      - chat
+      description: Deletes a message.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/chat.delete
+      operationId: chat_delete
+      parameters:
+      - name: token
+        in: header
+        description: 'Authentication token. Requires scope: `chat:write`'
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                ts:
+                  type: number
+                  description: Timestamp of the message to be deleted.
+                channel:
+                  type: string
+                  description: Channel containing the message to be deleted.
+                as_user:
+                  type: boolean
+                  description: Pass true to delete the message as the authed user
+                    with `chat:write:user` scope. [Bot users](/bot-users) in this
+                    context are considered authed users. If unused or false, the message
+                    will be deleted with `chat:write:bot` scope.
+          application/json:
+            schema:
+              properties:
+                ts:
+                  type: number
+                  description: Timestamp of the message to be deleted.
+                channel:
+                  type: string
+                  description: Channel containing the message to be deleted.
+                as_user:
+                  type: boolean
+                  description: Pass true to delete the message as the authed user
+                    with `chat:write:user` scope. [Bot users](/bot-users) in this
+                    context are considered authed users. If unused or false, the message
+                    will be deleted with `chat:write:bot` scope.
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: chat.delete success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response of chat.delete method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: chat.delete error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from chat.delete method
+      security:
+      - slackAuth:
+        - chat:write:user
+        - chat:write:bot
+  /chat.deleteScheduledMessage:
+    post:
+      tags:
+      - chat
+      description: Deletes a pending scheduled message from the queue.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/chat.deleteScheduledMessage
+      operationId: chat_deleteScheduledMessage
+      parameters:
+      - name: token
+        in: header
+        description: 'Authentication token. Requires scope: `chat:write`'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+              - channel
+              - scheduled_message_id
+              properties:
+                as_user:
+                  type: boolean
+                  description: Pass true to delete the message as the authed user
+                    with `chat:write:user` scope. [Bot users](/bot-users) in this
+                    context are considered authed users. If unused or false, the message
+                    will be deleted with `chat:write:bot` scope.
+                channel:
+                  type: string
+                  description: The channel the scheduled_message is posting to
+                scheduled_message_id:
+                  type: string
+                  description: '`scheduled_message_id` returned from call to chat.scheduleMessage'
+          application/json:
+            schema:
+              required:
+              - channel
+              - scheduled_message_id
+              properties:
+                as_user:
+                  type: boolean
+                  description: Pass true to delete the message as the authed user
+                    with `chat:write:user` scope. [Bot users](/bot-users) in this
+                    context are considered authed users. If unused or false, the message
+                    will be deleted with `chat:write:bot` scope.
+                channel:
+                  type: string
+                  description: The channel the scheduled_message is posting to
+                scheduled_message_id:
+                  type: string
+                  description: '`scheduled_message_id` returned from call to chat.scheduleMessage'
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: chat.deleteScheduledMessage schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from chat.deleteScheduledMessage
+                  method
+        default:
+          description: Typical error response if no message is found
+          content:
+            application/json:
+              schema:
+                title: chat.deleteScheduledMessage error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from chat.deleteScheduledMessage
+                  method
+      security:
+      - slackAuth:
+        - chat:write:user
+        - chat:write:bot
+  /chat.getPermalink:
+    get:
+      tags:
+      - chat
+      description: Retrieve a permalink URL for a specific extant message
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/chat.getPermalink
+      operationId: chat_getPermalink
+      parameters:
+      - name: token
+        in: query
+        description: 'Authentication token. Requires scope: `none`'
+        required: true
+        schema:
+          type: string
+      - name: channel
+        in: query
+        description: The ID of the conversation or channel containing the message
+        required: true
+        schema:
+          type: string
+      - name: message_ts
+        in: query
+        description: A message's `ts` value, uniquely identifying it within a channel
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Standard success response
+          content:
+            application/json:
+              schema:
+                title: chat.getPermalink success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response chat.getPermalink
+        default:
+          description: Error response when channel cannot be found
+          content:
+            application/json:
+              schema:
+                title: chat.getPermalink error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from chat.getPermalink method
+      security:
+      - slackAuth:
+        - none
+  /chat.meMessage:
+    post:
+      tags:
+      - chat
+      description: Share a me message into a channel.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/chat.meMessage
+      operationId: chat_meMessage
+      parameters:
+      - name: token
+        in: header
+        description: 'Authentication token. Requires scope: `chat:write`'
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                channel:
+                  type: string
+                  description: Channel to send message to. Can be a public channel,
+                    private group or IM channel. Can be an encoded ID, or a name.
+                text:
+                  type: string
+                  description: Text of the message to send.
+          application/json:
+            schema:
+              properties:
+                channel:
+                  type: string
+                  description: Channel to send message to. Can be a public channel,
+                    private group or IM channel. Can be an encoded ID, or a name.
+                text:
+                  type: string
+                  description: Text of the message to send.
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: chat.meMessage schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from chat.meMessage method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: chat.meMessage error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from chat.meMessage method
+      security:
+      - slackAuth:
+        - chat:write:user
+        - chat:write:bot
+  /chat.postEphemeral:
+    post:
+      tags:
+      - chat
+      description: Sends an ephemeral message to a user in a channel.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/chat.postEphemeral
+      operationId: chat_postEphemeral
+      parameters:
+      - name: token
+        in: header
+        description: 'Authentication token. Requires scope: `chat:write`'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+              - channel
+              - user
+              properties:
+                as_user:
+                  type: boolean
+                  description: Pass true to post the message as the authed user. Defaults
+                    to true if the chat:write:bot scope is not included. Otherwise,
+                    defaults to false.
+                attachments:
+                  type: string
+                  description: A JSON-based array of structured attachments, presented
+                    as a URL-encoded string.
+                blocks:
+                  type: string
+                  description: A JSON-based array of structured blocks, presented
+                    as a URL-encoded string.
+                channel:
+                  type: string
+                  description: Channel, private group, or IM channel to send message
+                    to. Can be an encoded ID, or a name.
+                icon_emoji:
+                  type: string
+                  description: Emoji to use as the icon for this message. Overrides
+                    `icon_url`. Must be used in conjunction with `as_user` set to
+                    `false`, otherwise ignored. See [authorship](#authorship) below.
+                icon_url:
+                  type: string
+                  description: URL to an image to use as the icon for this message.
+                    Must be used in conjunction with `as_user` set to false, otherwise
+                    ignored. See [authorship](#authorship) below.
+                link_names:
+                  type: boolean
+                  description: Find and link channel names and usernames.
+                parse:
+                  type: string
+                  description: Change how messages are treated. Defaults to `none`.
+                    See [below](#formatting).
+                text:
+                  type: string
+                  description: How this field works and whether it is required depends
+                    on other fields you use in your API call. [See below](#text_usage)
+                    for more detail.
+                thread_ts:
+                  type: string
+                  description: Provide another message's `ts` value to post this message
+                    in a thread. Avoid using a reply's `ts` value; use its parent's
+                    value instead. Ephemeral messages in threads are only shown if
+                    there is already an active thread.
+                user:
+                  type: string
+                  description: '`id` of the user who will receive the ephemeral message.
+                    The user should be in the channel specified by the `channel` argument.'
+                username:
+                  type: string
+                  description: Set your bot's user name. Must be used in conjunction
+                    with `as_user` set to false, otherwise ignored. See [authorship](#authorship)
+                    below.
+          application/json:
+            schema:
+              required:
+              - channel
+              - user
+              properties:
+                as_user:
+                  type: boolean
+                  description: Pass true to post the message as the authed user. Defaults
+                    to true if the chat:write:bot scope is not included. Otherwise,
+                    defaults to false.
+                attachments:
+                  type: string
+                  description: A JSON-based array of structured attachments, presented
+                    as a URL-encoded string.
+                blocks:
+                  type: string
+                  description: A JSON-based array of structured blocks, presented
+                    as a URL-encoded string.
+                channel:
+                  type: string
+                  description: Channel, private group, or IM channel to send message
+                    to. Can be an encoded ID, or a name.
+                icon_emoji:
+                  type: string
+                  description: Emoji to use as the icon for this message. Overrides
+                    `icon_url`. Must be used in conjunction with `as_user` set to
+                    `false`, otherwise ignored. See [authorship](#authorship) below.
+                icon_url:
+                  type: string
+                  description: URL to an image to use as the icon for this message.
+                    Must be used in conjunction with `as_user` set to false, otherwise
+                    ignored. See [authorship](#authorship) below.
+                link_names:
+                  type: boolean
+                  description: Find and link channel names and usernames.
+                parse:
+                  type: string
+                  description: Change how messages are treated. Defaults to `none`.
+                    See [below](#formatting).
+                text:
+                  type: string
+                  description: How this field works and whether it is required depends
+                    on other fields you use in your API call. [See below](#text_usage)
+                    for more detail.
+                thread_ts:
+                  type: string
+                  description: Provide another message's `ts` value to post this message
+                    in a thread. Avoid using a reply's `ts` value; use its parent's
+                    value instead. Ephemeral messages in threads are only shown if
+                    there is already an active thread.
+                user:
+                  type: string
+                  description: '`id` of the user who will receive the ephemeral message.
+                    The user should be in the channel specified by the `channel` argument.'
+                username:
+                  type: string
+                  description: Set your bot's user name. Must be used in conjunction
+                    with `as_user` set to false, otherwise ignored. See [authorship](#authorship)
+                    below.
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: chat.postEphemeral success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from chat.postEphemeral
+                  method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: chat.postEphemeral error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from chat.postEphemeral method
+      security:
+      - slackAuth:
+        - chat:write:user
+        - chat:write:bot
+  /chat.postMessage:
+    post:
+      tags:
+      - chat
+      description: Sends a message to a channel.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/chat.postMessage
+      operationId: chat_postMessage
+      parameters:
+      - name: token
+        in: header
+        description: 'Authentication token. Requires scope: `chat:write`'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+              - channel
+              properties:
+                as_user:
+                  type: string
+                  description: Pass true to post the message as the authed user, instead
+                    of as a bot. Defaults to false. See [authorship](#authorship)
+                    below.
+                attachments:
+                  type: string
+                  description: A JSON-based array of structured attachments, presented
+                    as a URL-encoded string.
+                blocks:
+                  type: string
+                  description: A JSON-based array of structured blocks, presented
+                    as a URL-encoded string.
+                channel:
+                  type: string
+                  description: Channel, private group, or IM channel to send message
+                    to. Can be an encoded ID, or a name. See [below](#channels) for
+                    more details.
+                icon_emoji:
+                  type: string
+                  description: Emoji to use as the icon for this message. Overrides
+                    `icon_url`. Must be used in conjunction with `as_user` set to
+                    `false`, otherwise ignored. See [authorship](#authorship) below.
+                icon_url:
+                  type: string
+                  description: URL to an image to use as the icon for this message.
+                    Must be used in conjunction with `as_user` set to false, otherwise
+                    ignored. See [authorship](#authorship) below.
+                link_names:
+                  type: boolean
+                  description: Find and link channel names and usernames.
+                mrkdwn:
+                  type: boolean
+                  description: Disable Slack markup parsing by setting to `false`.
+                    Enabled by default.
+                parse:
+                  type: string
+                  description: Change how messages are treated. Defaults to `none`.
+                    See [below](#formatting).
+                reply_broadcast:
+                  type: boolean
+                  description: Used in conjunction with `thread_ts` and indicates
+                    whether reply should be made visible to everyone in the channel
+                    or conversation. Defaults to `false`.
+                text:
+                  type: string
+                  description: How this field works and whether it is required depends
+                    on other fields you use in your API call. [See below](#text_usage)
+                    for more detail.
+                thread_ts:
+                  type: string
+                  description: Provide another message's `ts` value to make this message
+                    a reply. Avoid using a reply's `ts` value; use its parent instead.
+                unfurl_links:
+                  type: boolean
+                  description: Pass true to enable unfurling of primarily text-based
+                    content.
+                unfurl_media:
+                  type: boolean
+                  description: Pass false to disable unfurling of media content.
+                username:
+                  type: string
+                  description: Set your bot's user name. Must be used in conjunction
+                    with `as_user` set to false, otherwise ignored. See [authorship](#authorship)
+                    below.
+          application/json:
+            schema:
+              required:
+              - channel
+              properties:
+                as_user:
+                  type: string
+                  description: Pass true to post the message as the authed user, instead
+                    of as a bot. Defaults to false. See [authorship](#authorship)
+                    below.
+                attachments:
+                  type: string
+                  description: A JSON-based array of structured attachments, presented
+                    as a URL-encoded string.
+                blocks:
+                  type: string
+                  description: A JSON-based array of structured blocks, presented
+                    as a URL-encoded string.
+                channel:
+                  type: string
+                  description: Channel, private group, or IM channel to send message
+                    to. Can be an encoded ID, or a name. See [below](#channels) for
+                    more details.
+                icon_emoji:
+                  type: string
+                  description: Emoji to use as the icon for this message. Overrides
+                    `icon_url`. Must be used in conjunction with `as_user` set to
+                    `false`, otherwise ignored. See [authorship](#authorship) below.
+                icon_url:
+                  type: string
+                  description: URL to an image to use as the icon for this message.
+                    Must be used in conjunction with `as_user` set to false, otherwise
+                    ignored. See [authorship](#authorship) below.
+                link_names:
+                  type: boolean
+                  description: Find and link channel names and usernames.
+                mrkdwn:
+                  type: boolean
+                  description: Disable Slack markup parsing by setting to `false`.
+                    Enabled by default.
+                parse:
+                  type: string
+                  description: Change how messages are treated. Defaults to `none`.
+                    See [below](#formatting).
+                reply_broadcast:
+                  type: boolean
+                  description: Used in conjunction with `thread_ts` and indicates
+                    whether reply should be made visible to everyone in the channel
+                    or conversation. Defaults to `false`.
+                text:
+                  type: string
+                  description: How this field works and whether it is required depends
+                    on other fields you use in your API call. [See below](#text_usage)
+                    for more detail.
+                thread_ts:
+                  type: string
+                  description: Provide another message's `ts` value to make this message
+                    a reply. Avoid using a reply's `ts` value; use its parent instead.
+                unfurl_links:
+                  type: boolean
+                  description: Pass true to enable unfurling of primarily text-based
+                    content.
+                unfurl_media:
+                  type: boolean
+                  description: Pass false to disable unfurling of media content.
+                username:
+                  type: string
+                  description: Set your bot's user name. Must be used in conjunction
+                    with `as_user` set to false, otherwise ignored. See [authorship](#authorship)
+                    below.
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: chat.postMessage success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response of chat.postMessage method
+        default:
+          description: Typical error response if too many attachments are included
+          content:
+            application/json:
+              schema:
+                title: chat.postMessage error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response chat.postMessage method
+      security:
+      - slackAuth:
+        - chat:write:user
+        - chat:write:bot
+  /chat.scheduleMessage:
+    post:
+      tags:
+      - chat
+      description: Schedules a message to be sent to a channel.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/chat.scheduleMessage
+      operationId: chat_scheduleMessage
+      parameters:
+      - name: token
+        in: header
+        description: 'Authentication token. Requires scope: `chat:write`'
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                channel:
+                  type: string
+                  description: Channel, private group, or DM channel to send message
+                    to. Can be an encoded ID, or a name. See [below](#channels) for
+                    more details.
+                text:
+                  type: string
+                  description: How this field works and whether it is required depends
+                    on other fields you use in your API call. [See below](#text_usage)
+                    for more detail.
+                post_at:
+                  type: string
+                  description: Unix EPOCH timestamp of time in future to send the
+                    message.
+                parse:
+                  type: string
+                  description: Change how messages are treated. Defaults to `none`.
+                    See [chat.postMessage](chat.postMessage#formatting).
+                as_user:
+                  type: boolean
+                  description: Pass true to post the message as the authed user, instead
+                    of as a bot. Defaults to false. See [chat.postMessage](chat.postMessage#authorship).
+                link_names:
+                  type: boolean
+                  description: Find and link channel names and usernames.
+                attachments:
+                  type: string
+                  description: A JSON-based array of structured attachments, presented
+                    as a URL-encoded string.
+                blocks:
+                  type: string
+                  description: A JSON-based array of structured blocks, presented
+                    as a URL-encoded string.
+                unfurl_links:
+                  type: boolean
+                  description: Pass true to enable unfurling of primarily text-based
+                    content.
+                unfurl_media:
+                  type: boolean
+                  description: Pass false to disable unfurling of media content.
+                thread_ts:
+                  type: number
+                  description: Provide another message's `ts` value to make this message
+                    a reply. Avoid using a reply's `ts` value; use its parent instead.
+                reply_broadcast:
+                  type: boolean
+                  description: Used in conjunction with `thread_ts` and indicates
+                    whether reply should be made visible to everyone in the channel
+                    or conversation. Defaults to `false`.
+          application/json:
+            schema:
+              properties:
+                channel:
+                  type: string
+                  description: Channel, private group, or DM channel to send message
+                    to. Can be an encoded ID, or a name. See [below](#channels) for
+                    more details.
+                text:
+                  type: string
+                  description: How this field works and whether it is required depends
+                    on other fields you use in your API call. [See below](#text_usage)
+                    for more detail.
+                post_at:
+                  type: string
+                  description: Unix EPOCH timestamp of time in future to send the
+                    message.
+                parse:
+                  type: string
+                  description: Change how messages are treated. Defaults to `none`.
+                    See [chat.postMessage](chat.postMessage#formatting).
+                as_user:
+                  type: boolean
+                  description: Pass true to post the message as the authed user, instead
+                    of as a bot. Defaults to false. See [chat.postMessage](chat.postMessage#authorship).
+                link_names:
+                  type: boolean
+                  description: Find and link channel names and usernames.
+                attachments:
+                  type: string
+                  description: A JSON-based array of structured attachments, presented
+                    as a URL-encoded string.
+                blocks:
+                  type: string
+                  description: A JSON-based array of structured blocks, presented
+                    as a URL-encoded string.
+                unfurl_links:
+                  type: boolean
+                  description: Pass true to enable unfurling of primarily text-based
+                    content.
+                unfurl_media:
+                  type: boolean
+                  description: Pass false to disable unfurling of media content.
+                thread_ts:
+                  type: number
+                  description: Provide another message's `ts` value to make this message
+                    a reply. Avoid using a reply's `ts` value; use its parent instead.
+                reply_broadcast:
+                  type: boolean
+                  description: Used in conjunction with `thread_ts` and indicates
+                    whether reply should be made visible to everyone in the channel
+                    or conversation. Defaults to `false`.
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: chat.scheduleMessage success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response of chat.scheduleMessage
+                  method
+        default:
+          description: Typical error response if the `post_at` is invalid (ex. in
+            the past or too far into the future)
+          content:
+            application/json:
+              schema:
+                title: chat.scheduleMessage error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response chat.scheduleMessage method
+      security:
+      - slackAuth:
+        - chat:write:user
+        - chat:write:bot
+  /chat.scheduledMessages.list:
+    get:
+      tags:
+      - chat.scheduledMessages
+      - chat
+      description: Returns a list of scheduled messages.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/chat.scheduledMessages.list
+      operationId: chat_scheduledMessages_list
+      parameters:
+      - name: token
+        in: header
+        description: 'Authentication token. Requires scope: `none`'
+        schema:
+          type: string
+      - name: channel
+        in: query
+        description: The channel of the scheduled messages
+        schema:
+          type: string
+      - name: latest
+        in: query
+        description: A UNIX timestamp of the latest value in the time range
+        schema:
+          type: number
+      - name: oldest
+        in: query
+        description: A UNIX timestamp of the oldest value in the time range
+        schema:
+          type: number
+      - name: limit
+        in: query
+        description: Maximum number of original entries to return.
+        schema:
+          type: integer
+      - name: cursor
+        in: query
+        description: For pagination purposes, this is the `cursor` value returned
+          from a previous call to `chat.scheduledmessages.list` indicating where you
+          want to start this call from.
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: chat.scheduledMessages.list schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from chat.scheduledMessages.list
+                  method
+        default:
+          description: Typical error response if the channel passed is invalid
+          content:
+            application/json:
+              schema:
+                title: chat.scheduledMessages.list error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from chat.scheduledMessages.list
+                  method
+      security:
+      - slackAuth:
+        - none
+  /chat.unfurl:
+    post:
+      tags:
+      - chat
+      description: Provide custom unfurl behavior for user-posted URLs
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/chat.unfurl
+      operationId: chat_unfurl
+      parameters:
+      - name: token
+        in: header
+        description: 'Authentication token. Requires scope: `links:write`'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+              - channel
+              - ts
+              properties:
+                channel:
+                  type: string
+                  description: Channel ID of the message
+                ts:
+                  type: string
+                  description: Timestamp of the message to add unfurl behavior to.
+                unfurls:
+                  type: string
+                  description: URL-encoded JSON map with keys set to URLs featured
+                    in the the message, pointing to their unfurl blocks or message
+                    attachments.
+                user_auth_message:
+                  type: string
+                  description: Provide a simply-formatted string to send as an ephemeral
+                    message to the user as invitation to authenticate further and
+                    enable full unfurling behavior
+                user_auth_required:
+                  type: boolean
+                  description: Set to `true` or `1` to indicate the user must install
+                    your Slack app to trigger unfurls for this domain
+                user_auth_url:
+                  type: string
+                  description: Send users to this custom URL where they will complete
+                    authentication in your app to fully trigger unfurling. Value should
+                    be properly URL-encoded.
+          application/json:
+            schema:
+              required:
+              - channel
+              - ts
+              properties:
+                channel:
+                  type: string
+                  description: Channel ID of the message
+                ts:
+                  type: string
+                  description: Timestamp of the message to add unfurl behavior to.
+                unfurls:
+                  type: string
+                  description: URL-encoded JSON map with keys set to URLs featured
+                    in the the message, pointing to their unfurl blocks or message
+                    attachments.
+                user_auth_message:
+                  type: string
+                  description: Provide a simply-formatted string to send as an ephemeral
+                    message to the user as invitation to authenticate further and
+                    enable full unfurling behavior
+                user_auth_required:
+                  type: boolean
+                  description: Set to `true` or `1` to indicate the user must install
+                    your Slack app to trigger unfurls for this domain
+                user_auth_url:
+                  type: string
+                  description: Send users to this custom URL where they will complete
+                    authentication in your app to fully trigger unfurling. Value should
+                    be properly URL-encoded.
+        required: true
+      responses:
+        "200":
+          description: Typical, minimal success response
+          content:
+            application/json:
+              schema:
+                title: chat.unfurl success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from chat.unfurl method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: chat.unfurl error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from chat.unfurl method
+      security:
+      - slackAuth:
+        - links:write
+  /chat.update:
+    post:
+      tags:
+      - chat
+      description: Updates a message.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/chat.update
+      operationId: chat_update
+      parameters:
+      - name: token
+        in: header
+        description: 'Authentication token. Requires scope: `chat:write`'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+              - channel
+              - ts
+              properties:
+                as_user:
+                  type: string
+                  description: Pass true to update the message as the authed user.
+                    [Bot users](/bot-users) in this context are considered authed
+                    users.
+                attachments:
+                  type: string
+                  description: A JSON-based array of structured attachments, presented
+                    as a URL-encoded string. This field is required when not presenting
+                    `text`. If you don't include this field, the message's previous
+                    `attachments` will be retained. To remove previous `attachments`,
+                    include an empty array for this field.
+                blocks:
+                  type: string
+                  description: A JSON-based array of [structured blocks](/block-kit/building),
+                    presented as a URL-encoded string. If you don't include this field,
+                    the message's previous `blocks` will be retained. To remove previous
+                    `blocks`, include an empty array for this field.
+                channel:
+                  type: string
+                  description: Channel containing the message to be updated.
+                link_names:
+                  type: string
+                  description: Find and link channel names and usernames. Defaults
+                    to `none`. If you do not specify a value for this field, the original
+                    value set for the message will be overwritten with the default,
+                    `none`.
+                parse:
+                  type: string
+                  description: Change how messages are treated. Defaults to `client`,
+                    unlike `chat.postMessage`. Accepts either `none` or `full`. If
+                    you do not specify a value for this field, the original value
+                    set for the message will be overwritten with the default, `client`.
+                text:
+                  type: string
+                  description: New text for the message, using the [default formatting
+                    rules](/reference/surfaces/formatting). It's not required when
+                    presenting `blocks` or `attachments`.
+                ts:
+                  type: string
+                  description: Timestamp of the message to be updated.
+          application/json:
+            schema:
+              required:
+              - channel
+              - ts
+              properties:
+                as_user:
+                  type: string
+                  description: Pass true to update the message as the authed user.
+                    [Bot users](/bot-users) in this context are considered authed
+                    users.
+                attachments:
+                  type: string
+                  description: A JSON-based array of structured attachments, presented
+                    as a URL-encoded string. This field is required when not presenting
+                    `text`. If you don't include this field, the message's previous
+                    `attachments` will be retained. To remove previous `attachments`,
+                    include an empty array for this field.
+                blocks:
+                  type: string
+                  description: A JSON-based array of [structured blocks](/block-kit/building),
+                    presented as a URL-encoded string. If you don't include this field,
+                    the message's previous `blocks` will be retained. To remove previous
+                    `blocks`, include an empty array for this field.
+                channel:
+                  type: string
+                  description: Channel containing the message to be updated.
+                link_names:
+                  type: string
+                  description: Find and link channel names and usernames. Defaults
+                    to `none`. If you do not specify a value for this field, the original
+                    value set for the message will be overwritten with the default,
+                    `none`.
+                parse:
+                  type: string
+                  description: Change how messages are treated. Defaults to `client`,
+                    unlike `chat.postMessage`. Accepts either `none` or `full`. If
+                    you do not specify a value for this field, the original value
+                    set for the message will be overwritten with the default, `client`.
+                text:
+                  type: string
+                  description: New text for the message, using the [default formatting
+                    rules](/reference/surfaces/formatting). It's not required when
+                    presenting `blocks` or `attachments`.
+                ts:
+                  type: string
+                  description: Timestamp of the message to be updated.
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: chat.update success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response of chat.update method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: chat.update error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response chat.update method
+      security:
+      - slackAuth:
+        - chat:write:user
+        - chat:write:bot

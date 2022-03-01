@@ -1,16 +1,133 @@
-openapi: 3.0.0
+openapi: 3.0.1
+
 externalDocs:
   description: Learn more about the Slack Web API
   url: https://api.slack.com/web
+
 info:
-  contact:
-    name: Slack developer relations
-    url: https://api.slack.com/support
+  title: Slack Web API
+  version: 1.7.0
   description: One way to interact with the Slack platform is its HTTP RPC-based Web API, a
     collection of methods requiring OAuth 2.0-based user, bot, or workspace
     tokens blessed with related OAuth scopes.
-  title: Slack Web API
-  version: 1.5.0
+  contact:
+    name: Slack developer relations
+    url: https://api.slack.com/support
+    email: support@slack.com
+
+tags:
+  - name: admin.apps
+    description: admin.apps
+  - name: admin
+    description: admin
+  - name: admin.apps.approved
+    description: admin.apps.approved
+  - name: admin.apps.requests
+    description: admin.apps.requests
+  - name: admin.apps.restricted
+    description: admin.apps.restricted
+  - name: admin.conversations
+    description: admin.conversations
+  - name: admin.conversations.ekm
+    description: admin.conversations.ekm
+  - name: admin.conversations.restrictAccess
+    description: admin.conversations.restrictAccess
+  - name: admin.emoji
+    description: admin.emoji
+  - name: admin.inviteRequests
+    description: admin.inviteRequests
+  - name: admin.inviteRequests.approved
+    description: admin.inviteRequests.approved
+  - name: admin.inviteRequests.denied
+    description: admin.inviteRequests.denied
+  - name: admin.teams.admins
+    description: admin.teams.admins
+  - name: admin.teams
+    description: admin.teams
+  - name: admin.teams.owners
+    description: admin.teams.owners
+  - name: admin.teams.settings
+    description: admin.teams.settings
+  - name: admin.usergroups
+    description: admin.usergroups
+  - name: admin.users
+    description: admin.users
+  - name: admin.users.session
+    description: admin.users.session
+  - name: api
+    description: api
+  - name: apps
+    description: apps
+  - name: apps.event.authorizations
+    description: apps.event.authorizations
+  - name: apps.permissions
+    description: apps.permissions
+  - name: apps.permissions.resources
+    description: apps.permissions.resources
+  - name: apps.permissions.scopes
+    description: apps.permissions.scopes
+  - name: apps.permissions.users
+    description: apps.permissions.users
+  - name: auth
+    description: auth
+  - name: bots
+    description: bots
+  - name: calls
+    description: calls
+  - name: calls.participants
+    description: calls.participants
+  - name: chat
+    description: chat
+  - name: chat.scheduledMessages
+    description: chat.scheduledMessages
+  - name: conversations
+    description: conversations
+  - name: dialog
+    description: dialog
+  - name: dnd
+    description: dnd
+  - name: emoji
+    description: emoji
+  - name: files
+    description: files
+  - name: files.comments
+    description: files.comments
+  - name: files.remote
+    description: files.remote
+  - name: migration
+    description: migration
+  - name: oauth
+    description: oauth
+  - name: oauth.v2
+    description: oauth.v2
+  - name: pins
+    description: pins
+  - name: reactions
+    description: reactions
+  - name: reminders
+    description: reminders
+  - name: rtm
+    description: rtm
+  - name: search
+    description: search
+  - name: stars
+    description: stars
+  - name: team
+    description: team
+  - name: team.profile
+    description: team.profile
+  - name: usergroups
+    description: usergroups
+  - name: usergroups.users
+    description: usergroups.users
+  - name: users
+    description: users
+  - name: users.profile
+    description: users.profile
+  - name: views
+    description: views
+  - name: workflows
+    description: workflows
 
 servers:
   - url: https://slack.com/api

@@ -1,0 +1,7 @@
+includes:
+  - api.test.yaml
+  - bots.info.yaml
+  - dialog.open.yaml
+  - migration.exchange.yaml
+  - rtm.connect.yaml
+  - search.messages.yaml
