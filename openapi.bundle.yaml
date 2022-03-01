@@ -1972,6 +1972,7 @@ externalDocs:
   url: https://api.slack.com/web
 info:
   contact:
+    email: support@slack.com
     name: Slack developer relations
     url: https://api.slack.com/support
   description: One way to interact with the Slack platform is its HTTP RPC-based Web API, a collection of methods requiring OAuth 2.0-based user, bot, or workspace tokens blessed with related OAuth scopes.
@@ -2088,3 +2089,6 @@ paths:
 servers:
 - description: Public slack API
   url: https://slack.com/api
+tags:
+- description: conversations
+  name: conversations

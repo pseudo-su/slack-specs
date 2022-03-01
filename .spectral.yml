@@ -4,6 +4,6 @@ rules:
   oas3-parameter-description: true
   oas3-server-not-example.com: true
   openapi-tags-alphabetical: true
-  operation-default-response: true
   contact-properties: true
   tag-description: true
+  oas3-unused-component: false

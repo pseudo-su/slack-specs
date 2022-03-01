@@ -17,8 +17,8 @@ make setup
 # Generate
 make generate
 
-# Lint
-make lint
+# Verify
+make verify
 
 # Test
 make test-smoke
