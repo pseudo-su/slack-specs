@@ -1,0 +1,61 @@
+paths:
+  /migration.exchange:
+    get:
+      tags:
+      - migration
+      description: For Enterprise Grid workspaces, map local user IDs to global user
+        IDs
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/migration.exchange
+      operationId: migration_exchange
+      parameters:
+      - name: token
+        in: query
+        description: 'Authentication token. Requires scope: `tokens.basic`'
+        required: true
+        schema:
+          type: string
+      - name: users
+        in: query
+        description: A comma-separated list of user ids, up to 400 per request
+        required: true
+        schema:
+          type: string
+      - name: team_id
+        in: query
+        description: Specify team_id starts with `T` in case of Org Token
+        schema:
+          type: string
+      - name: to_old
+        in: query
+        description: Specify `true` to convert `W` global user IDs to workspace-specific
+          `U` IDs. Defaults to `false`.
+        schema:
+          type: boolean
+      responses:
+        "200":
+          description: Typical success response when mappings exist for the specified
+            user IDs
+          content:
+            application/json:
+              schema:
+                title: migration.exchange success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from migration.exchange
+                  method
+        default:
+          description: Typical error response when there are no mappings to provide
+          content:
+            application/json:
+              schema:
+                title: migration.exchange error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from migration.exchange method
+      security:
+      - slackAuth:
+        - tokens.basic

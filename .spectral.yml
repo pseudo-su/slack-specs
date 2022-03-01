@@ -6,4 +6,8 @@ rules:
   openapi-tags-alphabetical: true
   contact-properties: true
   tag-description: true
+
+  # disable some unhelpful lint rules temporarily
   oas3-unused-component: false
+  oas3-parameter-description: false
+  openapi-tags-alphabetical: false

@@ -18,5 +18,5 @@ func (suite *TestSuite) TestListConversations() {
 
 	// fmt.Println(prettyJSON(t, r.Body))
 	assert.Equal(t, nil, err)
-	assert.Equal(t, pkg.DefsOkTrue(true), r.JSON200.Ok)
+	assert.NotNil(t, r.JSON200)
 }

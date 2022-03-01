@@ -1,0 +1,741 @@
+paths:
+  /admin.apps.approve:
+    post:
+      tags:
+      - admin.apps
+      - admin
+      description: Approve an app for installation on a workspace.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.apps.approve
+      operationId: admin_apps_approve
+      parameters:
+      - name: token
+        in: header
+        description: 'Authentication token. Requires scope: `admin.apps:write`'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                app_id:
+                  type: string
+                  description: The id of the app to approve.
+                request_id:
+                  type: string
+                  description: The id of the request to approve.
+                team_id:
+                  type: string
+          application/json:
+            schema:
+              properties:
+                app_id:
+                  type: string
+                  description: The id of the app to approve.
+                request_id:
+                  type: string
+                  description: The id of the request to approve.
+                team_id:
+                  type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+      - slackAuth:
+        - admin.apps:write
+  /admin.apps.approved.list:
+    get:
+      tags:
+      - admin.apps.approved
+      - admin
+      description: List approved apps for an org or workspace.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.apps.approved.list
+      operationId: admin_apps_approved_list
+      parameters:
+      - name: token
+        in: query
+        description: 'Authentication token. Requires scope: `admin.apps:read`'
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: The maximum number of items to return. Must be between 1 - 1000
+          both inclusive.
+        schema:
+          type: integer
+      - name: cursor
+        in: query
+        description: Set `cursor` to `next_cursor` returned by the previous call to
+          list items in the next page
+        schema:
+          type: string
+      - name: team_id
+        in: query
+        schema:
+          type: string
+      - name: enterprise_id
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+      - slackAuth:
+        - admin.apps:read
+  /admin.apps.requests.list:
+    get:
+      tags:
+      - admin.apps.requests
+      - admin
+      description: List app requests for a team/workspace.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.apps.requests.list
+      operationId: admin_apps_requests_list
+      parameters:
+      - name: token
+        in: query
+        description: 'Authentication token. Requires scope: `admin.apps:read`'
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: The maximum number of items to return. Must be between 1 - 1000
+          both inclusive.
+        schema:
+          type: integer
+      - name: cursor
+        in: query
+        description: Set `cursor` to `next_cursor` returned by the previous call to
+          list items in the next page
+        schema:
+          type: string
+      - name: team_id
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+      - slackAuth:
+        - admin.apps:read
+  /admin.apps.restrict:
+    post:
+      tags:
+      - admin.apps
+      - admin
+      description: Restrict an app for installation on a workspace.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.apps.restrict
+      operationId: admin_apps_restrict
+      parameters:
+      - name: token
+        in: header
+        description: 'Authentication token. Requires scope: `admin.apps:write`'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                app_id:
+                  type: string
+                  description: The id of the app to restrict.
+                request_id:
+                  type: string
+                  description: The id of the request to restrict.
+                team_id:
+                  type: string
+          application/json:
+            schema:
+              properties:
+                app_id:
+                  type: string
+                  description: The id of the app to restrict.
+                request_id:
+                  type: string
+                  description: The id of the request to restrict.
+                team_id:
+                  type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+      - slackAuth:
+        - admin.apps:write
+  /admin.apps.restricted.list:
+    get:
+      tags:
+      - admin.apps.restricted
+      - admin
+      description: List restricted apps for an org or workspace.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.apps.restricted.list
+      operationId: admin_apps_restricted_list
+      parameters:
+      - name: token
+        in: query
+        description: 'Authentication token. Requires scope: `admin.apps:read`'
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: The maximum number of items to return. Must be between 1 - 1000
+          both inclusive.
+        schema:
+          type: integer
+      - name: cursor
+        in: query
+        description: Set `cursor` to `next_cursor` returned by the previous call to
+          list items in the next page
+        schema:
+          type: string
+      - name: team_id
+        in: query
+        schema:
+          type: string
+      - name: enterprise_id
+        in: query
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+      - slackAuth:
+        - admin.apps:read
+  /apps.event.authorizations.list:
+    get:
+      tags:
+      - apps.event.authorizations
+      - apps
+      description: Get a list of authorizations for the given event context. Each
+        authorization represents an app installation that the event is visible to.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/apps.event.authorizations.list
+      operationId: apps_event_authorizations_list
+      parameters:
+      - name: token
+        in: header
+        description: 'Authentication token. Requires scope: `authorizations:read`'
+        required: true
+        schema:
+          type: string
+      - name: event_context
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        schema:
+          type: string
+      - name: limit
+        in: query
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+      - slackAuth:
+        - authorizations:read
+  /apps.permissions.info:
+    get:
+      tags:
+      - apps.permissions
+      - apps
+      description: Returns list of permissions this app has on a team.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/apps.permissions.info
+      operationId: apps_permissions_info
+      parameters:
+      - name: token
+        in: query
+        description: 'Authentication token. Requires scope: `none`'
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Standard success response when used with a user token
+          content:
+            application/json:
+              schema:
+                title: apps.permissions.info schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from apps.permissions.info
+                  method
+        default:
+          description: Standard failure response when used with an invalid token
+          content:
+            application/json:
+              schema:
+                title: apps.permissions.info error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from apps.permissions.info
+                  method
+      security:
+      - slackAuth:
+        - none
+  /apps.permissions.request:
+    get:
+      tags:
+      - apps.permissions
+      - apps
+      description: Allows an app to request additional scopes
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/apps.permissions.request
+      operationId: apps_permissions_request
+      parameters:
+      - name: token
+        in: query
+        description: 'Authentication token. Requires scope: `none`'
+        required: true
+        schema:
+          type: string
+      - name: scopes
+        in: query
+        description: A comma separated list of scopes to request for
+        required: true
+        schema:
+          type: string
+      - name: trigger_id
+        in: query
+        description: Token used to trigger the permissions API
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Standard success response when used with a user token
+          content:
+            application/json:
+              schema:
+                title: apps.permissions.request schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from apps.permissions.request
+                  method
+        default:
+          description: Standard failure response when trigger_id is invalid
+          content:
+            application/json:
+              schema:
+                title: apps.permissions.request error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from apps.permissions.request
+                  method
+      security:
+      - slackAuth:
+        - none
+  /apps.permissions.resources.list:
+    get:
+      tags:
+      - apps.permissions.resources
+      - apps
+      description: Returns list of resource grants this app has on a team.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/apps.permissions.resources.list
+      operationId: apps_permissions_resources_list
+      parameters:
+      - name: token
+        in: query
+        description: 'Authentication token. Requires scope: `none`'
+        required: true
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        description: Paginate through collections of data by setting the `cursor`
+          parameter to a `next_cursor` attribute returned by a previous request's
+          `response_metadata`. Default value fetches the first "page" of the collection.
+          See [pagination](/docs/pagination) for more detail.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: The maximum number of items to return.
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Typical successful paginated response
+          content:
+            application/json:
+              schema:
+                title: apps.permissions.resources.list success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response apps.permissions.resources.list
+                  method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: apps.permissions.resources.list error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from apps.permissions.resources.list
+                  method
+      security:
+      - slackAuth:
+        - none
+  /apps.permissions.scopes.list:
+    get:
+      tags:
+      - apps.permissions.scopes
+      - apps
+      description: Returns list of scopes this app has on a team.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/apps.permissions.scopes.list
+      operationId: apps_permissions_scopes_list
+      parameters:
+      - name: token
+        in: query
+        description: 'Authentication token. Requires scope: `none`'
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Typical successful paginated response
+          content:
+            application/json:
+              schema:
+                title: api.permissions.scopes.list success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response api.permissions.scopes.list
+                  method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: apps.permissions.scopes.list error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from apps.permissions.scopes.list
+                  method
+      security:
+      - slackAuth:
+        - none
+  /apps.permissions.users.list:
+    get:
+      tags:
+      - apps.permissions.users
+      - apps
+      description: Returns list of user grants and corresponding scopes this app has
+        on a team.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/apps.permissions.users.list
+      operationId: apps_permissions_users_list
+      parameters:
+      - name: token
+        in: query
+        description: 'Authentication token. Requires scope: `none`'
+        required: true
+        schema:
+          type: string
+      - name: cursor
+        in: query
+        description: Paginate through collections of data by setting the `cursor`
+          parameter to a `next_cursor` attribute returned by a previous request's
+          `response_metadata`. Default value fetches the first "page" of the collection.
+          See [pagination](/docs/pagination) for more detail.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: The maximum number of items to return.
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Typical successful paginated response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+      - slackAuth:
+        - none
+  /apps.permissions.users.request:
+    get:
+      tags:
+      - apps.permissions.users
+      - apps
+      description: Enables an app to trigger a permissions modal to grant an app access
+        to a user access scope.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/apps.permissions.users.request
+      operationId: apps_permissions_users_request
+      parameters:
+      - name: token
+        in: query
+        description: 'Authentication token. Requires scope: `none`'
+        required: true
+        schema:
+          type: string
+      - name: scopes
+        in: query
+        description: A comma separated list of user scopes to request for
+        required: true
+        schema:
+          type: string
+      - name: trigger_id
+        in: query
+        description: Token used to trigger the request
+        required: true
+        schema:
+          type: string
+      - name: user
+        in: query
+        description: The user this scope is being requested for
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Standard success response when used with a user token
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Standard failure response when trigger_id is invalid
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+      - slackAuth:
+        - none
+  /apps.uninstall:
+    get:
+      tags:
+      - apps
+      description: Uninstalls your app from a workspace.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/apps.uninstall
+      operationId: apps_uninstall
+      parameters:
+      - name: token
+        in: query
+        description: 'Authentication token. Requires scope: `none`'
+        schema:
+          type: string
+      - name: client_id
+        in: query
+        description: Issued when you created your application.
+        schema:
+          type: string
+      - name: client_secret
+        in: query
+        description: Issued when you created your application.
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: apps.uninstall schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from apps.uninstall method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: apps.uninstall error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from apps.uninstall method
+      security:
+      - slackAuth:
+        - none

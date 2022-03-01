@@ -1,0 +1,87 @@
+paths:
+  /auth.revoke:
+    get:
+      tags:
+      - auth
+      description: Revokes a token.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/auth.revoke
+      operationId: auth_revoke
+      parameters:
+      - name: token
+        in: query
+        description: 'Authentication token. Requires scope: `none`'
+        required: true
+        schema:
+          type: string
+      - name: test
+        in: query
+        description: Setting this parameter to `1` triggers a _testing mode_ where
+          the specified token will not actually be revoked.
+        schema:
+          type: boolean
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: auth.revoke schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from auth.revoke method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: auth.revoke error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from auth.revoke method
+      security:
+      - slackAuth:
+        - none
+  /auth.test:
+    get:
+      tags:
+      - auth
+      description: Checks authentication & identity.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/auth.test
+      operationId: auth_test
+      parameters:
+      - name: token
+        in: header
+        description: 'Authentication token. Requires scope: `none`'
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Standard success response when used with a user token
+          content:
+            application/json:
+              schema:
+                title: auth.test success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response auth.test method
+        default:
+          description: Standard failure response when used with an invalid token
+          content:
+            application/json:
+              schema:
+                title: auth.test error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response auth.test method
+      security:
+      - slackAuth:
+        - none

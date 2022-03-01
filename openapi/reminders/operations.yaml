@@ -1,0 +1,273 @@
+paths:
+  /reminders.add:
+    post:
+      tags:
+      - reminders
+      description: Creates a reminder.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/reminders.add
+      operationId: reminders_add
+      parameters:
+      - name: token
+        in: header
+        description: 'Authentication token. Requires scope: `reminders:write`'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+              - text
+              - time
+              properties:
+                text:
+                  type: string
+                  description: The content of the reminder
+                time:
+                  type: string
+                  description: 'When this reminder should happen: the Unix timestamp
+                    (up to five years from now), the number of seconds until the reminder
+                    (if within 24 hours), or a natural language description (Ex. "in
+                    15 minutes," or "every Thursday")'
+                user:
+                  type: string
+                  description: The user who will receive the reminder. If no user
+                    is specified, the reminder will go to user who created it.
+          application/json:
+            schema:
+              required:
+              - text
+              - time
+              properties:
+                text:
+                  type: string
+                  description: The content of the reminder
+                time:
+                  type: string
+                  description: 'When this reminder should happen: the Unix timestamp
+                    (up to five years from now), the number of seconds until the reminder
+                    (if within 24 hours), or a natural language description (Ex. "in
+                    15 minutes," or "every Thursday")'
+                user:
+                  type: string
+                  description: The user who will receive the reminder. If no user
+                    is specified, the reminder will go to user who created it.
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: reminders.add schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from reminders.add method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: reminders.add error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from reminders.add method
+      security:
+      - slackAuth:
+        - reminders:write
+  /reminders.complete:
+    post:
+      tags:
+      - reminders
+      description: Marks a reminder as complete.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/reminders.complete
+      operationId: reminders_complete
+      parameters:
+      - name: token
+        in: header
+        description: 'Authentication token. Requires scope: `reminders:write`'
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                reminder:
+                  type: string
+                  description: The ID of the reminder to be marked as complete
+          application/json:
+            schema:
+              properties:
+                reminder:
+                  type: string
+                  description: The ID of the reminder to be marked as complete
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: reminders.complete schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from reminders.complete
+                  method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: reminders.complete error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from reminders.complete method
+      security:
+      - slackAuth:
+        - reminders:write
+  /reminders.delete:
+    post:
+      tags:
+      - reminders
+      description: Deletes a reminder.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/reminders.delete
+      operationId: reminders_delete
+      parameters:
+      - name: token
+        in: header
+        description: 'Authentication token. Requires scope: `reminders:write`'
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                reminder:
+                  type: string
+                  description: The ID of the reminder
+          application/json:
+            schema:
+              properties:
+                reminder:
+                  type: string
+                  description: The ID of the reminder
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: reminders.delete schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from reminders.delete
+                  method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: reminders.delete error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from reminders.delete method
+      security:
+      - slackAuth:
+        - reminders:write
+  /reminders.info:
+    get:
+      tags:
+      - reminders
+      description: Gets information about a reminder.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/reminders.info
+      operationId: reminders_info
+      parameters:
+      - name: token
+        in: query
+        description: 'Authentication token. Requires scope: `reminders:read`'
+        schema:
+          type: string
+      - name: reminder
+        in: query
+        description: The ID of the reminder
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: reminders.info schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from reminders.info method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: reminders.info error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from reminders.info method
+      security:
+      - slackAuth:
+        - reminders:read
+  /reminders.list:
+    get:
+      tags:
+      - reminders
+      description: Lists all reminders created by or for a given user.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/reminders.list
+      operationId: reminders_list
+      parameters:
+      - name: token
+        in: query
+        description: 'Authentication token. Requires scope: `reminders:read`'
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: reminders.list schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from reminders.list method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: reminders.list error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from reminders.list method
+      security:
+      - slackAuth:
+        - reminders:read

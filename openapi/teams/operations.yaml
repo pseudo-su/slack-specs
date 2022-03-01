@@ -1,0 +1,630 @@
+paths:
+  /admin.teams.admins.list:
+    get:
+      tags:
+      - admin.teams.admins
+      - admin
+      description: List all of the admins on a given workspace.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.teams.admins.list
+      operationId: admin_teams_admins_list
+      parameters:
+      - name: token
+        in: query
+        description: 'Authentication token. Requires scope: `admin.teams:read`'
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: The maximum number of items to return.
+        schema:
+          type: integer
+      - name: cursor
+        in: query
+        description: Set `cursor` to `next_cursor` returned by the previous call to
+          list items in the next page.
+        schema:
+          type: string
+      - name: team_id
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+      - slackAuth:
+        - admin.teams:read
+  /admin.teams.create:
+    post:
+      tags:
+      - admin.teams
+      - admin
+      description: Create an Enterprise team.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.teams.create
+      operationId: admin_teams_create
+      parameters:
+      - name: token
+        in: header
+        description: 'Authentication token. Requires scope: `admin.teams:write`'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+              - team_domain
+              - team_name
+              properties:
+                team_domain:
+                  type: string
+                  description: Team domain (for example, slacksoftballteam).
+                team_name:
+                  type: string
+                  description: Team name (for example, Slack Softball Team).
+                team_description:
+                  type: string
+                  description: Description for the team.
+                team_discoverability:
+                  type: string
+                  description: Who can join the team. A team's discoverability can
+                    be `open`, `closed`, `invite_only`, or `unlisted`.
+          application/json:
+            schema:
+              required:
+              - team_domain
+              - team_name
+              properties:
+                team_domain:
+                  type: string
+                  description: Team domain (for example, slacksoftballteam).
+                team_name:
+                  type: string
+                  description: Team name (for example, Slack Softball Team).
+                team_description:
+                  type: string
+                  description: Description for the team.
+                team_discoverability:
+                  type: string
+                  description: Who can join the team. A team's discoverability can
+                    be `open`, `closed`, `invite_only`, or `unlisted`.
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+      - slackAuth:
+        - admin.teams:write
+  /admin.teams.list:
+    get:
+      tags:
+      - admin.teams
+      - admin
+      description: List all teams on an Enterprise organization
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.teams.list
+      operationId: admin_teams_list
+      parameters:
+      - name: token
+        in: header
+        description: 'Authentication token. Requires scope: `admin.teams:read`'
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: The maximum number of items to return. Must be between 1 - 100
+          both inclusive.
+        schema:
+          type: integer
+      - name: cursor
+        in: query
+        description: Set `cursor` to `next_cursor` returned by the previous call to
+          list items in the next page.
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+      - slackAuth:
+        - admin.teams:read
+  /admin.teams.owners.list:
+    get:
+      tags:
+      - admin.teams.owners
+      - admin
+      description: List all of the owners on a given workspace.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.teams.owners.list
+      operationId: admin_teams_owners_list
+      parameters:
+      - name: token
+        in: query
+        description: 'Authentication token. Requires scope: `admin.teams:read`'
+        required: true
+        schema:
+          type: string
+      - name: team_id
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: The maximum number of items to return. Must be between 1 - 1000
+          both inclusive.
+        schema:
+          type: integer
+      - name: cursor
+        in: query
+        description: Set `cursor` to `next_cursor` returned by the previous call to
+          list items in the next page.
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+      - slackAuth:
+        - admin.teams:read
+  /admin.teams.settings.info:
+    get:
+      tags:
+      - admin.teams.settings
+      - admin
+      description: Fetch information about settings in a workspace
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.teams.settings.info
+      operationId: admin_teams_settings_info
+      parameters:
+      - name: token
+        in: header
+        description: 'Authentication token. Requires scope: `admin.teams:read`'
+        required: true
+        schema:
+          type: string
+      - name: team_id
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+      - slackAuth:
+        - admin.teams:read
+  /admin.teams.settings.setDefaultChannels:
+    post:
+      tags:
+      - admin.teams.settings
+      - admin
+      description: Set the default channels of a workspace.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.teams.settings.setDefaultChannels
+      operationId: admin_teams_settings_setDefaultChannels
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+              - channel_ids
+              - team_id
+              - token
+              properties:
+                token:
+                  type: string
+                  description: 'Authentication token. Requires scope: `admin.teams:write`'
+                team_id:
+                  type: string
+                  description: ID for the workspace to set the default channel for.
+                channel_ids:
+                  type: string
+                  description: An array of channel IDs.
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+      - slackAuth:
+        - admin.teams:write
+  /admin.teams.settings.setDescription:
+    post:
+      tags:
+      - admin.teams.settings
+      - admin
+      description: Set the description of a given workspace.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.teams.settings.setDescription
+      operationId: admin_teams_settings_setDescription
+      parameters:
+      - name: token
+        in: header
+        description: 'Authentication token. Requires scope: `admin.teams:write`'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+              - description
+              - team_id
+              properties:
+                team_id:
+                  type: string
+                  description: ID for the workspace to set the description for.
+                description:
+                  type: string
+                  description: The new description for the workspace.
+          application/json:
+            schema:
+              required:
+              - description
+              - team_id
+              properties:
+                team_id:
+                  type: string
+                  description: ID for the workspace to set the description for.
+                description:
+                  type: string
+                  description: The new description for the workspace.
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+      - slackAuth:
+        - admin.teams:write
+  /admin.teams.settings.setDiscoverability:
+    post:
+      tags:
+      - admin.teams.settings
+      - admin
+      description: An API method that allows admins to set the discoverability of
+        a given workspace
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.teams.settings.setDiscoverability
+      operationId: admin_teams_settings_setDiscoverability
+      parameters:
+      - name: token
+        in: header
+        description: 'Authentication token. Requires scope: `admin.teams:write`'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+              - discoverability
+              - team_id
+              properties:
+                team_id:
+                  type: string
+                  description: The ID of the workspace to set discoverability on.
+                discoverability:
+                  type: string
+                  description: This workspace's discovery setting. It must be set
+                    to one of `open`, `invite_only`, `closed`, or `unlisted`.
+          application/json:
+            schema:
+              required:
+              - discoverability
+              - team_id
+              properties:
+                team_id:
+                  type: string
+                  description: The ID of the workspace to set discoverability on.
+                discoverability:
+                  type: string
+                  description: This workspace's discovery setting. It must be set
+                    to one of `open`, `invite_only`, `closed`, or `unlisted`.
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+      - slackAuth:
+        - admin.teams:write
+  /admin.teams.settings.setIcon:
+    post:
+      tags:
+      - admin.teams.settings
+      - admin
+      description: Sets the icon of a workspace.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.teams.settings.setIcon
+      operationId: admin_teams_settings_setIcon
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+              - image_url
+              - team_id
+              - token
+              properties:
+                token:
+                  type: string
+                  description: 'Authentication token. Requires scope: `admin.teams:write`'
+                image_url:
+                  type: string
+                  description: Image URL for the icon
+                team_id:
+                  type: string
+                  description: ID for the workspace to set the icon for.
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+      - slackAuth:
+        - admin.teams:write
+  /admin.teams.settings.setName:
+    post:
+      tags:
+      - admin.teams.settings
+      - admin
+      description: Set the name of a given workspace.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.teams.settings.setName
+      operationId: admin_teams_settings_setName
+      parameters:
+      - name: token
+        in: header
+        description: 'Authentication token. Requires scope: `admin.teams:write`'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+              - name
+              - team_id
+              properties:
+                team_id:
+                  type: string
+                  description: ID for the workspace to set the name for.
+                name:
+                  type: string
+                  description: The new name of the workspace.
+          application/json:
+            schema:
+              required:
+              - name
+              - team_id
+              properties:
+                team_id:
+                  type: string
+                  description: ID for the workspace to set the name for.
+                name:
+                  type: string
+                  description: The new name of the workspace.
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description: This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+      - slackAuth:
+        - admin.teams:write

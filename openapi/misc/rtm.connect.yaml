@@ -1,0 +1,53 @@
+paths:
+  /rtm.connect:
+    get:
+      tags:
+      - rtm
+      description: Starts a Real Time Messaging session.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/rtm.connect
+      operationId: rtm_connect
+      parameters:
+      - name: token
+        in: query
+        description: 'Authentication token. Requires scope: `rtm:stream`'
+        required: true
+        schema:
+          type: string
+      - name: batch_presence_aware
+        in: query
+        description: Batch presence deliveries via subscription. Enabling changes
+          the shape of `presence_change` events. See [batch presence](/docs/presence-and-status#batching).
+        schema:
+          type: boolean
+      - name: presence_sub
+        in: query
+        description: Only deliver presence events when requested by subscription.
+          See [presence subscriptions](/docs/presence-and-status#subscriptions).
+        schema:
+          type: boolean
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: rtm.connect schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from rtm.connect method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: rtm.connect error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from rtm.connect method
+      security:
+      - slackAuth:
+        - rtm:stream

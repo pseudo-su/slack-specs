@@ -10,20 +10,27 @@ components:
             admin: admin
             admin.apps:read: admin.apps:read
             admin.apps:write: admin.apps:write
+            admin.conversations:read: admin.conversations:read
             admin.conversations:write: admin.conversations:write
             admin.invites:read: admin.invites:read
             admin.invites:write: admin.invites:write
             admin.teams:read: admin.teams:read
             admin.teams:write: admin.teams:write
+            admin.usergroups:read: admin.usergroups:read
+            admin.usergroups:write: admin.usergroups:write
             admin.users:read: admin.users:read
             admin.users:write: admin.users:write
+            authorizations:read: authorizations:read
             bot: Bot user scope
+            calls:read: calls:read
+            calls:write: calls:write
             channels:history: channels:history
+            channels:manage: channels:manage
             channels:read: channels:read
             channels:write: channels:write
             chat:write: chat:write
             chat:write:bot: Author messages as a bot
-            chat:write:user: chat:write:user
+            chat:write:user: Author messages as a user
             conversations:history: conversations:history
             conversations:read: conversations:read
             conversations:write: conversations:write
@@ -66,3 +73,4 @@ components:
             users:read: users:read
             users:read.email: users:read.email
             users:write: users:write
+            workflow.steps:execute: workflow.steps:execute
