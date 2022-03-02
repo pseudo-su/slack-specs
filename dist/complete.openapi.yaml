@@ -15,6 +15,344 @@ components:
         type: object
       title: Block Kit blocks
       type: array
+    conversations.list_Channel:
+      properties:
+        created:
+          example: 1449252889
+          type: number
+        creator:
+          example: U012A3CDE
+          type: string
+        id:
+          example: C012AB3CD
+          type: string
+        is_archived:
+          example: false
+          type: boolean
+        is_channel:
+          enum:
+          - true
+          example: true
+          type: boolean
+        is_ext_shared:
+          example: false
+          type: boolean
+        is_general:
+          example: true
+          type: boolean
+        is_group:
+          example: false
+          type: boolean
+        is_im:
+          example: false
+          type: boolean
+        is_member:
+          example: true
+          type: boolean
+        is_mpim:
+          example: false
+          type: boolean
+        is_org_shared:
+          example: false
+          type: boolean
+        is_pending_ext_shared:
+          example: false
+          type: boolean
+        is_private:
+          example: false
+          type: boolean
+        is_shared:
+          example: false
+          type: boolean
+        name:
+          example: general
+          type: string
+        name_normalized:
+          example: general
+          type: string
+        num_members:
+          example: 4
+          type: number
+        pending_shared:
+          example: []
+          items:
+            type: object
+          type: array
+        previous_names:
+          items:
+            example: previous-channel-name
+            type: string
+          type: array
+        purpose:
+          properties:
+            creator:
+              example: U061F7AUR
+              type: string
+            last_set:
+              example: 1493657761
+              type: number
+            value:
+              example: 'Group messaging with: @mr.banks @slactions-jackson @beforebot'
+              type: string
+          required:
+          - value
+          - creator
+          - last_set
+          type: object
+        topic:
+          properties:
+            creator:
+              example: U061F7AUR
+              type: string
+            last_set:
+              example: 1493657761
+              type: number
+            value:
+              example: Group messaging
+              type: string
+          required:
+          - value
+          - creator
+          - last_set
+          type: object
+        unlinked:
+          example: 0
+          type: number
+      required:
+      - id
+      - name
+      - is_channel
+      - is_group
+      - is_im
+      - created
+      - creator
+      - is_archived
+      - is_general
+      - unlinked
+      - name_normalized
+      - is_shared
+      - is_ext_shared
+      - is_org_shared
+      - pending_shared
+      - is_pending_ext_shared
+      - is_member
+      - is_private
+      - is_mpim
+      - topic
+      - purpose
+      - previous_names
+      - num_members
+      type: object
+    conversations.list_ConversationType:
+      enum:
+      - public_channel
+      - private_channel
+      - npim
+      - im
+      type: string
+    conversations.list_ErrorResponseBody:
+      additionalProperties: true
+      description: Schema for error response from conversations.list method
+      properties:
+        error:
+          example: invalid_auth
+          type: string
+        ok:
+          example: false
+          type: boolean
+      required:
+      - ok
+      - error
+      title: conversations.list error schema
+      type: object
+    conversations.list_Group:
+      properties:
+        created:
+          example: 1493657761
+          type: number
+        creator:
+          example: U061F7AUR
+          type: string
+        id:
+          example: G0AKFJBEU
+          type: string
+        is_archived:
+          example: false
+          type: boolean
+        is_channel:
+          example: false
+          type: boolean
+        is_ext_shared:
+          example: false
+          type: boolean
+        is_general:
+          example: false
+          type: boolean
+        is_group:
+          enum:
+          - true
+          example: true
+          type: boolean
+        is_im:
+          example: false
+          type: boolean
+        is_member:
+          example: true
+          type: boolean
+        is_mpim:
+          example: true
+          type: boolean
+        is_open:
+          example: true
+          type: boolean
+        is_org_shared:
+          example: false
+          type: boolean
+        is_pending_ext_shared:
+          example: false
+          type: boolean
+        is_private:
+          example: true
+          type: boolean
+        is_shared:
+          example: false
+          type: boolean
+        name:
+          example: mpdm-mr.banks--slactions-jackson--beforebot-1
+          type: string
+        name_normalized:
+          example: mpdm-mr.banks--slactions-jackson--beforebot-1
+          type: string
+        pending_shared:
+          example: []
+          items:
+            type: object
+          type: array
+        priority:
+          example: 0
+          type: number
+        purpose:
+          properties:
+            creator:
+              example: U061F7AUR
+              type: string
+            last_set:
+              example: 1493657761
+              type: number
+            value:
+              example: 'Group messaging with: @mr.banks @slactions-jackson @beforebot'
+              type: string
+          required:
+          - value
+          - creator
+          - last_set
+          type: object
+        topic:
+          properties:
+            creator:
+              example: U061F7AUR
+              type: string
+            last_set:
+              example: 1493657761
+              type: number
+            value:
+              example: Group messaging
+              type: string
+          required:
+          - value
+          - creator
+          - last_set
+          type: object
+        unlinked:
+          example: 0
+          type: number
+      required:
+      - id
+      - name
+      - is_channel
+      - is_group
+      - is_im
+      - created
+      - creator
+      - is_archived
+      - is_general
+      - unlinked
+      - name_normalized
+      - is_shared
+      - is_ext_shared
+      - is_org_shared
+      - pending_shared
+      - is_pending_ext_shared
+      - is_member
+      - is_private
+      - is_mpim
+      - is_open
+      - topic
+      - purpose
+      - priority
+      type: object
+    conversations.list_Im:
+      properties:
+        created:
+          example: 1498500348
+          type: number
+        id:
+          example: D0C0F7S8Y
+          type: string
+        is_im:
+          enum:
+          - true
+          example: true
+          type: boolean
+        is_org_shared:
+          example: false
+          type: boolean
+        is_user_deleted:
+          example: false
+          type: boolean
+        priority:
+          example: 0
+          type: number
+        user:
+          example: U0BS9U4SV
+          type: string
+      required:
+      - id
+      - created
+      - is_im
+      - is_org_shared
+      - user
+      - is_user_deleted
+      - priority
+      type: object
+    conversations.list_ResponseBody:
+      additionalProperties: true
+      description: Schema for successful response from conversations.list method
+      properties:
+        channels:
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/conversations.list_Channel'
+            - $ref: '#/components/schemas/conversations.list_Group'
+            - $ref: '#/components/schemas/conversations.list_Im'
+          type: array
+        ok:
+          example: true
+          type: boolean
+        response_metadata:
+          properties:
+            next_cursor:
+              example: dGVhbTpDMDYxRkE1UEI=
+              type: string
+          required:
+          - next_cursor
+          type: object
+      required:
+      - ok
+      - channels
+      - response_metadata
+      title: conversations.list success schema
+      type: object
     defs_app_id:
       pattern: ^A[A-Z0-9]{1,}$
       title: App ID
@@ -7452,10 +7790,14 @@ paths:
           type: boolean
       - description: Mix and match channel types by providing a comma-separated list
           of any combination of `public_channel`, `private_channel`, `mpim`, `im`
+        explode: false
         in: query
         name: types
         schema:
-          type: string
+          items:
+            $ref: '#/components/schemas/conversations.list_ConversationType'
+          type: array
+        style: form
       - description: The maximum number of items to return. Fewer than the requested
           number of items may be returned, even if the end of the list hasn't been
           reached. Must be an integer no larger than 1000.
@@ -7476,22 +7818,13 @@ paths:
           content:
             application/json:
               schema:
-                additionalProperties:
-                  type: object
-                description: Schema for successful response from conversations.list
-                  method
-                title: conversations.list success schema
-                type: object
+                $ref: '#/components/schemas/conversations.list_ResponseBody'
           description: Typical success response with only public channels
         default:
           content:
             application/json:
               schema:
-                additionalProperties:
-                  type: object
-                description: Schema for error response from conversations.list method
-                title: conversations.list error schema
-                type: object
+                $ref: '#/components/schemas/conversations.list_ErrorResponseBody'
           description: Typical error response
       security:
       - slackAuth:

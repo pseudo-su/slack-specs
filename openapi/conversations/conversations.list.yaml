@@ -1,0 +1,418 @@
+paths:
+  /conversations.list:
+    get:
+      operationId: conversations_list
+      tags:
+        - conversations
+      description: Lists all channels in a Slack team.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/conversations.list
+      security:
+        - slackAuth:
+            - channels:read
+            - groups:read
+            - im:read
+            - mpim:read
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `conversations:read`"
+          schema:
+            type: string
+        - name: exclude_archived
+          in: query
+          description: Set to `true` to exclude archived channels from the list
+          schema:
+            type: boolean
+        - name: types
+          in: query
+          description:
+            Mix and match channel types by providing a comma-separated list
+            of any combination of `public_channel`, `private_channel`, `mpim`, `im`
+          style: form
+          explode: false
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/conversations.list_ConversationType"
+        - name: limit
+          in: query
+          description:
+            The maximum number of items to return. Fewer than the requested
+            number of items may be returned, even if the end of the list hasn't been
+            reached. Must be an integer no larger than 1000.
+          schema:
+            type: integer
+        - name: cursor
+          in: query
+          description:
+            Paginate through collections of data by setting the `cursor`
+            parameter to a `next_cursor` attribute returned by a previous request's
+            `response_metadata`. Default value fetches the first "page" of the collection.
+            See [pagination](/docs/pagination) for more detail.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Typical success response with only public channels
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/conversations.list_ResponseBody"
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/conversations.list_ErrorResponseBody"
+components:
+  schemas:
+    conversations.list_ConversationType:
+      type: string
+      enum:
+        - public_channel
+        - private_channel
+        - npim
+        - im
+
+    conversations.list_Channel:
+      type: object
+      required:
+        - id
+        - name
+        - is_channel
+        - is_group
+        - is_im
+        - created
+        - creator
+        - is_archived
+        - is_general
+        - unlinked
+        - name_normalized
+        - is_shared
+        - is_ext_shared
+        - is_org_shared
+        - pending_shared
+        - is_pending_ext_shared
+        - is_member
+        - is_private
+        - is_mpim
+        - topic
+        - purpose
+        - previous_names
+        - num_members
+      properties:
+        id:
+          type: string
+          example: "C012AB3CD"
+        name:
+          type: string
+          example: "general"
+        is_channel:
+          type: boolean
+          example: true
+          enum:
+            - true
+        is_group:
+          type: boolean
+          example: false
+        is_im:
+          type: boolean
+          example: false
+        created:
+          type: number
+          example: 1449252889
+        creator:
+          type: string
+          example: "U012A3CDE"
+        is_archived:
+          type: boolean
+          example: false
+        is_general:
+          type: boolean
+          example: true
+        unlinked:
+          type: number
+          example: 0
+        name_normalized:
+          type: string
+          example: "general"
+        is_shared:
+          type: boolean
+          example: false
+        is_ext_shared:
+          type: boolean
+          example: false
+        is_org_shared:
+          type: boolean
+          example: false
+        pending_shared:
+          type: array
+          items:
+            # NOTE: the schema for pending_shared isn't clear from the docs
+            # https://api.slack.com/types/conversation
+            type: object
+          example: []
+        is_pending_ext_shared:
+          type: boolean
+          example: false
+        is_member:
+          type: boolean
+          example: true
+        is_private:
+          type: boolean
+          example: false
+        is_mpim:
+          type: boolean
+          example: false
+        topic:
+          type: object
+          required:
+            - value
+            - creator
+            - last_set
+          properties:
+            value:
+              type: string
+              example: "Group messaging"
+            creator:
+              type: string
+              example: "U061F7AUR"
+            last_set:
+              type: number
+              example: 1493657761
+        purpose:
+          type: object
+          required:
+            - value
+            - creator
+            - last_set
+          properties:
+            value:
+              type: string
+              example: "Group messaging with: @mr.banks @slactions-jackson @beforebot"
+            creator:
+              type: string
+              example: "U061F7AUR"
+            last_set:
+              type: number
+              example: 1493657761
+        previous_names:
+          type: array
+          items:
+            type: string
+            example: "previous-channel-name"
+        num_members:
+          type: number
+          example: 4
+
+    conversations.list_Group:
+      type: object
+      required:
+        - id
+        - name
+        - is_channel
+        - is_group
+        - is_im
+        - created
+        - creator
+        - is_archived
+        - is_general
+        - unlinked
+        - name_normalized
+        - is_shared
+        - is_ext_shared
+        - is_org_shared
+        - pending_shared
+        - is_pending_ext_shared
+        - is_member
+        - is_private
+        - is_mpim
+        - is_open
+        - topic
+        - purpose
+        - priority
+      properties:
+        id:
+          type: string
+          example: "G0AKFJBEU"
+        name:
+          type: string
+          example: "mpdm-mr.banks--slactions-jackson--beforebot-1"
+        is_channel:
+          type: boolean
+          example: false
+        is_group:
+          type: boolean
+          example: true
+          enum:
+            - true
+        is_im:
+          type: boolean
+          example: false
+        created:
+          type: number
+          example: 1493657761
+        creator:
+          type: string
+          example: "U061F7AUR"
+        is_archived:
+          type: boolean
+          example: false
+        is_general:
+          type: boolean
+          example: false
+        unlinked:
+          type: number
+          example: 0
+        name_normalized:
+          type: string
+          example: "mpdm-mr.banks--slactions-jackson--beforebot-1"
+        is_shared:
+          type: boolean
+          example: false
+        is_ext_shared:
+          type: boolean
+          example: false
+        is_org_shared:
+          type: boolean
+          example: false
+        pending_shared:
+          type: array
+          items:
+            # NOTE: the schema for pending_shared isn't clear from the docs
+            # https://api.slack.com/types/conversation
+            type: object
+          example: []
+        is_pending_ext_shared:
+          type: boolean
+          example: false
+        is_member:
+          type: boolean
+          example: true
+        is_private:
+          type: boolean
+          example: true
+        is_mpim:
+          type: boolean
+          example: true
+        is_open:
+          type: boolean
+          example: true
+        topic:
+          type: object
+          required:
+            - value
+            - creator
+            - last_set
+          properties:
+            value:
+              type: string
+              example: "Group messaging"
+            creator:
+              type: string
+              example: "U061F7AUR"
+            last_set:
+              type: number
+              example: 1493657761
+        purpose:
+          type: object
+          required:
+            - value
+            - creator
+            - last_set
+          properties:
+            value:
+              type: string
+              example: "Group messaging with: @mr.banks @slactions-jackson @beforebot"
+            creator:
+              type: string
+              example: "U061F7AUR"
+            last_set:
+              type: number
+              example: 1493657761
+        priority:
+          type: number
+          example: 0
+
+    conversations.list_Im:
+      type: object
+      required:
+        - id
+        - created
+        - is_im
+        - is_org_shared
+        - user
+        - is_user_deleted
+        - priority
+      properties:
+        id:
+          type: string
+          example: "D0C0F7S8Y"
+        created:
+          type: number
+          example: 1498500348
+        is_im:
+          type: boolean
+          example: true
+          enum:
+            - true
+        is_org_shared:
+          type: boolean
+          example: false
+        user:
+          type: string
+          example: "U0BS9U4SV"
+        is_user_deleted:
+          type: boolean
+          example: false
+        priority:
+          type: number
+          example: 0
+
+    conversations.list_ResponseBody:
+      type: object
+      title: conversations.list success schema
+      additionalProperties: true
+      description: Schema for successful response from conversations.list
+        method
+      required:
+        - ok
+        - channels
+        - response_metadata
+      properties:
+        ok:
+          type: boolean
+          example: true
+        channels:
+          type: array
+          items:
+            oneOf:
+              - $ref: "#/components/schemas/conversations.list_Channel"
+              - $ref: "#/components/schemas/conversations.list_Group"
+              - $ref: "#/components/schemas/conversations.list_Im"
+        response_metadata:
+          type: object
+          required:
+            - next_cursor
+          properties:
+            next_cursor:
+              type: string
+              example: dGVhbTpDMDYxRkE1UEI=
+
+    conversations.list_ErrorResponseBody:
+      type: object
+      title: conversations.list error schema
+      additionalProperties: true
+      description: Schema for error response from conversations.list method
+      required:
+        - ok
+        - error
+      properties:
+        ok:
+          type: boolean
+          example: false
+        error:
+          type: string
+          example: invalid_auth

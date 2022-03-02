@@ -9063,7 +9063,7 @@ func NewConversationsListRequest(server string, params *ConversationsListParams)
 
 	if params.Types != nil {
 
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "types", runtime.ParamLocationQuery, *params.Types); err != nil {
+		if queryFrag, err := runtime.StyleParamWithLocation("form", false, "types", runtime.ParamLocationQuery, *params.Types); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 			return nil, err
@@ -17664,12 +17664,8 @@ func (r ConversationsLeaveResponse) StatusCode() int {
 type ConversationsListResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *struct {
-		AdditionalProperties map[string]map[string]interface{} `json:"-"`
-	}
-	JSONDefault *struct {
-		AdditionalProperties map[string]map[string]interface{} `json:"-"`
-	}
+	JSON200      *ConversationsListResponseBody
+	JSONDefault  *ConversationsListErrorResponseBody
 }
 
 // Status returns HTTPResponse.Status
@@ -25271,18 +25267,14 @@ func ParseConversationsListResponse(rsp *http.Response) (*ConversationsListRespo
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			AdditionalProperties map[string]map[string]interface{} `json:"-"`
-		}
+		var dest ConversationsListResponseBody
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && true:
-		var dest struct {
-			AdditionalProperties map[string]map[string]interface{} `json:"-"`
-		}
+		var dest ConversationsListErrorResponseBody
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

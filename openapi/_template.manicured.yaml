@@ -2,7 +2,7 @@ includes:
   - base.openapi.yaml
   - common.parameters.yaml
   - common.responses.yaml
-  - common.schemas.yaml
+  - common.schemas.manicured.yaml
   - common.response-headers.yaml
   - common.security-schemes.yaml
 
@@ -10,7 +10,7 @@ includes:
   # - auth/_template.yaml
   # - calls/_template.yaml
   # - chat/_template.yaml
-  # - conversations/_template.yaml
+  - conversations/_template.manicured.yaml
   # - dnd/_template.yaml
   # - files/_template.yaml
   # - invite_requests/_template.yaml

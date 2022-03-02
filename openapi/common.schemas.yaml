@@ -1,4 +1,6 @@
 components:
+  # NOTE: migrate schemas out of here into specific features
+  # OR into common.schemas.manicured.yaml
   schemas:
     blocks:
       title: Block Kit blocks
