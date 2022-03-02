@@ -1,4 +1,5 @@
-export OPENAPI_FILENAME=./generated.openapi.yaml
+export OPENAPI_FILENAME_COMPLETE=./dist/complete.openapi.yaml
+export OPENAPI_FILENAME_MANICURED=./dist/manicured.openapi.yaml
 
 export GO111MODULE=on
 
@@ -29,18 +30,31 @@ verify:
 	# Lint go files
 	./bin/golangci-lint run ./...
 	# Lint OpenAPI spec
-	./bin/spectral lint -v --fail-severity=warn $(OPENAPI_FILENAME)
+	./bin/spectral lint -v --fail-severity=warn $(OPENAPI_FILENAME_COMPLETE)
+	./bin/spectral lint -v --fail-severity=warn $(OPENAPI_FILENAME_MANICURED)
 .PHONY: verify
 
 ### Codegen
 
 ## Run codegen
 generate:
-	# Generate openapi spec
-	gobin -m -run github.com/the4thamigo-uk/conflate/conflate -data ./openapi/_template.yaml -format YAML > $(OPENAPI_FILENAME)
-	# Generate golang api client pkg/
-	gobin -m -run github.com/deepmap/oapi-codegen/cmd/oapi-codegen --package=pkg --generate types -o ./pkg/types.gen.go $(OPENAPI_FILENAME)
-	gobin -m -run github.com/deepmap/oapi-codegen/cmd/oapi-codegen --package=pkg --generate client -o ./pkg/client.gen.go $(OPENAPI_FILENAME)
+	mkdir -p ./dist;
+
+	# Generate manicured openapi spec
+	gobin -m -run github.com/the4thamigo-uk/conflate/conflate -data ./openapi/_template.manicured.yaml -format YAML > $(OPENAPI_FILENAME_MANICURED)
+
+	# Generate golang api client pkg/manicured
+	mkdir -p ./pkg/manicured
+	gobin -m -run github.com/deepmap/oapi-codegen/cmd/oapi-codegen --package=pkg --generate types -o ./pkg/manicured/types.gen.go $(OPENAPI_FILENAME_MANICURED)
+	gobin -m -run github.com/deepmap/oapi-codegen/cmd/oapi-codegen --package=pkg --generate client -o ./pkg/manicured/client.gen.go $(OPENAPI_FILENAME_MANICURED)
+
+	# Generate complete openapi spec
+	gobin -m -run github.com/the4thamigo-uk/conflate/conflate -data ./openapi/_template.complete.yaml -format YAML > $(OPENAPI_FILENAME_COMPLETE)
+
+	# Generate golang api client pkg/complete
+	mkdir -p ./pkg/complete
+	gobin -m -run github.com/deepmap/oapi-codegen/cmd/oapi-codegen --package=pkg --generate types -o ./pkg/complete/types.gen.go $(OPENAPI_FILENAME_COMPLETE)
+	gobin -m -run github.com/deepmap/oapi-codegen/cmd/oapi-codegen --package=pkg --generate client -o ./pkg/complete/client.gen.go $(OPENAPI_FILENAME_COMPLETE)
 .PHONY: generate
 
 ### Test

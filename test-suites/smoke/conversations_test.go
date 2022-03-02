@@ -3,7 +3,7 @@ package smoke
 import (
 	"context"
 
-	"github.com/pseudo-su/slack-specs/pkg"
+	pkg "github.com/pseudo-su/slack-specs/pkg/complete"
 
 	"github.com/stretchr/testify/assert"
 )

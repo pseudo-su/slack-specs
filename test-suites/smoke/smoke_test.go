@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/caarlos0/env"
-	"github.com/pseudo-su/slack-specs/pkg"
+	pkg "github.com/pseudo-su/slack-specs/pkg/complete"
 	log "github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/suite"
 )
