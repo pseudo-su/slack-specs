@@ -2,31 +2,31 @@ paths:
   /dialog.open:
     get:
       tags:
-      - dialog
+        - dialog
       description: Open a dialog with a user
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/dialog.open
       operationId: dialog_open
       parameters:
-      - name: token
-        in: header
-        description: 'Authentication token. Requires scope: `none`'
-        required: true
-        schema:
-          type: string
-      - name: dialog
-        in: query
-        description: The dialog definition. This must be a JSON-encoded string.
-        required: true
-        schema:
-          type: string
-      - name: trigger_id
-        in: query
-        description: Exchange a trigger to post to the user.
-        required: true
-        schema:
-          type: string
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `none`"
+          required: true
+          schema:
+            type: string
+        - name: dialog
+          in: query
+          description: The dialog definition. This must be a JSON-encoded string.
+          required: true
+          schema:
+            type: string
+        - name: trigger_id
+          in: query
+          description: Exchange a trigger to post to the user.
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: Typical success response is quite minimal.
@@ -39,7 +39,8 @@ paths:
                   type: object
                 description: Schema for successful response from dialog.open method
         default:
-          description: Typical error response, before getting to any possible validation
+          description:
+            Typical error response, before getting to any possible validation
             errors.
           content:
             application/json:
@@ -50,5 +51,5 @@ paths:
                   type: object
                 description: Schema for error response from dialog.open method
       security:
-      - slackAuth:
-        - none
+        - slackAuth:
+            - none

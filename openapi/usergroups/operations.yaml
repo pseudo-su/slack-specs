@@ -2,27 +2,27 @@ paths:
   /admin.usergroups.addChannels:
     post:
       tags:
-      - admin.usergroups
-      - admin
+        - admin.usergroups
+        - admin
       description: Add one or more default channels to an IDP group.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/admin.usergroups.addChannels
       operationId: admin_usergroups_addChannels
       parameters:
-      - name: token
-        in: header
-        description: 'Authentication token. Requires scope: `admin.usergroups:write`'
-        required: true
-        schema:
-          type: string
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `admin.usergroups:write`"
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/x-www-form-urlencoded:
             schema:
               required:
-              - channel_ids
-              - usergroup_id
+                - channel_ids
+                - usergroup_id
               properties:
                 usergroup_id:
                   type: string
@@ -36,8 +36,8 @@ paths:
           application/json:
             schema:
               required:
-              - channel_ids
-              - usergroup_id
+                - channel_ids
+                - usergroup_id
               properties:
                 usergroup_id:
                   type: string
@@ -59,10 +59,12 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _OK_ response
+                description:
+                  This method either only returns a brief _OK_ response
                   or a verbose schema is not available for this method.
         default:
-          description: Typical error response if the token provided is not associated
+          description:
+            Typical error response if the token provided is not associated
             with an Org Admin or Owner
           content:
             application/json:
@@ -71,66 +73,72 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _not OK_ response
+                description:
+                  This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-      - slackAuth:
-        - admin.usergroups:write
+        - slackAuth:
+            - admin.usergroups:write
   /admin.usergroups.addTeams:
     post:
       tags:
-      - admin.usergroups
-      - admin
-      description: Associate one or more default workspaces with an organization-wide
+        - admin.usergroups
+        - admin
+      description:
+        Associate one or more default workspaces with an organization-wide
         IDP group.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/admin.usergroups.addTeams
       operationId: admin_usergroups_addTeams
       parameters:
-      - name: token
-        in: header
-        description: 'Authentication token. Requires scope: `admin.teams:write`'
-        required: true
-        schema:
-          type: string
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `admin.teams:write`"
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/x-www-form-urlencoded:
             schema:
               required:
-              - team_ids
-              - usergroup_id
+                - team_ids
+                - usergroup_id
               properties:
                 usergroup_id:
                   type: string
                   description: An encoded usergroup (IDP Group) ID.
                 team_ids:
                   type: string
-                  description: A comma separated list of encoded team (workspace)
+                  description:
+                    A comma separated list of encoded team (workspace)
                     IDs. Each workspace *MUST* belong to the organization associated
                     with the token.
                 auto_provision:
                   type: boolean
-                  description: When `true`, this method automatically creates new
+                  description:
+                    When `true`, this method automatically creates new
                     workspace accounts for the IDP group members.
           application/json:
             schema:
               required:
-              - team_ids
-              - usergroup_id
+                - team_ids
+                - usergroup_id
               properties:
                 usergroup_id:
                   type: string
                   description: An encoded usergroup (IDP Group) ID.
                 team_ids:
                   type: string
-                  description: A comma separated list of encoded team (workspace)
+                  description:
+                    A comma separated list of encoded team (workspace)
                     IDs. Each workspace *MUST* belong to the organization associated
                     with the token.
                 auto_provision:
                   type: boolean
-                  description: When `true`, this method automatically creates new
+                  description:
+                    When `true`, this method automatically creates new
                     workspace accounts for the IDP group members.
         required: true
       responses:
@@ -143,7 +151,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _OK_ response
+                description:
+                  This method either only returns a brief _OK_ response
                   or a verbose schema is not available for this method.
         default:
           description: Typical error response
@@ -154,44 +163,45 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _not OK_ response
+                description:
+                  This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-      - slackAuth:
-        - admin.teams:write
+        - slackAuth:
+            - admin.teams:write
   /admin.usergroups.listChannels:
     get:
       tags:
-      - admin.usergroups
-      - admin
+        - admin.usergroups
+        - admin
       description: List the channels linked to an org-level IDP group (user group).
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/admin.usergroups.listChannels
       operationId: admin_usergroups_listChannels
       parameters:
-      - name: token
-        in: header
-        description: 'Authentication token. Requires scope: `admin.usergroups:read`'
-        required: true
-        schema:
-          type: string
-      - name: usergroup_id
-        in: query
-        description: ID of the IDP group to list default channels for.
-        required: true
-        schema:
-          type: string
-      - name: team_id
-        in: query
-        description: ID of the the workspace.
-        schema:
-          type: string
-      - name: include_num_members
-        in: query
-        description: Flag to include or exclude the count of members per channel.
-        schema:
-          type: boolean
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `admin.usergroups:read`"
+          required: true
+          schema:
+            type: string
+        - name: usergroup_id
+          in: query
+          description: ID of the IDP group to list default channels for.
+          required: true
+          schema:
+            type: string
+        - name: team_id
+          in: query
+          description: ID of the the workspace.
+          schema:
+            type: string
+        - name: include_num_members
+          in: query
+          description: Flag to include or exclude the count of members per channel.
+          schema:
+            type: boolean
       responses:
         "200":
           description: Typical success response
@@ -202,10 +212,12 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _OK_ response
+                description:
+                  This method either only returns a brief _OK_ response
                   or a verbose schema is not available for this method.
         default:
-          description: Typical error response if the token provided is not associated
+          description:
+            Typical error response if the token provided is not associated
             with an Org Admin or Owner
           content:
             application/json:
@@ -214,36 +226,38 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _not OK_ response
+                description:
+                  This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-      - slackAuth:
-        - admin.usergroups:read
+        - slackAuth:
+            - admin.usergroups:read
   /admin.usergroups.removeChannels:
     post:
       tags:
-      - admin.usergroups
-      - admin
-      description: Remove one or more default channels from an org-level IDP group
+        - admin.usergroups
+        - admin
+      description:
+        Remove one or more default channels from an org-level IDP group
         (user group).
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/admin.usergroups.removeChannels
       operationId: admin_usergroups_removeChannels
       parameters:
-      - name: token
-        in: header
-        description: 'Authentication token. Requires scope: `admin.usergroups:write`'
-        required: true
-        schema:
-          type: string
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `admin.usergroups:write`"
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/x-www-form-urlencoded:
             schema:
               required:
-              - channel_ids
-              - usergroup_id
+                - channel_ids
+                - usergroup_id
               properties:
                 usergroup_id:
                   type: string
@@ -254,8 +268,8 @@ paths:
           application/json:
             schema:
               required:
-              - channel_ids
-              - usergroup_id
+                - channel_ids
+                - usergroup_id
               properties:
                 usergroup_id:
                   type: string
@@ -274,10 +288,12 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _OK_ response
+                description:
+                  This method either only returns a brief _OK_ response
                   or a verbose schema is not available for this method.
         default:
-          description: Typical error response if the token provided is not associated
+          description:
+            Typical error response if the token provided is not associated
             with an Org Admin or Owner
           content:
             application/json:
@@ -286,75 +302,82 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _not OK_ response
+                description:
+                  This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-      - slackAuth:
-        - admin.usergroups:write
+        - slackAuth:
+            - admin.usergroups:write
 
   /usergroups.create:
     post:
       tags:
-      - usergroups
+        - usergroups
       description: Create a User Group
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/usergroups.create
       operationId: usergroups_create
       parameters:
-      - name: token
-        in: header
-        description: 'Authentication token. Requires scope: `usergroups:write`'
-        required: true
-        schema:
-          type: string
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `usergroups:write`"
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/x-www-form-urlencoded:
             schema:
               required:
-              - name
+                - name
               properties:
                 channels:
                   type: string
-                  description: A comma separated string of encoded channel IDs for
+                  description:
+                    A comma separated string of encoded channel IDs for
                     which the User Group uses as a default.
                 description:
                   type: string
                   description: A short description of the User Group.
                 handle:
                   type: string
-                  description: A mention handle. Must be unique among channels, users
+                  description:
+                    A mention handle. Must be unique among channels, users
                     and User Groups.
                 include_count:
                   type: boolean
                   description: Include the number of users in each User Group.
                 name:
                   type: string
-                  description: A name for the User Group. Must be unique among User
+                  description:
+                    A name for the User Group. Must be unique among User
                     Groups.
           application/json:
             schema:
               required:
-              - name
+                - name
               properties:
                 channels:
                   type: string
-                  description: A comma separated string of encoded channel IDs for
+                  description:
+                    A comma separated string of encoded channel IDs for
                     which the User Group uses as a default.
                 description:
                   type: string
                   description: A short description of the User Group.
                 handle:
                   type: string
-                  description: A mention handle. Must be unique among channels, users
+                  description:
+                    A mention handle. Must be unique among channels, users
                     and User Groups.
                 include_count:
                   type: boolean
                   description: Include the number of users in each User Group.
                 name:
                   type: string
-                  description: A name for the User Group. Must be unique among User
+                  description:
+                    A name for the User Group. Must be unique among User
                     Groups.
         required: true
       responses:
@@ -367,7 +390,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: Schema for successful response from usergroups.create
+                description:
+                  Schema for successful response from usergroups.create
                   method
         default:
           description: Typical error response
@@ -380,30 +404,30 @@ paths:
                   type: object
                 description: Schema for error response from usergroups.create method
       security:
-      - slackAuth:
-        - usergroups:write
+        - slackAuth:
+            - usergroups:write
   /usergroups.disable:
     post:
       tags:
-      - usergroups
+        - usergroups
       description: Disable an existing User Group
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/usergroups.disable
       operationId: usergroups_disable
       parameters:
-      - name: token
-        in: header
-        description: 'Authentication token. Requires scope: `usergroups:write`'
-        required: true
-        schema:
-          type: string
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `usergroups:write`"
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/x-www-form-urlencoded:
             schema:
               required:
-              - usergroup
+                - usergroup
               properties:
                 include_count:
                   type: boolean
@@ -414,7 +438,7 @@ paths:
           application/json:
             schema:
               required:
-              - usergroup
+                - usergroup
               properties:
                 include_count:
                   type: boolean
@@ -433,7 +457,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: Schema for successful response from usergroups.disable
+                description:
+                  Schema for successful response from usergroups.disable
                   method
         default:
           description: Typical error response
@@ -446,30 +471,30 @@ paths:
                   type: object
                 description: Schema for error response from usergroups.disable method
       security:
-      - slackAuth:
-        - usergroups:write
+        - slackAuth:
+            - usergroups:write
   /usergroups.enable:
     post:
       tags:
-      - usergroups
+        - usergroups
       description: Enable a User Group
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/usergroups.enable
       operationId: usergroups_enable
       parameters:
-      - name: token
-        in: header
-        description: 'Authentication token. Requires scope: `usergroups:write`'
-        required: true
-        schema:
-          type: string
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `usergroups:write`"
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/x-www-form-urlencoded:
             schema:
               required:
-              - usergroup
+                - usergroup
               properties:
                 include_count:
                   type: boolean
@@ -480,7 +505,7 @@ paths:
           application/json:
             schema:
               required:
-              - usergroup
+                - usergroup
               properties:
                 include_count:
                   type: boolean
@@ -499,7 +524,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: Schema for successful response from usergroups.enable
+                description:
+                  Schema for successful response from usergroups.enable
                   method
         default:
           description: Typical error response
@@ -512,39 +538,39 @@ paths:
                   type: object
                 description: Schema for error response from usergroups.enable method
       security:
-      - slackAuth:
-        - usergroups:write
+        - slackAuth:
+            - usergroups:write
   /usergroups.list:
     get:
       tags:
-      - usergroups
+        - usergroups
       description: List all User Groups for a team
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/usergroups.list
       operationId: usergroups_list
       parameters:
-      - name: include_users
-        in: query
-        description: Include the list of users for each User Group.
-        schema:
-          type: boolean
-      - name: token
-        in: query
-        description: 'Authentication token. Requires scope: `usergroups:read`'
-        required: true
-        schema:
-          type: string
-      - name: include_count
-        in: query
-        description: Include the number of users in each User Group.
-        schema:
-          type: boolean
-      - name: include_disabled
-        in: query
-        description: Include disabled User Groups.
-        schema:
-          type: boolean
+        - name: include_users
+          in: query
+          description: Include the list of users for each User Group.
+          schema:
+            type: boolean
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `usergroups:read`"
+          required: true
+          schema:
+            type: string
+        - name: include_count
+          in: query
+          description: Include the number of users in each User Group.
+          schema:
+            type: boolean
+        - name: include_disabled
+          in: query
+          description: Include disabled User Groups.
+          schema:
+            type: boolean
       responses:
         "200":
           description: Typical success response
@@ -567,41 +593,43 @@ paths:
                   type: object
                 description: Schema for error response from usergroups.list method
       security:
-      - slackAuth:
-        - usergroups:read
+        - slackAuth:
+            - usergroups:read
   /usergroups.update:
     post:
       tags:
-      - usergroups
+        - usergroups
       description: Update an existing User Group
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/usergroups.update
       operationId: usergroups_update
       parameters:
-      - name: token
-        in: header
-        description: 'Authentication token. Requires scope: `usergroups:write`'
-        required: true
-        schema:
-          type: string
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `usergroups:write`"
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/x-www-form-urlencoded:
             schema:
               required:
-              - usergroup
+                - usergroup
               properties:
                 handle:
                   type: string
-                  description: A mention handle. Must be unique among channels, users
+                  description:
+                    A mention handle. Must be unique among channels, users
                     and User Groups.
                 description:
                   type: string
                   description: A short description of the User Group.
                 channels:
                   type: string
-                  description: A comma separated string of encoded channel IDs for
+                  description:
+                    A comma separated string of encoded channel IDs for
                     which the User Group uses as a default.
                 include_count:
                   type: boolean
@@ -611,23 +639,26 @@ paths:
                   description: The encoded ID of the User Group to update.
                 name:
                   type: string
-                  description: A name for the User Group. Must be unique among User
+                  description:
+                    A name for the User Group. Must be unique among User
                     Groups.
           application/json:
             schema:
               required:
-              - usergroup
+                - usergroup
               properties:
                 handle:
                   type: string
-                  description: A mention handle. Must be unique among channels, users
+                  description:
+                    A mention handle. Must be unique among channels, users
                     and User Groups.
                 description:
                   type: string
                   description: A short description of the User Group.
                 channels:
                   type: string
-                  description: A comma separated string of encoded channel IDs for
+                  description:
+                    A comma separated string of encoded channel IDs for
                     which the User Group uses as a default.
                 include_count:
                   type: boolean
@@ -637,7 +668,8 @@ paths:
                   description: The encoded ID of the User Group to update.
                 name:
                   type: string
-                  description: A name for the User Group. Must be unique among User
+                  description:
+                    A name for the User Group. Must be unique among User
                     Groups.
         required: true
       responses:
@@ -650,7 +682,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: Schema for successful response from usergroups.update
+                description:
+                  Schema for successful response from usergroups.update
                   method
         default:
           description: Typical error response
@@ -663,36 +696,36 @@ paths:
                   type: object
                 description: Schema for error response from usergroups.update method
       security:
-      - slackAuth:
-        - usergroups:write
+        - slackAuth:
+            - usergroups:write
   /usergroups.users.list:
     get:
       tags:
-      - usergroups.users
-      - usergroups
+        - usergroups.users
+        - usergroups
       description: List all users in a User Group
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/usergroups.users.list
       operationId: usergroups_users_list
       parameters:
-      - name: token
-        in: query
-        description: 'Authentication token. Requires scope: `usergroups:read`'
-        required: true
-        schema:
-          type: string
-      - name: include_disabled
-        in: query
-        description: Allow results that involve disabled User Groups.
-        schema:
-          type: boolean
-      - name: usergroup
-        in: query
-        description: The encoded ID of the User Group to update.
-        required: true
-        schema:
-          type: string
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `usergroups:read`"
+          required: true
+          schema:
+            type: string
+        - name: include_disabled
+          in: query
+          description: Allow results that involve disabled User Groups.
+          schema:
+            type: boolean
+        - name: usergroup
+          in: query
+          description: The encoded ID of the User Group to update.
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: Standard success response when used with a user token
@@ -703,7 +736,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: Schema for successful response from usergroups.users.list
+                description:
+                  Schema for successful response from usergroups.users.list
                   method
         default:
           description: Standard failure response when used with an invalid token
@@ -714,35 +748,36 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: Schema for error response from usergroups.users.list
+                description:
+                  Schema for error response from usergroups.users.list
                   method
       security:
-      - slackAuth:
-        - usergroups:read
+        - slackAuth:
+            - usergroups:read
   /usergroups.users.update:
     post:
       tags:
-      - usergroups.users
-      - usergroups
+        - usergroups.users
+        - usergroups
       description: Update the list of users for a User Group
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/usergroups.users.update
       operationId: usergroups_users_update
       parameters:
-      - name: token
-        in: header
-        description: 'Authentication token. Requires scope: `usergroups:write`'
-        required: true
-        schema:
-          type: string
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `usergroups:write`"
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/x-www-form-urlencoded:
             schema:
               required:
-              - usergroup
-              - users
+                - usergroup
+                - users
               properties:
                 include_count:
                   type: boolean
@@ -752,13 +787,14 @@ paths:
                   description: The encoded ID of the User Group to update.
                 users:
                   type: string
-                  description: A comma separated string of encoded user IDs that represent
+                  description:
+                    A comma separated string of encoded user IDs that represent
                     the entire list of users for the User Group.
           application/json:
             schema:
               required:
-              - usergroup
-              - users
+                - usergroup
+                - users
               properties:
                 include_count:
                   type: boolean
@@ -768,7 +804,8 @@ paths:
                   description: The encoded ID of the User Group to update.
                 users:
                   type: string
-                  description: A comma separated string of encoded user IDs that represent
+                  description:
+                    A comma separated string of encoded user IDs that represent
                     the entire list of users for the User Group.
         required: true
       responses:
@@ -781,7 +818,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: Schema for successful response from usergroups.users.update
+                description:
+                  Schema for successful response from usergroups.users.update
                   method
         default:
           description: Typical error response
@@ -792,8 +830,9 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: Schema for error response from usergroups.users.update
+                description:
+                  Schema for error response from usergroups.users.update
                   method
       security:
-      - slackAuth:
-        - usergroups:write
+        - slackAuth:
+            - usergroups:write

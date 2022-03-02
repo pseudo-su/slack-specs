@@ -2,19 +2,19 @@ paths:
   /files.comments.delete:
     post:
       tags:
-      - files.comments
-      - files
+        - files.comments
+        - files
       description: Deletes an existing comment on a file.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/files.comments.delete
       operationId: files_comments_delete
       parameters:
-      - name: token
-        in: header
-        description: 'Authentication token. Requires scope: `files:write:user`'
-        schema:
-          type: string
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `files:write:user`"
+          schema:
+            type: string
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -45,7 +45,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: Schema for successful response files.comments.delete
+                description:
+                  Schema for successful response files.comments.delete
                   method
         default:
           description: Standard failure response when used with an invalid token
@@ -58,23 +59,23 @@ paths:
                   type: object
                 description: Schema for error response files.comments.delete method
       security:
-      - slackAuth:
-        - files:write:user
+        - slackAuth:
+            - files:write:user
   /files.delete:
     post:
       tags:
-      - files
+        - files
       description: Deletes a file.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/files.delete
       operationId: files_delete
       parameters:
-      - name: token
-        in: header
-        description: 'Authentication token. Requires scope: `files:write:user`'
-        schema:
-          type: string
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `files:write:user`"
+          schema:
+            type: string
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -111,53 +112,55 @@ paths:
                   type: object
                 description: Schema for error response files.delete method
       security:
-      - slackAuth:
-        - files:write:user
+        - slackAuth:
+            - files:write:user
   /files.info:
     get:
       tags:
-      - files
+        - files
       description: Gets information about a file.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/files.info
       operationId: files_info
       parameters:
-      - name: token
-        in: query
-        description: 'Authentication token. Requires scope: `files:read`'
-        schema:
-          type: string
-      - name: file
-        in: query
-        description: Specify a file by providing its ID.
-        schema:
-          type: string
-      - name: count
-        in: query
-        schema:
-          type: string
-      - name: page
-        in: query
-        schema:
-          type: string
-      - name: limit
-        in: query
-        description: The maximum number of items to return. Fewer than the requested
-          number of items may be returned, even if the end of the list hasn't been
-          reached.
-        schema:
-          type: integer
-      - name: cursor
-        in: query
-        description: 'Parameter for pagination. File comments are paginated for a
-          single file. Set `cursor` equal to the `next_cursor` attribute returned
-          by the previous request''s `response_metadata`. This parameter is optional,
-          but pagination is mandatory: the default value simply fetches the first
-          "page" of the collection of comments. See [pagination](/docs/pagination)
-          for more details.'
-        schema:
-          type: string
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `files:read`"
+          schema:
+            type: string
+        - name: file
+          in: query
+          description: Specify a file by providing its ID.
+          schema:
+            type: string
+        - name: count
+          in: query
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description:
+            The maximum number of items to return. Fewer than the requested
+            number of items may be returned, even if the end of the list hasn't been
+            reached.
+          schema:
+            type: integer
+        - name: cursor
+          in: query
+          description:
+            'Parameter for pagination. File comments are paginated for a
+            single file. Set `cursor` equal to the `next_cursor` attribute returned
+            by the previous request''s `response_metadata`. This parameter is optional,
+            but pagination is mandatory: the default value simply fetches the first
+            "page" of the collection of comments. See [pagination](/docs/pagination)
+            for more details.'
+          schema:
+            type: string
       responses:
         "200":
           description: Typical success response
@@ -180,65 +183,68 @@ paths:
                   type: object
                 description: Schema for error response from files.info method
       security:
-      - slackAuth:
-        - files:read
+        - slackAuth:
+            - files:read
   /files.list:
     get:
       tags:
-      - files
+        - files
       description: List for a team, in a channel, or from a user with applied filters.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/files.list
       operationId: files_list
       parameters:
-      - name: token
-        in: query
-        description: 'Authentication token. Requires scope: `files:read`'
-        schema:
-          type: string
-      - name: user
-        in: query
-        description: Filter files created by a single user.
-        schema:
-          type: string
-      - name: channel
-        in: query
-        description: Filter files appearing in a specific channel, indicated by its
-          ID.
-        schema:
-          type: string
-      - name: ts_from
-        in: query
-        description: Filter files created after this timestamp (inclusive).
-        schema:
-          type: number
-      - name: ts_to
-        in: query
-        description: Filter files created before this timestamp (inclusive).
-        schema:
-          type: number
-      - name: types
-        in: query
-        description: Filter files by type ([see below](#file_types)). You can pass
-          multiple values in the types argument, like `types=spaces,snippets`.The
-          default value is `all`, which does not filter the list.
-        schema:
-          type: string
-      - name: count
-        in: query
-        schema:
-          type: string
-      - name: page
-        in: query
-        schema:
-          type: string
-      - name: show_files_hidden_by_limit
-        in: query
-        description: Show truncated file info for files hidden due to being too old,
-          and the team who owns the file being over the file limit.
-        schema:
-          type: boolean
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `files:read`"
+          schema:
+            type: string
+        - name: user
+          in: query
+          description: Filter files created by a single user.
+          schema:
+            type: string
+        - name: channel
+          in: query
+          description:
+            Filter files appearing in a specific channel, indicated by its
+            ID.
+          schema:
+            type: string
+        - name: ts_from
+          in: query
+          description: Filter files created after this timestamp (inclusive).
+          schema:
+            type: number
+        - name: ts_to
+          in: query
+          description: Filter files created before this timestamp (inclusive).
+          schema:
+            type: number
+        - name: types
+          in: query
+          description:
+            Filter files by type ([see below](#file_types)). You can pass
+            multiple values in the types argument, like `types=spaces,snippets`.The
+            default value is `all`, which does not filter the list.
+          schema:
+            type: string
+        - name: count
+          in: query
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: string
+        - name: show_files_hidden_by_limit
+          in: query
+          description:
+            Show truncated file info for files hidden due to being too old,
+            and the team who owns the file being over the file limit.
+          schema:
+            type: boolean
       responses:
         "200":
           description: Typical success response
@@ -261,13 +267,13 @@ paths:
                   type: object
                 description: Schema for error response from files.list method
       security:
-      - slackAuth:
-        - files:read
+        - slackAuth:
+            - files:read
   /files.remote.add:
     post:
       tags:
-      - files.remote
-      - files
+        - files.remote
+        - files
       description: Adds a file from a remote service
       externalDocs:
         description: API method documentation
@@ -280,7 +286,7 @@ paths:
               properties:
                 token:
                   type: string
-                  description: 'Authentication token. Requires scope: `remote_files:write`'
+                  description: "Authentication token. Requires scope: `remote_files:write`"
                 external_id:
                   type: string
                   description: Creator defined GUID for the file.
@@ -298,7 +304,8 @@ paths:
                   description: Preview of the document via `multipart/form-data`.
                 indexable_file_contents:
                   type: string
-                  description: A text file (txt, pdf, doc, etc.) containing textual
+                  description:
+                    A text file (txt, pdf, doc, etc.) containing textual
                     search terms that are used to improve discovery of the remote
                     file.
       responses:
@@ -311,7 +318,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _OK_ response
+                description:
+                  This method either only returns a brief _OK_ response
                   or a verbose schema is not available for this method.
         default:
           description: Typical error response
@@ -322,37 +330,38 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _not OK_ response
+                description:
+                  This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-      - slackAuth:
-        - remote_files:write
+        - slackAuth:
+            - remote_files:write
   /files.remote.info:
     get:
       tags:
-      - files.remote
-      - files
+        - files.remote
+        - files
       description: Retrieve information about a remote file added to Slack
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/files.remote.info
       operationId: files_remote_info
       parameters:
-      - name: token
-        in: query
-        description: 'Authentication token. Requires scope: `remote_files:read`'
-        schema:
-          type: string
-      - name: file
-        in: query
-        description: Specify a file by providing its ID.
-        schema:
-          type: string
-      - name: external_id
-        in: query
-        description: Creator defined GUID for the file.
-        schema:
-          type: string
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `remote_files:read`"
+          schema:
+            type: string
+        - name: file
+          in: query
+          description: Specify a file by providing its ID.
+          schema:
+            type: string
+        - name: external_id
+          in: query
+          description: Creator defined GUID for the file.
+          schema:
+            type: string
       responses:
         "200":
           description: Typical success response
@@ -363,7 +372,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _OK_ response
+                description:
+                  This method either only returns a brief _OK_ response
                   or a verbose schema is not available for this method.
         default:
           description: Typical error response
@@ -374,56 +384,59 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _not OK_ response
+                description:
+                  This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-      - slackAuth:
-        - remote_files:read
+        - slackAuth:
+            - remote_files:read
   /files.remote.list:
     get:
       tags:
-      - files.remote
-      - files
+        - files.remote
+        - files
       description: Retrieve information about a remote file added to Slack
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/files.remote.list
       operationId: files_remote_list
       parameters:
-      - name: token
-        in: query
-        description: 'Authentication token. Requires scope: `remote_files:read`'
-        schema:
-          type: string
-      - name: channel
-        in: query
-        description: Filter files appearing in a specific channel, indicated by its
-          ID.
-        schema:
-          type: string
-      - name: ts_from
-        in: query
-        description: Filter files created after this timestamp (inclusive).
-        schema:
-          type: number
-      - name: ts_to
-        in: query
-        description: Filter files created before this timestamp (inclusive).
-        schema:
-          type: number
-      - name: limit
-        in: query
-        description: The maximum number of items to return.
-        schema:
-          type: integer
-      - name: cursor
-        in: query
-        description: Paginate through collections of data by setting the `cursor`
-          parameter to a `next_cursor` attribute returned by a previous request's
-          `response_metadata`. Default value fetches the first "page" of the collection.
-          See [pagination](/docs/pagination) for more detail.
-        schema:
-          type: string
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `remote_files:read`"
+          schema:
+            type: string
+        - name: channel
+          in: query
+          description:
+            Filter files appearing in a specific channel, indicated by its
+            ID.
+          schema:
+            type: string
+        - name: ts_from
+          in: query
+          description: Filter files created after this timestamp (inclusive).
+          schema:
+            type: number
+        - name: ts_to
+          in: query
+          description: Filter files created before this timestamp (inclusive).
+          schema:
+            type: number
+        - name: limit
+          in: query
+          description: The maximum number of items to return.
+          schema:
+            type: integer
+        - name: cursor
+          in: query
+          description:
+            Paginate through collections of data by setting the `cursor`
+            parameter to a `next_cursor` attribute returned by a previous request's
+            `response_metadata`. Default value fetches the first "page" of the collection.
+            See [pagination](/docs/pagination) for more detail.
+          schema:
+            type: string
       responses:
         "200":
           description: Typical success response
@@ -434,7 +447,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _OK_ response
+                description:
+                  This method either only returns a brief _OK_ response
                   or a verbose schema is not available for this method.
         default:
           description: Typical error response
@@ -445,16 +459,17 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _not OK_ response
+                description:
+                  This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-      - slackAuth:
-        - remote_files:read
+        - slackAuth:
+            - remote_files:read
   /files.remote.remove:
     post:
       tags:
-      - files.remote
-      - files
+        - files.remote
+        - files
       description: Remove a remote file.
       externalDocs:
         description: API method documentation
@@ -467,7 +482,7 @@ paths:
               properties:
                 token:
                   type: string
-                  description: 'Authentication token. Requires scope: `remote_files:write`'
+                  description: "Authentication token. Requires scope: `remote_files:write`"
                 file:
                   type: string
                   description: Specify a file by providing its ID.
@@ -484,7 +499,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _OK_ response
+                description:
+                  This method either only returns a brief _OK_ response
                   or a verbose schema is not available for this method.
         default:
           description: Typical error response
@@ -495,45 +511,48 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _not OK_ response
+                description:
+                  This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-      - slackAuth:
-        - remote_files:write
+        - slackAuth:
+            - remote_files:write
   /files.remote.share:
     get:
       tags:
-      - files.remote
-      - files
+        - files.remote
+        - files
       description: Share a remote file into a channel.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/files.remote.share
       operationId: files_remote_share
       parameters:
-      - name: token
-        in: query
-        description: 'Authentication token. Requires scope: `remote_files:share`'
-        schema:
-          type: string
-      - name: file
-        in: query
-        description: Specify a file registered with Slack by providing its ID. Either
-          this field or `external_id` or both are required.
-        schema:
-          type: string
-      - name: external_id
-        in: query
-        description: The globally unique identifier (GUID) for the file, as set by
-          the app registering the file with Slack.  Either this field or `file` or
-          both are required.
-        schema:
-          type: string
-      - name: channels
-        in: query
-        description: Comma-separated list of channel IDs where the file will be shared.
-        schema:
-          type: string
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `remote_files:share`"
+          schema:
+            type: string
+        - name: file
+          in: query
+          description:
+            Specify a file registered with Slack by providing its ID. Either
+            this field or `external_id` or both are required.
+          schema:
+            type: string
+        - name: external_id
+          in: query
+          description:
+            The globally unique identifier (GUID) for the file, as set by
+            the app registering the file with Slack.  Either this field or `file` or
+            both are required.
+          schema:
+            type: string
+        - name: channels
+          in: query
+          description: Comma-separated list of channel IDs where the file will be shared.
+          schema:
+            type: string
       responses:
         "200":
           description: Typical success response
@@ -544,7 +563,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _OK_ response
+                description:
+                  This method either only returns a brief _OK_ response
                   or a verbose schema is not available for this method.
         default:
           description: Typical error response
@@ -555,16 +575,17 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _not OK_ response
+                description:
+                  This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-      - slackAuth:
-        - remote_files:share
+        - slackAuth:
+            - remote_files:share
   /files.remote.update:
     post:
       tags:
-      - files.remote
-      - files
+        - files.remote
+        - files
       description: Updates an existing remote file.
       externalDocs:
         description: API method documentation
@@ -577,7 +598,7 @@ paths:
               properties:
                 token:
                   type: string
-                  description: 'Authentication token. Requires scope: `remote_files:write`'
+                  description: "Authentication token. Requires scope: `remote_files:write`"
                 file:
                   type: string
                   description: Specify a file by providing its ID.
@@ -598,7 +619,8 @@ paths:
                   description: Preview of the document via `multipart/form-data`.
                 indexable_file_contents:
                   type: string
-                  description: File containing contents that can be used to improve
+                  description:
+                    File containing contents that can be used to improve
                     searchability for the remote file.
       responses:
         "200":
@@ -610,7 +632,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _OK_ response
+                description:
+                  This method either only returns a brief _OK_ response
                   or a verbose schema is not available for this method.
         default:
           description: Typical error response
@@ -621,26 +644,27 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _not OK_ response
+                description:
+                  This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-      - slackAuth:
-        - remote_files:write
+        - slackAuth:
+            - remote_files:write
   /files.revokePublicURL:
     post:
       tags:
-      - files
+        - files
       description: Revokes public/external sharing access for a file
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/files.revokePublicURL
       operationId: files_revokePublicURL
       parameters:
-      - name: token
-        in: header
-        description: 'Authentication token. Requires scope: `files:write:user`'
-        schema:
-          type: string
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `files:write:user`"
+          schema:
+            type: string
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -665,7 +689,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: Schema for successful response from files.revokePublicURL
+                description:
+                  Schema for successful response from files.revokePublicURL
                   method
         default:
           description: Typical error response
@@ -676,26 +701,27 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: Schema for error response from files.revokePublicURL
+                description:
+                  Schema for error response from files.revokePublicURL
                   method
       security:
-      - slackAuth:
-        - files:write:user
+        - slackAuth:
+            - files:write:user
   /files.sharedPublicURL:
     post:
       tags:
-      - files
+        - files
       description: Enables a file for public/external sharing.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/files.sharedPublicURL
       operationId: files_sharedPublicURL
       parameters:
-      - name: token
-        in: header
-        description: 'Authentication token. Requires scope: `files:write:user`'
-        schema:
-          type: string
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `files:write:user`"
+          schema:
+            type: string
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -720,7 +746,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: Schema for successful response from files.sharedPublicURL
+                description:
+                  Schema for successful response from files.sharedPublicURL
                   method
         default:
           description: Typical error response
@@ -731,15 +758,16 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: Schema for error response from files.sharedPublicURL
+                description:
+                  Schema for error response from files.sharedPublicURL
                   method
       security:
-      - slackAuth:
-        - files:write:user
+        - slackAuth:
+            - files:write:user
   /files.upload:
     post:
       tags:
-      - files
+        - files
       description: Uploads or creates a file.
       externalDocs:
         description: API method documentation
@@ -752,14 +780,16 @@ paths:
               properties:
                 token:
                   type: string
-                  description: 'Authentication token. Requires scope: `files:write:user`'
+                  description: "Authentication token. Requires scope: `files:write:user`"
                 file:
                   type: string
-                  description: File contents via `multipart/form-data`. If omitting
+                  description:
+                    File contents via `multipart/form-data`. If omitting
                     this parameter, you must submit `content`.
                 content:
                   type: string
-                  description: File contents via a POST variable. If omitting this
+                  description:
+                    File contents via a POST variable. If omitting this
                     parameter, you must provide a `file`.
                 filetype:
                   type: string
@@ -772,20 +802,24 @@ paths:
                   description: Title of file.
                 initial_comment:
                   type: string
-                  description: The message text introducing the file in specified
+                  description:
+                    The message text introducing the file in specified
                     `channels`.
                 channels:
                   type: string
-                  description: Comma-separated list of channel names or IDs where
+                  description:
+                    Comma-separated list of channel names or IDs where
                     the file will be shared.
                 thread_ts:
                   type: number
-                  description: Provide another message's `ts` value to upload this
+                  description:
+                    Provide another message's `ts` value to upload this
                     file as a reply. Never use a reply's `ts` value; use its parent
                     instead.
       responses:
         "200":
-          description: Success response after uploading a file to a channel with an
+          description:
+            Success response after uploading a file to a channel with an
             initial message
           content:
             application/json:
@@ -806,5 +840,5 @@ paths:
                   type: object
                 description: Schema for error response files.upload method
       security:
-      - slackAuth:
-        - files:write:user
+        - slackAuth:
+            - files:write:user

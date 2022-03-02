@@ -2,24 +2,24 @@ paths:
   /bots.info:
     get:
       tags:
-      - bots
+        - bots
       description: Gets information about a bot user.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/bots.info
       operationId: bots_info
       parameters:
-      - name: token
-        in: query
-        description: 'Authentication token. Requires scope: `users:read`'
-        required: true
-        schema:
-          type: string
-      - name: bot
-        in: query
-        description: Bot user to get info on
-        schema:
-          type: string
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `users:read`"
+          required: true
+          schema:
+            type: string
+        - name: bot
+          in: query
+          description: Bot user to get info on
+          schema:
+            type: string
       responses:
         "200":
           description: When successful, returns bot info by bot ID.
@@ -42,5 +42,5 @@ paths:
                   type: object
                 description: Schema for error response from bots.info method
       security:
-      - slackAuth:
-        - users:read
+        - slackAuth:
+            - users:read

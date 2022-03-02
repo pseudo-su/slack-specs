@@ -2,19 +2,19 @@ paths:
   /stars.add:
     post:
       tags:
-      - stars
+        - stars
       description: Adds a star to an item.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/stars.add
       operationId: stars_add
       parameters:
-      - name: token
-        in: header
-        description: 'Authentication token. Requires scope: `stars:write`'
-        required: true
-        schema:
-          type: string
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `stars:write`"
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -22,7 +22,8 @@ paths:
               properties:
                 channel:
                   type: string
-                  description: Channel to add star to, or channel where the message
+                  description:
+                    Channel to add star to, or channel where the message
                     to add star to was posted (used with `timestamp`).
                 file:
                   type: string
@@ -38,7 +39,8 @@ paths:
               properties:
                 channel:
                   type: string
-                  description: Channel to add star to, or channel where the message
+                  description:
+                    Channel to add star to, or channel where the message
                     to add star to was posted (used with `timestamp`).
                 file:
                   type: string
@@ -71,47 +73,49 @@ paths:
                   type: object
                 description: Schema for error response from stars.add method
       security:
-      - slackAuth:
-        - stars:write
+        - slackAuth:
+            - stars:write
   /stars.list:
     get:
       tags:
-      - stars
+        - stars
       description: Lists stars for a user.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/stars.list
       operationId: stars_list
       parameters:
-      - name: token
-        in: query
-        description: 'Authentication token. Requires scope: `stars:read`'
-        schema:
-          type: string
-      - name: count
-        in: query
-        schema:
-          type: string
-      - name: page
-        in: query
-        schema:
-          type: string
-      - name: cursor
-        in: query
-        description: 'Parameter for pagination. Set `cursor` equal to the `next_cursor`
-          attribute returned by the previous request''s `response_metadata`. This
-          parameter is optional, but pagination is mandatory: the default value simply
-          fetches the first "page" of the collection. See [pagination](/docs/pagination)
-          for more details.'
-        schema:
-          type: string
-      - name: limit
-        in: query
-        description: The maximum number of items to return. Fewer than the requested
-          number of items may be returned, even if the end of the list hasn't been
-          reached.
-        schema:
-          type: integer
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `stars:read`"
+          schema:
+            type: string
+        - name: count
+          in: query
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: string
+        - name: cursor
+          in: query
+          description:
+            'Parameter for pagination. Set `cursor` equal to the `next_cursor`
+            attribute returned by the previous request''s `response_metadata`. This
+            parameter is optional, but pagination is mandatory: the default value simply
+            fetches the first "page" of the collection. See [pagination](/docs/pagination)
+            for more details.'
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description:
+            The maximum number of items to return. Fewer than the requested
+            number of items may be returned, even if the end of the list hasn't been
+            reached.
+          schema:
+            type: integer
       responses:
         "200":
           description: Typical success response
@@ -134,24 +138,24 @@ paths:
                   type: object
                 description: Schema for error response from stars.list method
       security:
-      - slackAuth:
-        - stars:read
+        - slackAuth:
+            - stars:read
   /stars.remove:
     post:
       tags:
-      - stars
+        - stars
       description: Removes a star from an item.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/stars.remove
       operationId: stars_remove
       parameters:
-      - name: token
-        in: header
-        description: 'Authentication token. Requires scope: `stars:write`'
-        required: true
-        schema:
-          type: string
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `stars:write`"
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -159,7 +163,8 @@ paths:
               properties:
                 channel:
                   type: string
-                  description: Channel to remove star from, or channel where the message
+                  description:
+                    Channel to remove star from, or channel where the message
                     to remove star from was posted (used with `timestamp`).
                 file:
                   type: string
@@ -175,7 +180,8 @@ paths:
               properties:
                 channel:
                   type: string
-                  description: Channel to remove star from, or channel where the message
+                  description:
+                    Channel to remove star from, or channel where the message
                     to remove star from was posted (used with `timestamp`).
                 file:
                   type: string
@@ -208,5 +214,5 @@ paths:
                   type: object
                 description: Schema for error response from stars.remove method
       security:
-      - slackAuth:
-        - stars:write
+        - slackAuth:
+            - stars:write

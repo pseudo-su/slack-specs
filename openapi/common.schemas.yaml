@@ -3,11 +3,12 @@ components:
     blocks:
       title: Block Kit blocks
       type: array
-      description: This is a very loose definition, in the future, we'll populate
+      description:
+        This is a very loose definition, in the future, we'll populate
         this with deeper schema in this definition namespace.
       items:
         required:
-        - type
+          - type
         type: object
         properties:
           type:
@@ -62,12 +63,12 @@ components:
       title: default failure response
       type: boolean
       enum:
-      - false
+        - false
     defs_ok_true:
       title: default success response
       type: boolean
       enum:
-      - true
+        - true
     defs_optional_app_id:
       title: App ID or empty string
       pattern: ^(A[A-Z0-9]{1,})?$
@@ -106,24 +107,24 @@ components:
     objs_bot_profile:
       title: Bot Profile Object
       required:
-      - app_id
-      - deleted
-      - icons
-      - id
-      - name
-      - team_id
-      - updated
+        - app_id
+        - deleted
+        - icons
+        - id
+        - name
+        - team_id
+        - updated
       type: object
       properties:
         app_id:
-          $ref: '#/components/schemas/defs_app_id'
+          $ref: "#/components/schemas/defs_app_id"
         deleted:
           type: boolean
         icons:
           required:
-          - image_36
-          - image_48
-          - image_72
+            - image_36
+            - image_48
+            - image_72
           type: object
           properties:
             image_36:
@@ -136,39 +137,39 @@ components:
               type: string
               format: uri
         id:
-          $ref: '#/components/schemas/defs_bot_id'
+          $ref: "#/components/schemas/defs_bot_id"
         name:
           type: string
         team_id:
-          $ref: '#/components/schemas/defs_team'
+          $ref: "#/components/schemas/defs_team"
         updated:
           type: integer
     objs_channel:
       title: Channel Object
       required:
-      - created
-      - creator
-      - id
-      - is_channel
-      - is_mpim
-      - is_org_shared
-      - is_private
-      - is_shared
-      - members
-      - name
-      - name_normalized
-      - purpose
-      - topic
+        - created
+        - creator
+        - id
+        - is_channel
+        - is_mpim
+        - is_org_shared
+        - is_private
+        - is_shared
+        - members
+        - name
+        - name_normalized
+        - purpose
+        - topic
       type: object
       properties:
         accepted_user:
-          $ref: '#/components/schemas/defs_user_id'
+          $ref: "#/components/schemas/defs_user_id"
         created:
           type: integer
         creator:
-          $ref: '#/components/schemas/defs_user_id'
+          $ref: "#/components/schemas/defs_user_id"
         id:
-          $ref: '#/components/schemas/defs_channel_id'
+          $ref: "#/components/schemas/defs_channel_id"
         is_archived:
           type: boolean
         is_channel:
@@ -198,7 +199,7 @@ components:
         is_thread_only:
           type: boolean
         last_read:
-          $ref: '#/components/schemas/defs_ts'
+          $ref: "#/components/schemas/defs_ts"
         latest:
           type: object
         members:
@@ -206,7 +207,7 @@ components:
           uniqueItems: true
           type: array
           items:
-            $ref: '#/components/schemas/defs_user_id'
+            $ref: "#/components/schemas/defs_user_id"
         name:
           type: string
         name_normalized:
@@ -218,43 +219,44 @@ components:
           uniqueItems: true
           type: array
           items:
-            $ref: '#/components/schemas/defs_team'
+            $ref: "#/components/schemas/defs_team"
         previous_names:
           minItems: 0
           uniqueItems: true
           type: array
           items:
-            $ref: '#/components/schemas/defs_channel_name'
+            $ref: "#/components/schemas/defs_channel_name"
         priority:
           type: number
         purpose:
           required:
-          - creator
-          - last_set
-          - value
+            - creator
+            - last_set
+            - value
           type: object
           properties:
             creator:
-              $ref: '#/components/schemas/defs_topic_purpose_creator'
+              $ref: "#/components/schemas/defs_topic_purpose_creator"
             last_set:
               type: integer
             value:
               type: string
         topic:
           required:
-          - creator
-          - last_set
-          - value
+            - creator
+            - last_set
+            - value
           type: object
           properties:
             creator:
-              $ref: '#/components/schemas/defs_topic_purpose_creator'
+              $ref: "#/components/schemas/defs_topic_purpose_creator"
             last_set:
               type: integer
             value:
               type: string
         unlinked:
-          title: Field to determine whether a channel has ever been shared/disconnected
+          title:
+            Field to determine whether a channel has ever been shared/disconnected
             in the past
           type: integer
         unread_count:
@@ -264,12 +266,12 @@ components:
     objs_comment:
       title: File Comment Object
       required:
-      - comment
-      - created
-      - id
-      - is_intro
-      - timestamp
-      - user
+        - comment
+        - created
+        - id
+        - is_intro
+        - timestamp
+        - user
       type: object
       properties:
         comment:
@@ -277,7 +279,7 @@ components:
         created:
           type: integer
         id:
-          $ref: '#/components/schemas/defs_comment_id'
+          $ref: "#/components/schemas/defs_comment_id"
         is_intro:
           type: boolean
         is_starred:
@@ -285,19 +287,19 @@ components:
         num_stars:
           type: integer
         pinned_info:
-          $ref: '#/components/schemas/defs_pinned_info'
+          $ref: "#/components/schemas/defs_pinned_info"
         pinned_to:
           type: array
           items:
-            $ref: '#/components/schemas/defs_channel'
+            $ref: "#/components/schemas/defs_channel"
         reactions:
           type: array
           items:
-            $ref: '#/components/schemas/objs_reaction'
+            $ref: "#/components/schemas/objs_reaction"
         timestamp:
           type: integer
         user:
-          $ref: '#/components/schemas/defs_user_id'
+          $ref: "#/components/schemas/defs_user_id"
     objs_comments:
       title: file comments object
       type: array
@@ -311,20 +313,20 @@ components:
       type: object
     objs_enterprise_user:
       required:
-      - enterprise_id
-      - enterprise_name
-      - id
-      - is_admin
-      - is_owner
-      - teams
+        - enterprise_id
+        - enterprise_name
+        - id
+        - is_admin
+        - is_owner
+        - teams
       type: object
       properties:
         enterprise_id:
-          $ref: '#/components/schemas/defs_enterprise_id'
+          $ref: "#/components/schemas/defs_enterprise_id"
         enterprise_name:
-          $ref: '#/components/schemas/defs_enterprise_name'
+          $ref: "#/components/schemas/defs_enterprise_name"
         id:
-          $ref: '#/components/schemas/defs_enterprise_user_id'
+          $ref: "#/components/schemas/defs_enterprise_user_id"
         is_admin:
           type: boolean
         is_owner:
@@ -333,20 +335,20 @@ components:
           uniqueItems: true
           type: array
           items:
-            $ref: '#/components/schemas/defs_team'
+            $ref: "#/components/schemas/defs_team"
     objs_external_org_migrations:
       title: External Org Migrations
       required:
-      - current
-      - date_updated
+        - current
+        - date_updated
       type: object
       properties:
         current:
           type: array
           items:
             required:
-            - date_started
-            - team_id
+              - date_started
+              - team_id
             type: object
             properties:
               date_started:
@@ -363,7 +365,7 @@ components:
           uniqueItems: true
           type: array
           items:
-            $ref: '#/components/schemas/defs_channel_id'
+            $ref: "#/components/schemas/defs_channel_id"
         comments_count:
           type: integer
         created:
@@ -375,7 +377,7 @@ components:
         editable:
           type: boolean
         editor:
-          $ref: '#/components/schemas/defs_user_id'
+          $ref: "#/components/schemas/defs_user_id"
         external_id:
           type: string
         external_type:
@@ -389,18 +391,18 @@ components:
           uniqueItems: true
           type: array
           items:
-            $ref: '#/components/schemas/defs_group_id'
+            $ref: "#/components/schemas/defs_group_id"
         has_rich_preview:
           type: boolean
         id:
-          $ref: '#/components/schemas/defs_file_id'
+          $ref: "#/components/schemas/defs_file_id"
         image_exif_rotation:
           type: integer
         ims:
           uniqueItems: true
           type: array
           items:
-            $ref: '#/components/schemas/defs_dm_id'
+            $ref: "#/components/schemas/defs_dm_id"
         is_external:
           type: boolean
         is_public:
@@ -410,7 +412,7 @@ components:
         is_tombstoned:
           type: boolean
         last_editor:
-          $ref: '#/components/schemas/defs_user_id'
+          $ref: "#/components/schemas/defs_user_id"
         mimetype:
           type: string
         mode:
@@ -432,11 +434,11 @@ components:
           type: string
           format: uri
         pinned_info:
-          $ref: '#/components/schemas/defs_pinned_info'
+          $ref: "#/components/schemas/defs_pinned_info"
         pinned_to:
           type: array
           items:
-            $ref: '#/components/schemas/defs_channel'
+            $ref: "#/components/schemas/defs_channel"
         pretty_type:
           type: string
         preview:
@@ -446,7 +448,7 @@ components:
         reactions:
           type: array
           items:
-            $ref: '#/components/schemas/objs_reaction'
+            $ref: "#/components/schemas/objs_reaction"
         shares:
           type: object
           properties:
@@ -457,7 +459,7 @@ components:
         size:
           type: integer
         source_team:
-          $ref: '#/components/schemas/defs_team'
+          $ref: "#/components/schemas/defs_team"
         state:
           type: string
         thumb_1024:
@@ -528,7 +530,7 @@ components:
         user:
           type: string
         user_team:
-          $ref: '#/components/schemas/defs_team'
+          $ref: "#/components/schemas/defs_team"
         username:
           type: string
     objs_icon:
@@ -553,9 +555,9 @@ components:
     objs_message:
       title: Message object
       required:
-      - text
-      - ts
-      - type
+        - text
+        - ts
+        - type
       type: object
       properties:
         attachments:
@@ -564,7 +566,7 @@ components:
           type: array
           items:
             required:
-            - id
+              - id
             type: object
             properties:
               fallback:
@@ -580,25 +582,25 @@ components:
               image_width:
                 type: integer
         blocks:
-          $ref: '#/components/schemas/blocks'
+          $ref: "#/components/schemas/blocks"
         bot_id:
           type: object
         bot_profile:
-          $ref: '#/components/schemas/objs_bot_profile'
+          $ref: "#/components/schemas/objs_bot_profile"
         client_msg_id:
           type: string
         comment:
-          $ref: '#/components/schemas/objs_comment'
+          $ref: "#/components/schemas/objs_comment"
         display_as_bot:
           type: boolean
         file:
-          $ref: '#/components/schemas/objs_file'
+          $ref: "#/components/schemas/objs_file"
         files:
           minItems: 1
           uniqueItems: true
           type: array
           items:
-            $ref: '#/components/schemas/objs_file'
+            $ref: "#/components/schemas/objs_file"
         icons:
           type: object
           properties:
@@ -608,7 +610,7 @@ components:
               type: string
               format: uri
         inviter:
-          $ref: '#/components/schemas/defs_user_id'
+          $ref: "#/components/schemas/defs_user_id"
         is_delayed_message:
           type: boolean
         is_intro:
@@ -616,28 +618,28 @@ components:
         is_starred:
           type: boolean
         last_read:
-          $ref: '#/components/schemas/defs_ts'
+          $ref: "#/components/schemas/defs_ts"
         latest_reply:
-          $ref: '#/components/schemas/defs_ts'
+          $ref: "#/components/schemas/defs_ts"
         name:
           type: string
         old_name:
           type: string
         parent_user_id:
-          $ref: '#/components/schemas/defs_user_id'
+          $ref: "#/components/schemas/defs_user_id"
         permalink:
           type: string
           format: uri
         pinned_to:
           type: array
           items:
-            $ref: '#/components/schemas/defs_channel'
+            $ref: "#/components/schemas/defs_channel"
         purpose:
           type: string
         reactions:
           type: array
           items:
-            $ref: '#/components/schemas/objs_reaction'
+            $ref: "#/components/schemas/objs_reaction"
         reply_count:
           type: integer
         reply_users:
@@ -645,25 +647,25 @@ components:
           uniqueItems: true
           type: array
           items:
-            $ref: '#/components/schemas/defs_user_id'
+            $ref: "#/components/schemas/defs_user_id"
         reply_users_count:
           type: integer
         source_team:
-          $ref: '#/components/schemas/defs_workspace_id'
+          $ref: "#/components/schemas/defs_workspace_id"
         subscribed:
           type: boolean
         subtype:
           type: string
         team:
-          $ref: '#/components/schemas/defs_workspace_id'
+          $ref: "#/components/schemas/defs_workspace_id"
         text:
           type: string
         thread_ts:
-          $ref: '#/components/schemas/defs_ts'
+          $ref: "#/components/schemas/defs_ts"
         topic:
           type: string
         ts:
-          $ref: '#/components/schemas/defs_ts'
+          $ref: "#/components/schemas/defs_ts"
         type:
           type: string
         unread_count:
@@ -671,18 +673,18 @@ components:
         upload:
           type: boolean
         user:
-          $ref: '#/components/schemas/defs_user_id'
+          $ref: "#/components/schemas/defs_user_id"
         user_profile:
-          $ref: '#/components/schemas/objs_user_profile_short'
+          $ref: "#/components/schemas/objs_user_profile_short"
         user_team:
-          $ref: '#/components/schemas/defs_workspace_id'
+          $ref: "#/components/schemas/defs_workspace_id"
         username:
           type: string
     objs_paging:
       title: paging object
       required:
-      - page
-      - total
+        - page
+        - total
       type: object
       properties:
         count:
@@ -699,8 +701,8 @@ components:
           type: integer
     objs_primary_owner:
       required:
-      - email
-      - id
+        - email
+        - id
       type: object
       properties:
         email:
@@ -710,9 +712,9 @@ components:
     objs_reaction:
       title: Reaction object
       required:
-      - count
-      - name
-      - users
+        - count
+        - name
+        - users
       type: object
       properties:
         count:
@@ -722,22 +724,22 @@ components:
         users:
           type: array
           items:
-            $ref: '#/components/schemas/defs_user_id'
+            $ref: "#/components/schemas/defs_user_id"
     objs_reminder:
       required:
-      - creator
-      - id
-      - recurring
-      - text
-      - user
+        - creator
+        - id
+        - recurring
+        - text
+        - user
       type: object
       properties:
         complete_ts:
           type: integer
         creator:
-          $ref: '#/components/schemas/defs_user_id'
+          $ref: "#/components/schemas/defs_user_id"
         id:
-          $ref: '#/components/schemas/defs_reminder_id'
+          $ref: "#/components/schemas/defs_reminder_id"
         recurring:
           type: boolean
         text:
@@ -745,11 +747,11 @@ components:
         time:
           type: integer
         user:
-          $ref: '#/components/schemas/defs_user_id'
+          $ref: "#/components/schemas/defs_user_id"
     objs_resources:
       title: resources in info from apps.permissions.info
       required:
-      - ids
+        - ids
       type: object
       properties:
         excluded_ids:
@@ -757,25 +759,25 @@ components:
           items:
             type: array
             items:
-              $ref: '#/components/schemas/defs_channel'
+              $ref: "#/components/schemas/defs_channel"
         excluded_ids_temp_oneof_01:
           type: array
           items:
             type: array
             items:
-              $ref: '#/components/schemas/defs_team'
+              $ref: "#/components/schemas/defs_team"
         ids:
           type: array
           items:
             type: array
             items:
-              $ref: '#/components/schemas/defs_channel'
+              $ref: "#/components/schemas/defs_channel"
         ids_temp_oneof_01:
           type: array
           items:
             type: array
             items:
-              $ref: '#/components/schemas/defs_team'
+              $ref: "#/components/schemas/defs_team"
         wildcard:
           type: boolean
     objs_response_metadata:
@@ -792,24 +794,24 @@ components:
     objs_subteam:
       title: Subteam/Usergroup Object
       required:
-      - auto_provision
-      - auto_type
-      - created_by
-      - date_create
-      - date_delete
-      - date_update
-      - deleted_by
-      - description
-      - enterprise_subteam_id
-      - handle
-      - id
-      - is_external
-      - is_subteam
-      - is_usergroup
-      - name
-      - prefs
-      - team_id
-      - updated_by
+        - auto_provision
+        - auto_type
+        - created_by
+        - date_create
+        - date_delete
+        - date_update
+        - deleted_by
+        - description
+        - enterprise_subteam_id
+        - handle
+        - id
+        - is_external
+        - is_subteam
+        - is_usergroup
+        - name
+        - prefs
+        - team_id
+        - updated_by
       type: object
       properties:
         auto_provision:
@@ -819,7 +821,7 @@ components:
         channel_count:
           type: integer
         created_by:
-          $ref: '#/components/schemas/defs_user_id'
+          $ref: "#/components/schemas/defs_user_id"
         date_create:
           type: integer
         date_delete:
@@ -835,7 +837,7 @@ components:
         handle:
           type: string
         id:
-          $ref: '#/components/schemas/defs_subteam_id'
+          $ref: "#/components/schemas/defs_subteam_id"
         is_external:
           type: boolean
         is_subteam:
@@ -846,36 +848,36 @@ components:
           type: string
         prefs:
           required:
-          - channels
-          - groups
+            - channels
+            - groups
           type: object
           properties:
             channels:
               type: array
               items:
-                $ref: '#/components/schemas/defs_channel_id'
+                $ref: "#/components/schemas/defs_channel_id"
             groups:
               type: array
               items:
-                $ref: '#/components/schemas/defs_group_id'
+                $ref: "#/components/schemas/defs_group_id"
         team_id:
-          $ref: '#/components/schemas/defs_team'
+          $ref: "#/components/schemas/defs_team"
         updated_by:
-          $ref: '#/components/schemas/defs_user_id'
+          $ref: "#/components/schemas/defs_user_id"
         user_count:
           type: integer
         users:
           type: array
           items:
-            $ref: '#/components/schemas/defs_user_id'
+            $ref: "#/components/schemas/defs_user_id"
     objs_team:
       title: Team Object
       required:
-      - domain
-      - email_domain
-      - icon
-      - id
-      - name
+        - domain
+        - email_domain
+        - icon
+        - id
+        - name
       type: object
       properties:
         archived:
@@ -898,17 +900,17 @@ components:
         email_domain:
           type: string
         enterprise_id:
-          $ref: '#/components/schemas/defs_enterprise_id'
+          $ref: "#/components/schemas/defs_enterprise_id"
         enterprise_name:
-          $ref: '#/components/schemas/defs_enterprise_name'
+          $ref: "#/components/schemas/defs_enterprise_name"
         external_org_migrations:
-          $ref: '#/components/schemas/objs_external_org_migrations'
+          $ref: "#/components/schemas/objs_external_org_migrations"
         has_compliance_export:
           type: boolean
         icon:
-          $ref: '#/components/schemas/objs_icon'
+          $ref: "#/components/schemas/objs_icon"
         id:
-          $ref: '#/components/schemas/defs_workspace_id'
+          $ref: "#/components/schemas/defs_workspace_id"
         is_assigned:
           type: boolean
         is_enterprise:
@@ -934,13 +936,13 @@ components:
         plan:
           type: string
           enum:
-          - ""
-          - std
-          - plus
-          - compliance
-          - enterprise
+            - ""
+            - std
+            - plus
+            - compliance
+            - enterprise
         primary_owner:
-          $ref: '#/components/schemas/objs_primary_owner'
+          $ref: "#/components/schemas/objs_primary_owner"
         sso_provider:
           type: object
           properties:
@@ -952,11 +954,11 @@ components:
               type: string
     objs_team_profile_field:
       required:
-      - hint
-      - id
-      - label
-      - ordering
-      - type
+        - hint
+        - id
+        - label
+        - ordering
+        - type
       type: object
       properties:
         field_name:
@@ -981,12 +983,12 @@ components:
         type:
           type: string
           enum:
-          - text
-          - date
-          - link
-          - mailto
-          - options_list
-          - user
+            - text
+            - date
+            - link
+            - mailto
+            - options_list
+            - user
     objs_team_profile_field_option:
       type: object
       properties:
@@ -1005,27 +1007,27 @@ components:
     objs_user_profile:
       title: User profile object
       required:
-      - avatar_hash
-      - display_name
-      - display_name_normalized
-      - fields
-      - phone
-      - real_name
-      - real_name_normalized
-      - skype
-      - status_emoji
-      - status_text
-      - title
+        - avatar_hash
+        - display_name
+        - display_name_normalized
+        - fields
+        - phone
+        - real_name
+        - real_name_normalized
+        - skype
+        - status_emoji
+        - status_text
+        - title
       type: object
       properties:
         always_active:
           type: boolean
         api_app_id:
-          $ref: '#/components/schemas/defs_optional_app_id'
+          $ref: "#/components/schemas/defs_optional_app_id"
         avatar_hash:
           type: string
         bot_id:
-          $ref: '#/components/schemas/defs_bot_id'
+          $ref: "#/components/schemas/defs_bot_id"
         display_name:
           type: string
         display_name_normalized:
@@ -1109,7 +1111,7 @@ components:
         status_text_canonical:
           type: string
         team:
-          $ref: '#/components/schemas/defs_workspace_id'
+          $ref: "#/components/schemas/defs_workspace_id"
         title:
           type: string
         updated:
@@ -1120,15 +1122,15 @@ components:
           type: string
     objs_user_profile_short:
       required:
-      - avatar_hash
-      - display_name
-      - first_name
-      - image_72
-      - is_restricted
-      - is_ultra_restricted
-      - name
-      - real_name
-      - team
+        - avatar_hash
+        - display_name
+        - first_name
+        - image_72
+        - is_restricted
+        - is_ultra_restricted
+        - name
+        - real_name
+        - team
       type: object
       properties:
         avatar_hash:
@@ -1153,4 +1155,4 @@ components:
         real_name_normalized:
           type: string
         team:
-          $ref: '#/components/schemas/defs_workspace_id'
+          $ref: "#/components/schemas/defs_workspace_id"

@@ -2,25 +2,26 @@ paths:
   /auth.revoke:
     get:
       tags:
-      - auth
+        - auth
       description: Revokes a token.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/auth.revoke
       operationId: auth_revoke
       parameters:
-      - name: token
-        in: query
-        description: 'Authentication token. Requires scope: `none`'
-        required: true
-        schema:
-          type: string
-      - name: test
-        in: query
-        description: Setting this parameter to `1` triggers a _testing mode_ where
-          the specified token will not actually be revoked.
-        schema:
-          type: boolean
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `none`"
+          required: true
+          schema:
+            type: string
+        - name: test
+          in: query
+          description:
+            Setting this parameter to `1` triggers a _testing mode_ where
+            the specified token will not actually be revoked.
+          schema:
+            type: boolean
       responses:
         "200":
           description: Typical success response
@@ -43,24 +44,24 @@ paths:
                   type: object
                 description: Schema for error response from auth.revoke method
       security:
-      - slackAuth:
-        - none
+        - slackAuth:
+            - none
   /auth.test:
     get:
       tags:
-      - auth
+        - auth
       description: Checks authentication & identity.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/auth.test
       operationId: auth_test
       parameters:
-      - name: token
-        in: header
-        description: 'Authentication token. Requires scope: `none`'
-        required: true
-        schema:
-          type: string
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `none`"
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: Standard success response when used with a user token
@@ -83,5 +84,5 @@ paths:
                   type: object
                 description: Schema for error response auth.test method
       security:
-      - slackAuth:
-        - none
+        - slackAuth:
+            - none

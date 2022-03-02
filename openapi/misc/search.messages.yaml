@@ -2,50 +2,51 @@ paths:
   /search.messages:
     get:
       tags:
-      - search
+        - search
       description: Searches for messages matching a query.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/search.messages
       operationId: search_messages
       parameters:
-      - name: token
-        in: query
-        description: 'Authentication token. Requires scope: `search:read`'
-        required: true
-        schema:
-          type: string
-      - name: count
-        in: query
-        description: Pass the number of results you want per "page". Maximum of `100`.
-        schema:
-          type: integer
-      - name: highlight
-        in: query
-        description: Pass a value of `true` to enable query highlight markers (see
-          below).
-        schema:
-          type: boolean
-      - name: page
-        in: query
-        schema:
-          type: integer
-      - name: query
-        in: query
-        description: Search query.
-        required: true
-        schema:
-          type: string
-      - name: sort
-        in: query
-        description: Return matches sorted by either `score` or `timestamp`.
-        schema:
-          type: string
-      - name: sort_dir
-        in: query
-        description: Change sort direction to ascending (`asc`) or descending (`desc`).
-        schema:
-          type: string
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `search:read`"
+          required: true
+          schema:
+            type: string
+        - name: count
+          in: query
+          description: Pass the number of results you want per "page". Maximum of `100`.
+          schema:
+            type: integer
+        - name: highlight
+          in: query
+          description:
+            Pass a value of `true` to enable query highlight markers (see
+            below).
+          schema:
+            type: boolean
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: query
+          in: query
+          description: Search query.
+          required: true
+          schema:
+            type: string
+        - name: sort
+          in: query
+          description: Return matches sorted by either `score` or `timestamp`.
+          schema:
+            type: string
+        - name: sort_dir
+          in: query
+          description: Change sort direction to ascending (`asc`) or descending (`desc`).
+          schema:
+            type: string
       responses:
         "200":
           description: Typical success response
@@ -56,7 +57,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _OK_ response
+                description:
+                  This method either only returns a brief _OK_ response
                   or a verbose schema is not available for this method.
         default:
           description: Typical error response
@@ -67,8 +69,9 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _not OK_ response
+                description:
+                  This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-      - slackAuth:
-        - search:read
+        - slackAuth:
+            - search:read
