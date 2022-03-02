@@ -2,8 +2,8 @@ paths:
   /admin.emoji.add:
     post:
       tags:
-      - admin.emoji
-      - admin
+        - admin.emoji
+        - admin
       description: Add an emoji.
       externalDocs:
         description: API method documentation
@@ -14,20 +14,22 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               required:
-              - name
-              - token
-              - url
+                - name
+                - token
+                - url
               properties:
                 token:
                   type: string
-                  description: 'Authentication token. Requires scope: `admin.teams:write`'
+                  description: "Authentication token. Requires scope: `admin.teams:write`"
                 name:
                   type: string
-                  description: The name of the emoji to be removed. Colons (`:myemoji:`)
+                  description:
+                    The name of the emoji to be removed. Colons (`:myemoji:`)
                     around the value are not required, although they may be included.
                 url:
                   type: string
-                  description: The URL of a file to use as an image for the emoji.
+                  description:
+                    The URL of a file to use as an image for the emoji.
                     Square images under 128KB and with transparent backgrounds work
                     best.
         required: true
@@ -41,7 +43,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _OK_ response
+                description:
+                  This method either only returns a brief _OK_ response
                   or a verbose schema is not available for this method.
         default:
           description: Typical error response
@@ -52,16 +55,17 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _not OK_ response
+                description:
+                  This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-      - slackAuth:
-        - admin.teams:write
+        - slackAuth:
+            - admin.teams:write
   /admin.emoji.addAlias:
     post:
       tags:
-      - admin.emoji
-      - admin
+        - admin.emoji
+        - admin
       description: Add an emoji alias.
       externalDocs:
         description: API method documentation
@@ -72,16 +76,17 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               required:
-              - alias_for
-              - name
-              - token
+                - alias_for
+                - name
+                - token
               properties:
                 token:
                   type: string
-                  description: 'Authentication token. Requires scope: `admin.teams:write`'
+                  description: "Authentication token. Requires scope: `admin.teams:write`"
                 name:
                   type: string
-                  description: The name of the emoji to be aliased. Colons (`:myemoji:`)
+                  description:
+                    The name of the emoji to be aliased. Colons (`:myemoji:`)
                     around the value are not required, although they may be included.
                 alias_for:
                   type: string
@@ -97,7 +102,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _OK_ response
+                description:
+                  This method either only returns a brief _OK_ response
                   or a verbose schema is not available for this method.
         default:
           description: Typical error response
@@ -108,40 +114,43 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _not OK_ response
+                description:
+                  This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-      - slackAuth:
-        - admin.teams:write
+        - slackAuth:
+            - admin.teams:write
   /admin.emoji.list:
     get:
       tags:
-      - admin.emoji
-      - admin
+        - admin.emoji
+        - admin
       description: List emoji for an Enterprise Grid organization.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/admin.emoji.list
       operationId: admin_emoji_list
       parameters:
-      - name: token
-        in: query
-        description: 'Authentication token. Requires scope: `admin.teams:read`'
-        required: true
-        schema:
-          type: string
-      - name: cursor
-        in: query
-        description: Set `cursor` to `next_cursor` returned by the previous call to
-          list items in the next page
-        schema:
-          type: string
-      - name: limit
-        in: query
-        description: The maximum number of items to return. Must be between 1 - 1000
-          both inclusive.
-        schema:
-          type: integer
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `admin.teams:read`"
+          required: true
+          schema:
+            type: string
+        - name: cursor
+          in: query
+          description:
+            Set `cursor` to `next_cursor` returned by the previous call to
+            list items in the next page
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description:
+            The maximum number of items to return. Must be between 1 - 1000
+            both inclusive.
+          schema:
+            type: integer
       responses:
         "200":
           description: Typical success response
@@ -152,7 +161,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _OK_ response
+                description:
+                  This method either only returns a brief _OK_ response
                   or a verbose schema is not available for this method.
         default:
           description: Typical error response
@@ -163,16 +173,17 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _not OK_ response
+                description:
+                  This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-      - slackAuth:
-        - admin.teams:read
+        - slackAuth:
+            - admin.teams:read
   /admin.emoji.remove:
     post:
       tags:
-      - admin.emoji
-      - admin
+        - admin.emoji
+        - admin
       description: Remove an emoji across an Enterprise Grid organization
       externalDocs:
         description: API method documentation
@@ -183,15 +194,16 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               required:
-              - name
-              - token
+                - name
+                - token
               properties:
                 token:
                   type: string
-                  description: 'Authentication token. Requires scope: `admin.teams:write`'
+                  description: "Authentication token. Requires scope: `admin.teams:write`"
                 name:
                   type: string
-                  description: The name of the emoji to be removed. Colons (`:myemoji:`)
+                  description:
+                    The name of the emoji to be removed. Colons (`:myemoji:`)
                     around the value are not required, although they may be included.
         required: true
       responses:
@@ -204,7 +216,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _OK_ response
+                description:
+                  This method either only returns a brief _OK_ response
                   or a verbose schema is not available for this method.
         default:
           description: Typical error response
@@ -215,16 +228,17 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _not OK_ response
+                description:
+                  This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-      - slackAuth:
-        - admin.teams:write
+        - slackAuth:
+            - admin.teams:write
   /admin.emoji.rename:
     post:
       tags:
-      - admin.emoji
-      - admin
+        - admin.emoji
+        - admin
       description: Rename an emoji.
       externalDocs:
         description: API method documentation
@@ -235,16 +249,17 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               required:
-              - name
-              - new_name
-              - token
+                - name
+                - new_name
+                - token
               properties:
                 token:
                   type: string
-                  description: 'Authentication token. Requires scope: `admin.teams:write`'
+                  description: "Authentication token. Requires scope: `admin.teams:write`"
                 name:
                   type: string
-                  description: The name of the emoji to be renamed. Colons (`:myemoji:`)
+                  description:
+                    The name of the emoji to be renamed. Colons (`:myemoji:`)
                     around the value are not required, although they may be included.
                 new_name:
                   type: string
@@ -260,7 +275,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _OK_ response
+                description:
+                  This method either only returns a brief _OK_ response
                   or a verbose schema is not available for this method.
         default:
           description: Typical error response
@@ -271,28 +287,29 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _not OK_ response
+                description:
+                  This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-      - slackAuth:
-        - admin.teams:write
+        - slackAuth:
+            - admin.teams:write
 
   /emoji.list:
     get:
       tags:
-      - emoji
+        - emoji
       description: Lists custom emoji for a team.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/emoji.list
       operationId: emoji_list
       parameters:
-      - name: token
-        in: query
-        description: 'Authentication token. Requires scope: `emoji:read`'
-        required: true
-        schema:
-          type: string
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `emoji:read`"
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: Typical success response
@@ -303,7 +320,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _OK_ response
+                description:
+                  This method either only returns a brief _OK_ response
                   or a verbose schema is not available for this method.
         default:
           description: Typical error response
@@ -314,8 +332,9 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _not OK_ response
+                description:
+                  This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-      - slackAuth:
-        - emoji:read
+        - slackAuth:
+            - emoji:read

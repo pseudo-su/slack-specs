@@ -2,19 +2,19 @@ paths:
   /dnd.endDnd:
     post:
       tags:
-      - dnd
+        - dnd
       description: Ends the current user's Do Not Disturb session immediately.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/dnd.endDnd
       operationId: dnd_endDnd
       parameters:
-      - name: token
-        in: header
-        description: 'Authentication token. Requires scope: `dnd:write`'
-        required: true
-        schema:
-          type: string
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `dnd:write`"
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: Typical success response
@@ -37,24 +37,24 @@ paths:
                   type: object
                 description: Schema for error response from dnd.endDnd method
       security:
-      - slackAuth:
-        - dnd:write
+        - slackAuth:
+            - dnd:write
   /dnd.endSnooze:
     post:
       tags:
-      - dnd
+        - dnd
       description: Ends the current user's snooze mode immediately.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/dnd.endSnooze
       operationId: dnd_endSnooze
       parameters:
-      - name: token
-        in: header
-        description: 'Authentication token. Requires scope: `dnd:write`'
-        required: true
-        schema:
-          type: string
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `dnd:write`"
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: Typical success response
@@ -77,28 +77,28 @@ paths:
                   type: object
                 description: Schema for error response from dnd.endSnooze method
       security:
-      - slackAuth:
-        - dnd:write
+        - slackAuth:
+            - dnd:write
   /dnd.info:
     get:
       tags:
-      - dnd
+        - dnd
       description: Retrieves a user's current Do Not Disturb status.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/dnd.info
       operationId: dnd_info
       parameters:
-      - name: token
-        in: query
-        description: 'Authentication token. Requires scope: `dnd:read`'
-        schema:
-          type: string
-      - name: user
-        in: query
-        description: User to fetch status for (defaults to current user)
-        schema:
-          type: string
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `dnd:read`"
+          schema:
+            type: string
+        - name: user
+          in: query
+          description: User to fetch status for (defaults to current user)
+          schema:
+            type: string
       responses:
         "200":
           description: Typical success response
@@ -121,13 +121,14 @@ paths:
                   type: object
                 description: Schema for error response from dnd.info method
       security:
-      - slackAuth:
-        - dnd:read
+        - slackAuth:
+            - dnd:read
   /dnd.setSnooze:
     post:
       tags:
-      - dnd
-      description: Turns on Do Not Disturb mode for the current user, or changes its
+        - dnd
+      description:
+        Turns on Do Not Disturb mode for the current user, or changes its
         duration.
       externalDocs:
         description: API method documentation
@@ -138,12 +139,12 @@ paths:
           application/x-www-form-urlencoded:
             schema:
               required:
-              - num_minutes
-              - token
+                - num_minutes
+                - token
               properties:
                 token:
                   type: string
-                  description: 'Authentication token. Requires scope: `dnd:write`'
+                  description: "Authentication token. Requires scope: `dnd:write`"
                 num_minutes:
                   type: string
                   description: Number of minutes, from now, to snooze until.
@@ -170,29 +171,30 @@ paths:
                   type: object
                 description: Schema for error response from dnd.setSnooze method
       security:
-      - slackAuth:
-        - dnd:write
+        - slackAuth:
+            - dnd:write
   /dnd.teamInfo:
     get:
       tags:
-      - dnd
+        - dnd
       description: Retrieves the Do Not Disturb status for up to 50 users on a team.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/dnd.teamInfo
       operationId: dnd_teamInfo
       parameters:
-      - name: token
-        in: query
-        description: 'Authentication token. Requires scope: `dnd:read`'
-        schema:
-          type: string
-      - name: users
-        in: query
-        description: Comma-separated list of users to fetch Do Not Disturb status
-          for
-        schema:
-          type: string
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `dnd:read`"
+          schema:
+            type: string
+        - name: users
+          in: query
+          description:
+            Comma-separated list of users to fetch Do Not Disturb status
+            for
+          schema:
+            type: string
       responses:
         "200":
           description: Typical success response
@@ -203,7 +205,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _OK_ response
+                description:
+                  This method either only returns a brief _OK_ response
                   or a verbose schema is not available for this method.
         default:
           description: Typical error response
@@ -214,8 +217,9 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _not OK_ response
+                description:
+                  This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-      - slackAuth:
-        - dnd:read
+        - slackAuth:
+            - dnd:read

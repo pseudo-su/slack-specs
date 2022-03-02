@@ -2,26 +2,26 @@ paths:
   /admin.inviteRequests.approve:
     post:
       tags:
-      - admin.inviteRequests
-      - admin
+        - admin.inviteRequests
+        - admin
       description: Approve a workspace invite request.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/admin.inviteRequests.approve
       operationId: admin_inviteRequests_approve
       parameters:
-      - name: token
-        in: header
-        description: 'Authentication token. Requires scope: `admin.invites:write`'
-        required: true
-        schema:
-          type: string
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `admin.invites:write`"
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/x-www-form-urlencoded:
             schema:
               required:
-              - invite_request_id
+                - invite_request_id
               properties:
                 team_id:
                   type: string
@@ -32,7 +32,7 @@ paths:
           application/json:
             schema:
               required:
-              - invite_request_id
+                - invite_request_id
               properties:
                 team_id:
                   type: string
@@ -51,7 +51,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _OK_ response
+                description:
+                  This method either only returns a brief _OK_ response
                   or a verbose schema is not available for this method.
         default:
           description: Typical error response
@@ -62,45 +63,48 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _not OK_ response
+                description:
+                  This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-      - slackAuth:
-        - admin.invites:write
+        - slackAuth:
+            - admin.invites:write
   /admin.inviteRequests.approved.list:
     get:
       tags:
-      - admin.inviteRequests.approved
-      - admin
+        - admin.inviteRequests.approved
+        - admin
       description: List all approved workspace invite requests.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/admin.inviteRequests.approved.list
       operationId: admin_inviteRequests_approved_list
       parameters:
-      - name: token
-        in: header
-        description: 'Authentication token. Requires scope: `admin.invites:read`'
-        required: true
-        schema:
-          type: string
-      - name: team_id
-        in: query
-        description: ID for the workspace where the invite requests were made.
-        schema:
-          type: string
-      - name: cursor
-        in: query
-        description: Value of the `next_cursor` field sent as part of the previous
-          API response
-        schema:
-          type: string
-      - name: limit
-        in: query
-        description: The number of results that will be returned by the API on each
-          invocation. Must be between 1 - 1000, both inclusive
-        schema:
-          type: integer
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `admin.invites:read`"
+          required: true
+          schema:
+            type: string
+        - name: team_id
+          in: query
+          description: ID for the workspace where the invite requests were made.
+          schema:
+            type: string
+        - name: cursor
+          in: query
+          description:
+            Value of the `next_cursor` field sent as part of the previous
+            API response
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description:
+            The number of results that will be returned by the API on each
+            invocation. Must be between 1 - 1000, both inclusive
+          schema:
+            type: integer
       responses:
         "200":
           description: Typical success response
@@ -111,7 +115,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _OK_ response
+                description:
+                  This method either only returns a brief _OK_ response
                   or a verbose schema is not available for this method.
         default:
           description: Typical error response
@@ -122,45 +127,48 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _not OK_ response
+                description:
+                  This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-      - slackAuth:
-        - admin.invites:read
+        - slackAuth:
+            - admin.invites:read
   /admin.inviteRequests.denied.list:
     get:
       tags:
-      - admin.inviteRequests.denied
-      - admin
+        - admin.inviteRequests.denied
+        - admin
       description: List all denied workspace invite requests.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/admin.inviteRequests.denied.list
       operationId: admin_inviteRequests_denied_list
       parameters:
-      - name: token
-        in: header
-        description: 'Authentication token. Requires scope: `admin.invites:read`'
-        required: true
-        schema:
-          type: string
-      - name: team_id
-        in: query
-        description: ID for the workspace where the invite requests were made.
-        schema:
-          type: string
-      - name: cursor
-        in: query
-        description: Value of the `next_cursor` field sent as part of the previous
-          api response
-        schema:
-          type: string
-      - name: limit
-        in: query
-        description: The number of results that will be returned by the API on each
-          invocation. Must be between 1 - 1000 both inclusive
-        schema:
-          type: integer
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `admin.invites:read`"
+          required: true
+          schema:
+            type: string
+        - name: team_id
+          in: query
+          description: ID for the workspace where the invite requests were made.
+          schema:
+            type: string
+        - name: cursor
+          in: query
+          description:
+            Value of the `next_cursor` field sent as part of the previous
+            api response
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description:
+            The number of results that will be returned by the API on each
+            invocation. Must be between 1 - 1000 both inclusive
+          schema:
+            type: integer
       responses:
         "200":
           description: Typical success response
@@ -171,7 +179,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _OK_ response
+                description:
+                  This method either only returns a brief _OK_ response
                   or a verbose schema is not available for this method.
         default:
           description: Typical error response
@@ -182,34 +191,35 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _not OK_ response
+                description:
+                  This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-      - slackAuth:
-        - admin.invites:read
+        - slackAuth:
+            - admin.invites:read
   /admin.inviteRequests.deny:
     post:
       tags:
-      - admin.inviteRequests
-      - admin
+        - admin.inviteRequests
+        - admin
       description: Deny a workspace invite request.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/admin.inviteRequests.deny
       operationId: admin_inviteRequests_deny
       parameters:
-      - name: token
-        in: header
-        description: 'Authentication token. Requires scope: `admin.invites:write`'
-        required: true
-        schema:
-          type: string
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `admin.invites:write`"
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/x-www-form-urlencoded:
             schema:
               required:
-              - invite_request_id
+                - invite_request_id
               properties:
                 team_id:
                   type: string
@@ -220,7 +230,7 @@ paths:
           application/json:
             schema:
               required:
-              - invite_request_id
+                - invite_request_id
               properties:
                 team_id:
                   type: string
@@ -239,7 +249,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _OK_ response
+                description:
+                  This method either only returns a brief _OK_ response
                   or a verbose schema is not available for this method.
         default:
           description: Typical error response
@@ -250,45 +261,48 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _not OK_ response
+                description:
+                  This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-      - slackAuth:
-        - admin.invites:write
+        - slackAuth:
+            - admin.invites:write
   /admin.inviteRequests.list:
     get:
       tags:
-      - admin.inviteRequests
-      - admin
+        - admin.inviteRequests
+        - admin
       description: List all pending workspace invite requests.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/admin.inviteRequests.list
       operationId: admin_inviteRequests_list
       parameters:
-      - name: token
-        in: header
-        description: 'Authentication token. Requires scope: `admin.invites:read`'
-        required: true
-        schema:
-          type: string
-      - name: team_id
-        in: query
-        description: ID for the workspace where the invite requests were made.
-        schema:
-          type: string
-      - name: cursor
-        in: query
-        description: Value of the `next_cursor` field sent as part of the previous
-          API response
-        schema:
-          type: string
-      - name: limit
-        in: query
-        description: The number of results that will be returned by the API on each
-          invocation. Must be between 1 - 1000, both inclusive
-        schema:
-          type: integer
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `admin.invites:read`"
+          required: true
+          schema:
+            type: string
+        - name: team_id
+          in: query
+          description: ID for the workspace where the invite requests were made.
+          schema:
+            type: string
+        - name: cursor
+          in: query
+          description:
+            Value of the `next_cursor` field sent as part of the previous
+            API response
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description:
+            The number of results that will be returned by the API on each
+            invocation. Must be between 1 - 1000, both inclusive
+          schema:
+            type: integer
       responses:
         "200":
           description: Typical success response
@@ -299,7 +313,8 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _OK_ response
+                description:
+                  This method either only returns a brief _OK_ response
                   or a verbose schema is not available for this method.
         default:
           description: Typical error response
@@ -310,8 +325,9 @@ paths:
                 type: object
                 additionalProperties:
                   type: object
-                description: This method either only returns a brief _not OK_ response
+                description:
+                  This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-      - slackAuth:
-        - admin.invites:read
+        - slackAuth:
+            - admin.invites:read

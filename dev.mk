@@ -1,4 +1,4 @@
-export OPENAPI_FILENAME=./bundled.openapi.yaml
+export OPENAPI_FILENAME=./generated.openapi.yaml
 
 export GO111MODULE=on
 

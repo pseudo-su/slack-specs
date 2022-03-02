@@ -2,23 +2,23 @@ paths:
   /api.test:
     get:
       tags:
-      - api
+        - api
       description: Checks API calling code.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/api.test
       operationId: api_test
       parameters:
-      - name: error
-        in: query
-        description: Error response to return
-        schema:
-          type: string
-      - name: foo
-        in: query
-        description: example property to return
-        schema:
-          type: string
+        - name: error
+          in: query
+          description: Error response to return
+          schema:
+            type: string
+        - name: foo
+          in: query
+          description: example property to return
+          schema:
+            type: string
       responses:
         "200":
           description: Standard success response
@@ -43,5 +43,5 @@ paths:
                   properties: {}
                 description: Schema for error response api.test method
       security:
-      - slackAuth:
-        - none
+        - slackAuth:
+            - none
