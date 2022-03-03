@@ -160,22 +160,21 @@ components:
         - team_id
         - name
         - deleted
-        - color
-        - real_name
-        - tz
-        - tz_label
-        - tz_offset
+        # - color
+        # - real_name
+        # - tz
+        # - tz_label
+        # - tz_offset
         - profile
-        - is_admin
-        - is_owner
-        - is_primary_owner
-        - is_restricted
-        - is_ultra_restricted
+        # - is_admin
+        # - is_owner
+        # - is_primary_owner
+        # - is_restricted
+        # - is_ultra_restricted
         - is_bot
         - updated
-        # NOTE: the online docs have `is_app_user` as missing from one example
         # - is_app_user
-        - has_2fa
+        # - has_2fa
       properties:
         id:
           type: string

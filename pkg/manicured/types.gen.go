@@ -157,24 +157,24 @@ type UsersListErrorResponseBody struct {
 
 // UsersListMember defines model for users.list_Member.
 type UsersListMember struct {
-	Color             string                 `json:"color"`
+	Color             *string                `json:"color,omitempty"`
 	Deleted           bool                   `json:"deleted"`
-	Has2fa            bool                   `json:"has_2fa"`
+	Has2fa            *bool                  `json:"has_2fa,omitempty"`
 	Id                string                 `json:"id"`
-	IsAdmin           bool                   `json:"is_admin"`
+	IsAdmin           *bool                  `json:"is_admin,omitempty"`
 	IsAppUser         *bool                  `json:"is_app_user,omitempty"`
 	IsBot             bool                   `json:"is_bot"`
-	IsOwner           bool                   `json:"is_owner"`
-	IsPrimaryOwner    bool                   `json:"is_primary_owner"`
-	IsRestricted      bool                   `json:"is_restricted"`
-	IsUltraRestricted bool                   `json:"is_ultra_restricted"`
+	IsOwner           *bool                  `json:"is_owner,omitempty"`
+	IsPrimaryOwner    *bool                  `json:"is_primary_owner,omitempty"`
+	IsRestricted      *bool                  `json:"is_restricted,omitempty"`
+	IsUltraRestricted *bool                  `json:"is_ultra_restricted,omitempty"`
 	Name              string                 `json:"name"`
 	Profile           UsersListMemberProfile `json:"profile"`
-	RealName          string                 `json:"real_name"`
+	RealName          *string                `json:"real_name,omitempty"`
 	TeamId            string                 `json:"team_id"`
-	Tz                string                 `json:"tz"`
-	TzLabel           string                 `json:"tz_label"`
-	TzOffset          float32                `json:"tz_offset"`
+	Tz                *string                `json:"tz,omitempty"`
+	TzLabel           *string                `json:"tz_label,omitempty"`
+	TzOffset          *float32               `json:"tz_offset,omitempty"`
 	Updated           float32                `json:"updated"`
 }
 
