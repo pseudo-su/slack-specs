@@ -19501,12 +19501,8 @@ func (r UsersInfoResponse) StatusCode() int {
 type UsersListResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *struct {
-		AdditionalProperties map[string]map[string]interface{} `json:"-"`
-	}
-	JSONDefault *struct {
-		AdditionalProperties map[string]map[string]interface{} `json:"-"`
-	}
+	JSON200      *UsersListResponseBody
+	JSONDefault  *UsersListErrorResponseBody
 }
 
 // Status returns HTTPResponse.Status
@@ -27764,18 +27760,14 @@ func ParseUsersListResponse(rsp *http.Response) (*UsersListResponse, error) {
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest struct {
-			AdditionalProperties map[string]map[string]interface{} `json:"-"`
-		}
+		var dest UsersListResponseBody
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && true:
-		var dest struct {
-			AdditionalProperties map[string]map[string]interface{} `json:"-"`
-		}
+		var dest UsersListErrorResponseBody
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

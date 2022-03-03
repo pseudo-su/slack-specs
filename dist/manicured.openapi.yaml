@@ -341,6 +341,205 @@ components:
       - response_metadata
       title: conversations.list success schema
       type: object
+    users.list_ErrorResponseBody:
+      additionalProperties: true
+      description: Schema for error response from users.list method
+      properties:
+        error:
+          example: invalid_cursor
+          type: string
+        ok:
+          example: false
+          type: boolean
+      required:
+      - ok
+      - error
+      title: users.list error schema
+      type: object
+    users.list_Member:
+      properties:
+        color:
+          example: 9f69e7
+          type: string
+        deleted:
+          example: false
+          type: boolean
+        has_2fa:
+          example: false
+          type: boolean
+        id:
+          example: W012A3CDE
+          type: string
+        is_admin:
+          example: true
+          type: boolean
+        is_app_user:
+          example: false
+          type: boolean
+        is_bot:
+          example: false
+          type: boolean
+        is_owner:
+          example: false
+          type: boolean
+        is_primary_owner:
+          example: false
+          type: boolean
+        is_restricted:
+          example: false
+          type: boolean
+        is_ultra_restricted:
+          example: false
+          type: boolean
+        name:
+          example: spengler
+          type: string
+        profile:
+          $ref: '#/components/schemas/users.list_MemberProfile'
+        real_name:
+          example: spengler
+          type: string
+        team_id:
+          example: T012AB3C4
+          type: string
+        tz:
+          example: America/Los_Angeles
+          type: string
+        tz_label:
+          example: Pacific Daylight Time
+          type: string
+        tz_offset:
+          example: -25200
+          type: number
+        updated:
+          example: 1502138686
+          type: number
+      required:
+      - id
+      - team_id
+      - name
+      - deleted
+      - color
+      - real_name
+      - tz
+      - tz_label
+      - tz_offset
+      - profile
+      - is_admin
+      - is_owner
+      - is_primary_owner
+      - is_restricted
+      - is_ultra_restricted
+      - is_bot
+      - updated
+      - has_2fa
+      type: object
+    users.list_MemberProfile:
+      properties:
+        avatar_hash:
+          example: ge3b51ca72de
+          type: string
+        display_name:
+          example: spengler
+          type: string
+        display_name_normalized:
+          example: spengler
+          type: string
+        email:
+          example: spengler@ghostbusters.example.com
+          type: string
+        first_name:
+          example: Glinda
+          type: string
+        image_24:
+          example: https://a.slack-edge.com...png
+          type: string
+        image_32:
+          example: https://a.slack-edge.com...png
+          type: string
+        image_48:
+          example: https://a.slack-edge.com...png
+          type: string
+        image_72:
+          example: https://a.slack-edge.com...png
+          type: string
+        image_192:
+          example: https://a.slack-edge.com...png
+          type: string
+        image_512:
+          example: https://a.slack-edge.com...png
+          type: string
+        image_1024:
+          example: https://a.slack-edge.com...png
+          type: string
+        image_original:
+          example: https://a.slack-edge.com...png
+          type: string
+        last_name:
+          example: Southgood
+          type: string
+        phone:
+          example: ""
+          type: string
+        real_name:
+          example: Egon Spengler
+          type: string
+        real_name_normalized:
+          example: Egon Spengler
+          type: string
+        skype:
+          example: ""
+          type: string
+        status_emoji:
+          example: ':books:'
+          type: string
+        status_text:
+          example: Print is dead
+          type: string
+        team:
+          example: T012AB3C4
+          type: string
+        title:
+          example: Glinda the Good
+          type: string
+      required:
+      - avatar_hash
+      - status_text
+      - status_emoji
+      - real_name_normalized
+      - display_name_normalized
+      - team
+      - display_name
+      type: object
+    users.list_ResponseBody:
+      additionalProperties: true
+      description: Schema for successful response from users.list method
+      properties:
+        cache_ts:
+          example: 1498777272
+          type: number
+        members:
+          items:
+            $ref: '#/components/schemas/users.list_Member'
+          type: array
+        ok:
+          example: true
+          type: boolean
+        response_metadata:
+          properties:
+            next_cursor:
+              example: dGVhbTpDMDYxRkE1UEI=
+              type: string
+          required:
+          - next_cursor
+          type: object
+      required:
+      - ok
+      - members
+      - cache_ts
+      - response_metadata
+      title: users.list schema
+      type: object
   securitySchemes:
     slackAuth:
       flows:
@@ -495,6 +694,60 @@ paths:
         - mpim:read
       tags:
       - conversations
+  /users.list:
+    get:
+      description: Lists all users in a Slack team.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/users.list
+      operationId: users_list
+      parameters:
+      - description: 'Authentication token. Requires scope: `users:read`'
+        in: query
+        name: token
+        schema:
+          type: string
+      - description: The maximum number of items to return. Fewer than the requested
+          number of items may be returned, even if the end of the users list hasn't
+          been reached. Providing no `limit` value will result in Slack attempting
+          to deliver you the entire result set. If the collection is too large you
+          may experience `limit_required` or HTTP 500 errors.
+        in: query
+        name: limit
+        schema:
+          type: integer
+      - description: Paginate through collections of data by setting the `cursor`
+          parameter to a `next_cursor` attribute returned by a previous request's
+          `response_metadata`. Default value fetches the first "page" of the collection.
+          See [pagination](/docs/pagination) for more detail.
+        in: query
+        name: cursor
+        schema:
+          type: string
+      - description: Set this to `true` to receive the locale for users. Defaults
+          to `false`
+        in: query
+        name: include_locale
+        schema:
+          type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/users.list_ResponseBody'
+          description: Typical success response
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/users.list_ErrorResponseBody'
+          description: Typical error response
+      security:
+      - slackAuth:
+        - users:read
+      tags:
+      - users
 servers:
 - description: Public slack API
   url: https://slack.com/api

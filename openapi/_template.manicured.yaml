@@ -22,7 +22,7 @@ includes:
   # - team/_template.yaml
   # - teams/_template.yaml
   # - usergroups/_template.yaml
-  # - users/_template.yaml
+  - users/_template.manicured.yaml
   # - views/_template.yaml
   # - workflows/_template.yaml
 

@@ -1,0 +1,281 @@
+paths:
+  /users.list:
+    get:
+      operationId: users_list
+      description: Lists all users in a Slack team.
+      tags:
+        - users
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/users.list
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `users:read`"
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description:
+            The maximum number of items to return. Fewer than the requested
+            number of items may be returned, even if the end of the users list hasn't
+            been reached. Providing no `limit` value will result in Slack attempting
+            to deliver you the entire result set. If the collection is too large you
+            may experience `limit_required` or HTTP 500 errors.
+          schema:
+            type: integer
+        - name: cursor
+          in: query
+          description:
+            Paginate through collections of data by setting the `cursor`
+            parameter to a `next_cursor` attribute returned by a previous request's
+            `response_metadata`. Default value fetches the first "page" of the collection.
+            See [pagination](/docs/pagination) for more detail.
+          schema:
+            type: string
+        - name: include_locale
+          in: query
+          description:
+            Set this to `true` to receive the locale for users. Defaults
+            to `false`
+          schema:
+            type: boolean
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/users.list_ResponseBody"
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/users.list_ErrorResponseBody"
+      security:
+        - slackAuth:
+            - users:read
+
+components:
+  schemas:
+
+    users.list_MemberProfile:
+      type: object
+      required:
+        - avatar_hash
+        - status_text
+        - status_emoji
+        - real_name_normalized
+        - display_name_normalized
+        - team
+        # - image_24
+        # - image_32
+        # - image_48
+        # - image_72
+        # - image_192
+        # - image_512
+        # - image_1024
+        # - image_original
+        # - first_name
+        # - last_name
+        # - real_name
+        # - email
+        # - skype
+        - display_name
+        # - title
+        # - phone
+      properties:
+        avatar_hash:
+          type: string
+          example: "ge3b51ca72de"
+        status_text:
+          type: string
+          example: "Print is dead"
+        status_emoji:
+          type: string
+          example: ":books:"
+        real_name_normalized:
+          type: string
+          example: "Egon Spengler"
+        display_name_normalized:
+          type: string
+          example: "spengler"
+        email:
+          type: string
+          example: "spengler@ghostbusters.example.com"
+        team:
+          type: string
+          example: "T012AB3C4"
+        image_24:
+          type: string
+          example: "https://a.slack-edge.com...png"
+        image_32:
+          type: string
+          example: "https://a.slack-edge.com...png"
+        image_48:
+          type: string
+          example: "https://a.slack-edge.com...png"
+        image_72:
+          type: string
+          example: "https://a.slack-edge.com...png"
+        image_192:
+          type: string
+          example: "https://a.slack-edge.com...png"
+        image_512:
+          type: string
+          example: "https://a.slack-edge.com...png"
+        image_1024:
+          type: string
+          example: "https://a.slack-edge.com...png"
+        image_original:
+          type: string
+          example: "https://a.slack-edge.com...png"
+        first_name:
+          type: string
+          example: "Glinda"
+        last_name:
+          type: string
+          example: "Southgood"
+        real_name:
+          type: string
+          example: "Egon Spengler"
+        display_name:
+          type: string
+          example: "spengler"
+        title:
+          type: string
+          example: "Glinda the Good"
+        phone:
+          type: string
+          example: ""
+        skype:
+          type: string
+          example: ""
+
+    users.list_Member:
+      type: object
+      required:
+        - id
+        - team_id
+        - name
+        - deleted
+        - color
+        - real_name
+        - tz
+        - tz_label
+        - tz_offset
+        - profile
+        - is_admin
+        - is_owner
+        - is_primary_owner
+        - is_restricted
+        - is_ultra_restricted
+        - is_bot
+        - updated
+        # NOTE: the online docs have `is_app_user` as missing from one example
+        # - is_app_user
+        - has_2fa
+      properties:
+        id:
+          type: string
+          example: "W012A3CDE"
+        team_id:
+          type: string
+          example: "T012AB3C4"
+        name:
+          type: string
+          example: "spengler"
+        deleted:
+          type: boolean
+          example: false
+        color:
+          type: string
+          example: "9f69e7"
+        real_name:
+          type: string
+          example: "spengler"
+        tz:
+          type: string
+          example: "America/Los_Angeles"
+        tz_label:
+          type: string
+          example: "Pacific Daylight Time"
+        tz_offset:
+          type: number
+          example: -25200
+        profile:
+          $ref: "#/components/schemas/users.list_MemberProfile"
+        is_admin:
+          type: boolean
+          example: true
+        is_owner:
+          type: boolean
+          example: false
+        is_primary_owner:
+          type: boolean
+          example: false
+        is_restricted:
+          type: boolean
+          example: false
+        is_ultra_restricted:
+          type: boolean
+          example: false
+        is_bot:
+          type: boolean
+          example: false
+        updated:
+          type: number
+          example: 1502138686
+        is_app_user:
+          type: boolean
+          example: false
+        has_2fa:
+          type: boolean
+          example: false
+
+    users.list_ResponseBody:
+      type: object
+      title: users.list schema
+      additionalProperties: true
+      description: Schema for successful response from users.list method
+      required:
+        - ok
+        - members
+        - cache_ts
+        - response_metadata
+      properties:
+        ok:
+          type: boolean
+          example: true
+        members:
+          type: array
+          items:
+            $ref: "#/components/schemas/users.list_Member"
+        cache_ts:
+          type: number
+          example: 1498777272
+        response_metadata:
+          type: object
+          required:
+            - next_cursor
+          properties:
+            next_cursor:
+              type: string
+              example: dGVhbTpDMDYxRkE1UEI=
+
+    users.list_ErrorResponseBody:
+      type: object
+      title: users.list error schema
+      additionalProperties: true
+      description: Schema for error response from users.list method
+      required:
+        - ok
+        - error
+      properties:
+        ok:
+          type: boolean
+          example: false
+        error:
+          type: string
+          example: invalid_cursor

@@ -30,8 +30,8 @@ verify:
 	# Lint go files
 	./bin/golangci-lint run ./...
 	# Lint OpenAPI spec
-	./bin/spectral lint -v --fail-severity=warn $(OPENAPI_FILENAME_COMPLETE)
 	./bin/spectral lint -v --fail-severity=warn $(OPENAPI_FILENAME_MANICURED)
+	./bin/spectral lint -v --fail-severity=warn $(OPENAPI_FILENAME_COMPLETE)
 .PHONY: verify
 
 ### Codegen

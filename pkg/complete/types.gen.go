@@ -386,6 +386,73 @@ type ObjsUserProfileShort struct {
 	Team                  DefsWorkspaceId `json:"team"`
 }
 
+// Schema for error response from users.list method
+type UsersListErrorResponseBody struct {
+	Error                string                 `json:"error"`
+	Ok                   bool                   `json:"ok"`
+	AdditionalProperties map[string]interface{} `json:"-"`
+}
+
+// UsersListMember defines model for users.list_Member.
+type UsersListMember struct {
+	Color             string                 `json:"color"`
+	Deleted           bool                   `json:"deleted"`
+	Has2fa            bool                   `json:"has_2fa"`
+	Id                string                 `json:"id"`
+	IsAdmin           bool                   `json:"is_admin"`
+	IsAppUser         *bool                  `json:"is_app_user,omitempty"`
+	IsBot             bool                   `json:"is_bot"`
+	IsOwner           bool                   `json:"is_owner"`
+	IsPrimaryOwner    bool                   `json:"is_primary_owner"`
+	IsRestricted      bool                   `json:"is_restricted"`
+	IsUltraRestricted bool                   `json:"is_ultra_restricted"`
+	Name              string                 `json:"name"`
+	Profile           UsersListMemberProfile `json:"profile"`
+	RealName          string                 `json:"real_name"`
+	TeamId            string                 `json:"team_id"`
+	Tz                string                 `json:"tz"`
+	TzLabel           string                 `json:"tz_label"`
+	TzOffset          float32                `json:"tz_offset"`
+	Updated           float32                `json:"updated"`
+}
+
+// UsersListMemberProfile defines model for users.list_MemberProfile.
+type UsersListMemberProfile struct {
+	AvatarHash            string  `json:"avatar_hash"`
+	DisplayName           string  `json:"display_name"`
+	DisplayNameNormalized string  `json:"display_name_normalized"`
+	Email                 *string `json:"email,omitempty"`
+	FirstName             *string `json:"first_name,omitempty"`
+	Image1024             *string `json:"image_1024,omitempty"`
+	Image192              *string `json:"image_192,omitempty"`
+	Image24               *string `json:"image_24,omitempty"`
+	Image32               *string `json:"image_32,omitempty"`
+	Image48               *string `json:"image_48,omitempty"`
+	Image512              *string `json:"image_512,omitempty"`
+	Image72               *string `json:"image_72,omitempty"`
+	ImageOriginal         *string `json:"image_original,omitempty"`
+	LastName              *string `json:"last_name,omitempty"`
+	Phone                 *string `json:"phone,omitempty"`
+	RealName              *string `json:"real_name,omitempty"`
+	RealNameNormalized    string  `json:"real_name_normalized"`
+	Skype                 *string `json:"skype,omitempty"`
+	StatusEmoji           string  `json:"status_emoji"`
+	StatusText            string  `json:"status_text"`
+	Team                  string  `json:"team"`
+	Title                 *string `json:"title,omitempty"`
+}
+
+// Schema for successful response from users.list method
+type UsersListResponseBody struct {
+	CacheTs          float32           `json:"cache_ts"`
+	Members          []UsersListMember `json:"members"`
+	Ok               bool              `json:"ok"`
+	ResponseMetadata struct {
+		NextCursor string `json:"next_cursor"`
+	} `json:"response_metadata"`
+	AdditionalProperties map[string]interface{} `json:"-"`
+}
+
 // AdminAppsApproveJSONBody defines parameters for AdminAppsApprove.
 type AdminAppsApproveJSONBody struct {
 	// The id of the app to approve.
@@ -3229,6 +3296,190 @@ func (a ConversationsListResponseBody) MarshalJSON() ([]byte, error) {
 	object["channels"], err = json.Marshal(a.Channels)
 	if err != nil {
 		return nil, fmt.Errorf("error marshaling 'channels': %w", err)
+	}
+
+	object["ok"], err = json.Marshal(a.Ok)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'ok': %w", err)
+	}
+
+	object["response_metadata"], err = json.Marshal(a.ResponseMetadata)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'response_metadata': %w", err)
+	}
+
+	for fieldName, field := range a.AdditionalProperties {
+		object[fieldName], err = json.Marshal(field)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling '%s': %w", fieldName, err)
+		}
+	}
+	return json.Marshal(object)
+}
+
+// Getter for additional properties for UsersListErrorResponseBody. Returns the specified
+// element and whether it was found
+func (a UsersListErrorResponseBody) Get(fieldName string) (value interface{}, found bool) {
+	if a.AdditionalProperties != nil {
+		value, found = a.AdditionalProperties[fieldName]
+	}
+	return
+}
+
+// Setter for additional properties for UsersListErrorResponseBody
+func (a *UsersListErrorResponseBody) Set(fieldName string, value interface{}) {
+	if a.AdditionalProperties == nil {
+		a.AdditionalProperties = make(map[string]interface{})
+	}
+	a.AdditionalProperties[fieldName] = value
+}
+
+// Override default JSON handling for UsersListErrorResponseBody to handle AdditionalProperties
+func (a *UsersListErrorResponseBody) UnmarshalJSON(b []byte) error {
+	object := make(map[string]json.RawMessage)
+	err := json.Unmarshal(b, &object)
+	if err != nil {
+		return err
+	}
+
+	if raw, found := object["error"]; found {
+		err = json.Unmarshal(raw, &a.Error)
+		if err != nil {
+			return fmt.Errorf("error reading 'error': %w", err)
+		}
+		delete(object, "error")
+	}
+
+	if raw, found := object["ok"]; found {
+		err = json.Unmarshal(raw, &a.Ok)
+		if err != nil {
+			return fmt.Errorf("error reading 'ok': %w", err)
+		}
+		delete(object, "ok")
+	}
+
+	if len(object) != 0 {
+		a.AdditionalProperties = make(map[string]interface{})
+		for fieldName, fieldBuf := range object {
+			var fieldVal interface{}
+			err := json.Unmarshal(fieldBuf, &fieldVal)
+			if err != nil {
+				return fmt.Errorf("error unmarshaling field %s: %w", fieldName, err)
+			}
+			a.AdditionalProperties[fieldName] = fieldVal
+		}
+	}
+	return nil
+}
+
+// Override default JSON handling for UsersListErrorResponseBody to handle AdditionalProperties
+func (a UsersListErrorResponseBody) MarshalJSON() ([]byte, error) {
+	var err error
+	object := make(map[string]json.RawMessage)
+
+	object["error"], err = json.Marshal(a.Error)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'error': %w", err)
+	}
+
+	object["ok"], err = json.Marshal(a.Ok)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'ok': %w", err)
+	}
+
+	for fieldName, field := range a.AdditionalProperties {
+		object[fieldName], err = json.Marshal(field)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling '%s': %w", fieldName, err)
+		}
+	}
+	return json.Marshal(object)
+}
+
+// Getter for additional properties for UsersListResponseBody. Returns the specified
+// element and whether it was found
+func (a UsersListResponseBody) Get(fieldName string) (value interface{}, found bool) {
+	if a.AdditionalProperties != nil {
+		value, found = a.AdditionalProperties[fieldName]
+	}
+	return
+}
+
+// Setter for additional properties for UsersListResponseBody
+func (a *UsersListResponseBody) Set(fieldName string, value interface{}) {
+	if a.AdditionalProperties == nil {
+		a.AdditionalProperties = make(map[string]interface{})
+	}
+	a.AdditionalProperties[fieldName] = value
+}
+
+// Override default JSON handling for UsersListResponseBody to handle AdditionalProperties
+func (a *UsersListResponseBody) UnmarshalJSON(b []byte) error {
+	object := make(map[string]json.RawMessage)
+	err := json.Unmarshal(b, &object)
+	if err != nil {
+		return err
+	}
+
+	if raw, found := object["cache_ts"]; found {
+		err = json.Unmarshal(raw, &a.CacheTs)
+		if err != nil {
+			return fmt.Errorf("error reading 'cache_ts': %w", err)
+		}
+		delete(object, "cache_ts")
+	}
+
+	if raw, found := object["members"]; found {
+		err = json.Unmarshal(raw, &a.Members)
+		if err != nil {
+			return fmt.Errorf("error reading 'members': %w", err)
+		}
+		delete(object, "members")
+	}
+
+	if raw, found := object["ok"]; found {
+		err = json.Unmarshal(raw, &a.Ok)
+		if err != nil {
+			return fmt.Errorf("error reading 'ok': %w", err)
+		}
+		delete(object, "ok")
+	}
+
+	if raw, found := object["response_metadata"]; found {
+		err = json.Unmarshal(raw, &a.ResponseMetadata)
+		if err != nil {
+			return fmt.Errorf("error reading 'response_metadata': %w", err)
+		}
+		delete(object, "response_metadata")
+	}
+
+	if len(object) != 0 {
+		a.AdditionalProperties = make(map[string]interface{})
+		for fieldName, fieldBuf := range object {
+			var fieldVal interface{}
+			err := json.Unmarshal(fieldBuf, &fieldVal)
+			if err != nil {
+				return fmt.Errorf("error unmarshaling field %s: %w", fieldName, err)
+			}
+			a.AdditionalProperties[fieldName] = fieldVal
+		}
+	}
+	return nil
+}
+
+// Override default JSON handling for UsersListResponseBody to handle AdditionalProperties
+func (a UsersListResponseBody) MarshalJSON() ([]byte, error) {
+	var err error
+	object := make(map[string]json.RawMessage)
+
+	object["cache_ts"], err = json.Marshal(a.CacheTs)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'cache_ts': %w", err)
+	}
+
+	object["members"], err = json.Marshal(a.Members)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'members': %w", err)
 	}
 
 	object["ok"], err = json.Marshal(a.Ok)
