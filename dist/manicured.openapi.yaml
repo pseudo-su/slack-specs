@@ -767,10 +767,10 @@ servers:
 - description: Public slack API
   url: https://slack.com/api
 tags:
-- description: admin.apps
-  name: admin.apps
 - description: admin
   name: admin
+- description: admin.apps
+  name: admin.apps
 - description: admin.apps.approved
   name: admin.apps.approved
 - description: admin.apps.requests
@@ -791,10 +791,10 @@ tags:
   name: admin.inviteRequests.approved
 - description: admin.inviteRequests.denied
   name: admin.inviteRequests.denied
-- description: admin.teams.admins
-  name: admin.teams.admins
 - description: admin.teams
   name: admin.teams
+- description: admin.teams.admins
+  name: admin.teams.admins
 - description: admin.teams.owners
   name: admin.teams.owners
 - description: admin.teams.settings

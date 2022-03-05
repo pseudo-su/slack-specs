@@ -17,10 +17,10 @@ info:
     email: support@slack.com
 
 tags:
-  - name: admin.apps
-    description: admin.apps
   - name: admin
     description: admin
+  - name: admin.apps
+    description: admin.apps
   - name: admin.apps.approved
     description: admin.apps.approved
   - name: admin.apps.requests
@@ -41,10 +41,10 @@ tags:
     description: admin.inviteRequests.approved
   - name: admin.inviteRequests.denied
     description: admin.inviteRequests.denied
-  - name: admin.teams.admins
-    description: admin.teams.admins
   - name: admin.teams
     description: admin.teams
+  - name: admin.teams.admins
+    description: admin.teams.admins
   - name: admin.teams.owners
     description: admin.teams.owners
   - name: admin.teams.settings

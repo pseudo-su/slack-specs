@@ -1,0 +1,6 @@
+extends: .spectral.yaml
+
+rules:
+  oas3-unused-component: false
+  oas3-parameter-description: false
+  openapi-tags-alphabetical: false

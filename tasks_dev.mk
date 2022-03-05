@@ -53,7 +53,7 @@ verify.fix: testharness.go.verify.fix testharness.rust.verify.fix verify.openapi
 verify.openapi:
 	# Lint OpenAPI spec
 	./bin/spectral lint -v --fail-severity=warn $(OPENAPI_FILENAME_MANICURED)
-	./bin/spectral lint -v --fail-severity=warn $(OPENAPI_FILENAME_COMPLETE)
+	./bin/spectral lint --ruleset=.spectral.relaxed.yaml -v --fail-severity=warn $(OPENAPI_FILENAME_COMPLETE)
 .PHONY: verify.openapi
 
 ### Test
