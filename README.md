@@ -12,7 +12,7 @@ An experiment to try and create a tolerable authoring, linting and testing proce
 
 ```sh
 # Install/setup tool deps
-make setup
+make deps.install
 
 # Generate
 make generate

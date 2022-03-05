@@ -1,4 +1,4 @@
-package smoke
+package suite
 
 import (
 	"bytes"
