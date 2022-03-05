@@ -5,7 +5,7 @@ import (
 
 
 	testifySuite "github.com/stretchr/testify/suite"
-	suite "slack-specs-test-harness-go/smoke/suite"
+	suite "slack-specs-test-harness-go/test/smoke"
 )
 
 type TestSuite struct {

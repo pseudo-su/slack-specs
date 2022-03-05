@@ -5,3 +5,6 @@
 .DS_store
 reports/
 __debug_bin
+/.env*.local
+
+.vscode/settings.json

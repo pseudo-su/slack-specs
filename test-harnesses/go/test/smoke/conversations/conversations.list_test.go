@@ -1,11 +1,13 @@
 package conversations
 
 import (
+	// "fmt"
 	"context"
 
-	pkg "slack-specs-test-harness-go/pkg"
+	"slack-specs-test-harness-go/pkg"
 
 	"github.com/stretchr/testify/assert"
+	// s "slack-specs-test-harness-go/smoke/suite"
 )
 
 func (suite *TestSuite) TestListConversations() {
@@ -16,7 +18,7 @@ func (suite *TestSuite) TestListConversations() {
 	}
 	r, err := suite.ApiClient.ConversationsListWithResponse(ctx, &params)
 
-	// fmt.Println(prettyJSON(t, r.Body))
+	// fmt.Println(s.PrettyJSON(t, r.Body))
 	assert.Equal(t, nil, err)
 	assert.NotNil(t, r.JSON200)
 }

@@ -1,5 +1,5 @@
 HARNESSES := go rust
-TARGETS := deps.install deps.update deps.upgrade verify verify.fix generate test test.report
+TARGETS := deps.install deps.update deps.upgrade verify verify.fix generate test test.unit test.smoke test.report test.unit.report test.smoke.report
 
 define make-target
 ## Run $1 test harness target $2

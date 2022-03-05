@@ -1,5 +1,5 @@
-export OPENAPI_FILENAME_COMPLETE=./dist/complete.openapi.yaml
-export OPENAPI_FILENAME_MANICURED=./dist/manicured.openapi.yaml
+export OPENAPI_FILENAME_COMPLETE=./dist/openapi.complete.yaml
+export OPENAPI_FILENAME_MANICURED=./dist/openapi.manicured.yaml
 
 export GO111MODULE=on
 
@@ -65,3 +65,19 @@ test: testharness.go.test testharness.rust.test
 ## Run tests and generate reports
 test.report: testharness.go.test.report testharness.rust.test.report
 .PHONY: test.report
+
+## Run unit tests
+test.unit: testharness.go.test.unit testharness.rust.test.unit
+.PHONY: test.unit
+
+## Run unit tests and generate reports
+test.unit.report: testharness.go.test.unit.report testharness.rust.test.unit.report
+.PHONY: test.unit.report
+
+## Run unit tests
+test.smoke: testharness.go.test.smoke testharness.rust.test.smoke
+.PHONY: test.smoke
+
+## Run smoke tests and generate reports
+test.smoke.report: testharness.go.test.smoke.report testharness.rust.test.smoke.report
+.PHONY: test.smoke.report
