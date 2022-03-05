@@ -27,12 +27,26 @@ generate:
 ### Test
 
 ## Run tests
-test: test.smoke
+test: test.unit test.smoke
 .PHONY: test
 
 ## Run tests and generate reports
-test.report: test.smoke.report
+test.report: test.unit.report test.smoke.report test.report.lift
 .PHONY: test.report
+
+## Lift reports up into the project root
+test.report.lift:
+	mkdir -p ../../reports/rust
+	cp -r ./reports/ ../../reports/rust
+.PHONY: test.report.lift
+
+## Run unit tests
+test.unit:
+.PHONY: test.unit
+
+## Run unit tests and output reports
+test.unit.report:
+.PHONY: test.unit.report
 
 ## Run smoke tests
 test.smoke:

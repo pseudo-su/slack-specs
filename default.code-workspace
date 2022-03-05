@@ -1,0 +1,13 @@
+{
+  "folders": [
+    {
+      "path": "."
+    },
+    {
+      "path": "test-harnesses/go"
+    },
+    {
+      "path": "test-harnesses/rust"
+    }
+  ]
+}

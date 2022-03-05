@@ -73,8 +73,11 @@ For more details and before opening pull requests please read the full [./CONTRI
 - Add automatic request and response validation for both the `unit` and `smoke` tests. Some options include:
   - [`EXXETA/openapi-cop`](https://github.com/EXXETA/openapi-cop)
   - [`kin-openapi/openapi3`](https://github.com/getkin/kin-openapi) example in [`deepmap/oapi-codegen`](https://github.com/deepmap/oapi-codegen/blob/master/pkg/middleware/oapi_validate.go)
-- Add a rust `test-harness`
 - Generate a CLI program from the OpenAPI spec and have a `smoke` test suite that uses the generated CLI.
+- Surface code coverage metrics of the generated API clients in PRs
+- Add a test harness for `rust`
+- Add a test harness for `dart`
+- Add a test harness for `kotlin`
 
 ## Progress
 
