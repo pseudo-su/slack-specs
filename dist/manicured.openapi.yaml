@@ -4,6 +4,7 @@ components:
   responses: {}
   schemas:
     conversations.list_Channel:
+      description: Public slack channel
       properties:
         created:
           example: 1449252889
@@ -18,8 +19,6 @@ components:
           example: false
           type: boolean
         is_channel:
-          enum:
-          - true
           example: true
           type: boolean
         is_ext_shared:
@@ -110,8 +109,6 @@ components:
       - id
       - name
       - is_channel
-      - is_group
-      - is_im
       - created
       - creator
       - is_archived
@@ -125,7 +122,6 @@ components:
       - is_pending_ext_shared
       - is_member
       - is_private
-      - is_mpim
       - topic
       - purpose
       - previous_names
@@ -135,8 +131,8 @@ components:
       enum:
       - public_channel
       - private_channel
-      - npim
       - im
+      - npim
       type: string
     conversations.list_ErrorResponseBody:
       additionalProperties: true
@@ -154,6 +150,7 @@ components:
       title: conversations.list error schema
       type: object
     conversations.list_Group:
+      description: Private slack channel
       properties:
         created:
           example: 1493657761
@@ -177,8 +174,6 @@ components:
           example: false
           type: boolean
         is_group:
-          enum:
-          - true
           example: true
           type: boolean
         is_im:
@@ -257,9 +252,7 @@ components:
       required:
       - id
       - name
-      - is_channel
       - is_group
-      - is_im
       - created
       - creator
       - is_archived
@@ -273,13 +266,13 @@ components:
       - is_pending_ext_shared
       - is_member
       - is_private
-      - is_mpim
       - is_open
       - topic
       - purpose
       - priority
       type: object
     conversations.list_Im:
+      description: Single party instant message
       properties:
         created:
           example: 1498500348
@@ -288,8 +281,6 @@ components:
           example: D0C0F7S8Y
           type: string
         is_im:
-          enum:
-          - true
           example: true
           type: boolean
         is_org_shared:
@@ -313,6 +304,40 @@ components:
       - is_user_deleted
       - priority
       type: object
+    conversations.list_Mpim:
+      description: Multi party instant message
+      properties:
+        created:
+          example: 1493657761
+          type: number
+        creator:
+          example: U061F7AUR
+          type: string
+        id:
+          example: G0AKFJBEU
+          type: string
+        is_channel:
+          example: false
+          type: boolean
+        is_group:
+          example: true
+          type: boolean
+        is_im:
+          example: false
+          type: boolean
+        is_mpim:
+          example: true
+          type: boolean
+        name:
+          example: mpdm-mr.banks--slactions-jackson--beforebot-1
+          type: string
+      required:
+      - id
+      - name
+      - is_mpim
+      - created
+      - creator
+      type: object
     conversations.list_ResponseBody:
       additionalProperties: true
       description: Schema for successful response from conversations.list method
@@ -323,6 +348,7 @@ components:
             - $ref: '#/components/schemas/conversations.list_Channel'
             - $ref: '#/components/schemas/conversations.list_Group'
             - $ref: '#/components/schemas/conversations.list_Im'
+            - $ref: '#/components/schemas/conversations.list_Mpim'
           type: array
         ok:
           example: true

@@ -73,17 +73,19 @@ components:
       enum:
         - public_channel
         - private_channel
-        - npim
         - im
+        - npim
 
     conversations.list_Channel:
       type: object
+      description: Public slack channel
       required:
         - id
         - name
         - is_channel
-        - is_group
-        - is_im
+        # - is_group
+        # - is_im
+        # - is_mpim
         - created
         - creator
         - is_archived
@@ -97,7 +99,6 @@ components:
         - is_pending_ext_shared
         - is_member
         - is_private
-        - is_mpim
         - topic
         - purpose
         - previous_names
@@ -112,12 +113,15 @@ components:
         is_channel:
           type: boolean
           example: true
-          enum:
-            - true
+          # enum:
+          #   - true
         is_group:
           type: boolean
           example: false
         is_im:
+          type: boolean
+          example: false
+        is_mpim:
           type: boolean
           example: false
         created:
@@ -163,9 +167,6 @@ components:
         is_private:
           type: boolean
           example: false
-        is_mpim:
-          type: boolean
-          example: false
         topic:
           type: object
           required:
@@ -209,12 +210,14 @@ components:
 
     conversations.list_Group:
       type: object
+      description: Private slack channel
       required:
         - id
         - name
-        - is_channel
+        # - is_channel
         - is_group
-        - is_im
+        # - is_im
+        # - is_mpim
         - created
         - creator
         - is_archived
@@ -228,7 +231,6 @@ components:
         - is_pending_ext_shared
         - is_member
         - is_private
-        - is_mpim
         - is_open
         - topic
         - purpose
@@ -246,11 +248,14 @@ components:
         is_group:
           type: boolean
           example: true
-          enum:
-            - true
+          # enum:
+          #   - true
         is_im:
           type: boolean
           example: false
+        is_mpim:
+          type: boolean
+          example: true
         created:
           type: number
           example: 1493657761
@@ -294,9 +299,6 @@ components:
         is_private:
           type: boolean
           example: true
-        is_mpim:
-          type: boolean
-          example: true
         is_open:
           type: boolean
           example: true
@@ -338,10 +340,14 @@ components:
 
     conversations.list_Im:
       type: object
+      description: Single party instant message
       required:
         - id
         - created
+        # - is_channel
+        # - is_group
         - is_im
+        # - is_mpim
         - is_org_shared
         - user
         - is_user_deleted
@@ -356,8 +362,8 @@ components:
         is_im:
           type: boolean
           example: true
-          enum:
-            - true
+          # enum:
+          #   - true
         is_org_shared:
           type: boolean
           example: false
@@ -370,6 +376,46 @@ components:
         priority:
           type: number
           example: 0
+
+    conversations.list_Mpim:
+      type: object
+      description: Multi party instant message
+      required:
+        - id
+        - name
+        # - is_channel
+        # - is_group
+        # - is_im
+        - is_mpim
+        - created
+        - creator
+      properties:
+        id:
+          type: string
+          example: "G0AKFJBEU"
+        name:
+          type: string
+          example: "mpdm-mr.banks--slactions-jackson--beforebot-1"
+        is_channel:
+          type: boolean
+          example: false
+        is_group:
+          type: boolean
+          example: true
+        is_im:
+          type: boolean
+          example: false
+        is_mpim:
+          type: boolean
+          example: true
+          # enum:
+          #   - true
+        created:
+          type: number
+          example: 1493657761
+        creator:
+          type: string
+          example: "U061F7AUR"
 
     conversations.list_ResponseBody:
       type: object
@@ -392,6 +438,7 @@ components:
               - $ref: "#/components/schemas/conversations.list_Channel"
               - $ref: "#/components/schemas/conversations.list_Group"
               - $ref: "#/components/schemas/conversations.list_Im"
+              - $ref: "#/components/schemas/conversations.list_Mpim"
         response_metadata:
           type: object
           required:
