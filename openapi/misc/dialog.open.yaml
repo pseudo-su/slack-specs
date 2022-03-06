@@ -51,5 +51,5 @@ paths:
                   type: object
                 description: Schema for error response from dialog.open method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - none

@@ -54,7 +54,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/users.list_ErrorResponseBody"
       security:
-        - slackAuth:
+        - V1Oauth2:
             - users:read
 
 components:

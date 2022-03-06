@@ -8,6 +8,7 @@ deps.install:
 
 ## Update dependencies
 deps.update:
+	go mod tidy
 .PHONY: deps.update
 
 ## Upgrade dependencies
@@ -31,11 +32,6 @@ generate:
 	mkdir -p ./pkg
 	go run github.com/deepmap/oapi-codegen/cmd/oapi-codegen@v1.9.1 --package=pkg --generate types -o ./pkg/types.gen.go ../../dist/openapi.manicured.yaml
 	go run github.com/deepmap/oapi-codegen/cmd/oapi-codegen@v1.9.1 --package=pkg --generate client -o ./pkg/client.gen.go ../../dist/openapi.manicured.yaml
-
-	# Generate golang api client pkg/complete
-	mkdir -p ./pkg/complete
-	go run github.com/deepmap/oapi-codegen/cmd/oapi-codegen@v1.9.1 --package=pkg --generate types -o ./pkg/complete/types.gen.go ../../dist/openapi.complete.yaml
-	go run github.com/deepmap/oapi-codegen/cmd/oapi-codegen@v1.9.1 --package=pkg --generate client -o ./pkg/complete/client.gen.go ../../dist/openapi.complete.yaml
 .PHONY: generate
 
 ### Test

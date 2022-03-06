@@ -73,7 +73,7 @@ paths:
                   type: object
                 description: Schema for error response from stars.add method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - stars:write
   /stars.list:
     get:
@@ -138,7 +138,7 @@ paths:
                   type: object
                 description: Schema for error response from stars.list method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - stars:read
   /stars.remove:
     post:
@@ -214,5 +214,5 @@ paths:
                   type: object
                 description: Schema for error response from stars.remove method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - stars:write

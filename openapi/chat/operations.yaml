@@ -70,7 +70,7 @@ paths:
                   type: object
                 description: Schema for error response from chat.delete method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - chat:write:user
             - chat:write:bot
   /chat.deleteScheduledMessage:
@@ -156,7 +156,7 @@ paths:
                   Schema for error response from chat.deleteScheduledMessage
                   method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - chat:write:user
             - chat:write:bot
   /chat.getPermalink:
@@ -209,7 +209,7 @@ paths:
                   type: object
                 description: Schema for error response from chat.getPermalink method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - none
   /chat.meMessage:
     post:
@@ -272,7 +272,7 @@ paths:
                   type: object
                 description: Schema for error response from chat.meMessage method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - chat:write:user
             - chat:write:bot
   /chat.postEphemeral:
@@ -460,7 +460,7 @@ paths:
                   type: object
                 description: Schema for error response from chat.postEphemeral method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - chat:write:user
             - chat:write:bot
   /chat.postMessage:
@@ -670,7 +670,7 @@ paths:
                   type: object
                 description: Schema for error response chat.postMessage method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - chat:write:user
             - chat:write:bot
   /chat.scheduleMessage:
@@ -840,7 +840,7 @@ paths:
                   type: object
                 description: Schema for error response chat.scheduleMessage method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - chat:write:user
             - chat:write:bot
   /chat.scheduledMessages.list:
@@ -913,7 +913,7 @@ paths:
                   Schema for error response from chat.scheduledMessages.list
                   method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - none
   /chat.unfurl:
     post:
@@ -1026,7 +1026,7 @@ paths:
                   type: object
                 description: Schema for error response from chat.unfurl method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - links:write
   /chat.update:
     post:
@@ -1175,6 +1175,6 @@ paths:
                   type: object
                 description: Schema for error response chat.update method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - chat:write:user
             - chat:write:bot

@@ -59,7 +59,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.teams:read
   /admin.teams.create:
     post:
@@ -147,7 +147,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.teams:write
   /admin.teams.list:
     get:
@@ -206,7 +206,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.teams:read
   /admin.teams.owners.list:
     get:
@@ -270,7 +270,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.teams:read
   /admin.teams.settings.info:
     get:
@@ -320,7 +320,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.teams:read
   /admin.teams.settings.setDefaultChannels:
     post:
@@ -377,7 +377,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.teams:write
   /admin.teams.settings.setDescription:
     post:
@@ -449,7 +449,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.teams:write
   /admin.teams.settings.setDiscoverability:
     post:
@@ -527,7 +527,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.teams:write
   /admin.teams.settings.setIcon:
     post:
@@ -584,7 +584,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.teams:write
   /admin.teams.settings.setName:
     post:
@@ -656,5 +656,5 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.teams:write

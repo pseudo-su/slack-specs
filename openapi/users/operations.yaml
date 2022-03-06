@@ -99,7 +99,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.users:write
   /admin.users.invite:
     post:
@@ -241,7 +241,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.users:write
   /admin.users.list:
     get:
@@ -304,7 +304,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.users:read
   /admin.users.remove:
     post:
@@ -376,7 +376,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.users:write
   /admin.users.session.invalidate:
     post:
@@ -448,7 +448,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.users:write
   /admin.users.session.reset:
     post:
@@ -524,7 +524,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.users:write
   /admin.users.setAdmin:
     post:
@@ -596,7 +596,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.users:write
   /admin.users.setExpiration:
     post:
@@ -678,7 +678,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.users:write
   /admin.users.setOwner:
     post:
@@ -752,7 +752,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.users:write
   /admin.users.setRegular:
     post:
@@ -826,7 +826,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.users:write
 
   /users.conversations:
@@ -908,7 +908,7 @@ paths:
                   type: object
                 description: Schema for error response from users.conversations method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - channels:read
             - groups:read
             - im:read
@@ -957,7 +957,7 @@ paths:
                   type: object
                 description: Schema for error response from users.deletePhoto method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - users.profile:write
   /users.getPresence:
     get:
@@ -1005,7 +1005,7 @@ paths:
                   properties: {}
                 description: Schema for error response users.getPresence method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - users:read
   /users.identity:
     get:
@@ -1216,7 +1216,7 @@ paths:
                   type: object
                 description: Schema for error response from users.identity method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - identity.basic
   /users.info:
     get:
@@ -1268,7 +1268,7 @@ paths:
                   type: object
                 description: Schema for error response from users.info method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - users:read
   /users.lookupByEmail:
     get:
@@ -1316,7 +1316,7 @@ paths:
                   type: object
                 description: Schema for error response from users.lookupByEmail method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - users:read.email
   /users.profile.get:
     get:
@@ -1369,7 +1369,7 @@ paths:
                   type: object
                 description: Schema for error response from users.profile.get method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - users.profile:read
   /users.profile.set:
     post:
@@ -1462,7 +1462,7 @@ paths:
                   type: object
                 description: Schema for error response from users.profile.set method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - users.profile:write
   /users.setActive:
     post:
@@ -1502,7 +1502,7 @@ paths:
                   type: object
                 description: Schema for error response from users.setActive method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - users:write
   /users.setPhoto:
     post:
@@ -1558,7 +1558,7 @@ paths:
                   type: object
                 description: Schema for error response from users.setPhoto method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - users.profile:write
   /users.setPresence:
     post:
@@ -1619,5 +1619,5 @@ paths:
                   type: object
                 description: Schema for error response from users.setPresence method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - users:write

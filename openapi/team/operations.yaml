@@ -52,7 +52,7 @@ paths:
                   type: object
                 description: Schema for error response from team.accessLogs method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin
   /team.billableInfo:
     get:
@@ -103,7 +103,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin
   /team.info:
     get:
@@ -151,7 +151,7 @@ paths:
                   type: object
                 description: Schema for error response from team.info method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - team:read
   /team.integrationLogs:
     get:
@@ -223,7 +223,7 @@ paths:
                   type: object
                 description: Schema for error response from team.integrationLogs method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin
   /team.profile.get:
     get:
@@ -271,5 +271,5 @@ paths:
                   type: object
                 description: Schema for error response from team.profile.get method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - users.profile:read

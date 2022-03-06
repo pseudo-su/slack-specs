@@ -62,7 +62,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - none
   /oauth.token:
     get:
@@ -127,7 +127,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - none
   /oauth.v2.access:
     get:
@@ -189,5 +189,5 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - none

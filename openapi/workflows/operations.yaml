@@ -55,7 +55,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - workflow.steps:execute
   /workflows.stepFailed:
     get:
@@ -113,7 +113,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - workflow.steps:execute
   /workflows.updateStep:
     get:
@@ -196,5 +196,5 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - workflow.steps:execute

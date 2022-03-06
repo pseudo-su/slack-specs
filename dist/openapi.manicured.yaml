@@ -19,6 +19,8 @@ components:
           example: false
           type: boolean
         is_channel:
+          enum:
+          - true
           example: true
           type: boolean
         is_ext_shared:
@@ -124,8 +126,6 @@ components:
       - is_private
       - topic
       - purpose
-      - previous_names
-      - num_members
       type: object
     conversations.list_ConversationType:
       enum:
@@ -174,6 +174,8 @@ components:
           example: false
           type: boolean
         is_group:
+          enum:
+          - true
           example: true
           type: boolean
         is_im:
@@ -266,10 +268,8 @@ components:
       - is_pending_ext_shared
       - is_member
       - is_private
-      - is_open
       - topic
       - purpose
-      - priority
       type: object
     conversations.list_Im:
       description: Single party instant message
@@ -281,6 +281,8 @@ components:
           example: D0C0F7S8Y
           type: string
         is_im:
+          enum:
+          - true
           example: true
           type: boolean
         is_org_shared:
@@ -326,6 +328,8 @@ components:
           example: false
           type: boolean
         is_mpim:
+          enum:
+          - true
           example: true
           type: boolean
         name:
@@ -556,7 +560,15 @@ components:
       title: users.list schema
       type: object
   securitySchemes:
-    slackAuth:
+    BotTokenAuth:
+      bearerFormat: xoxb-XXXXXXXXXXXX-XXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXX
+      description: |
+        Slack app bot user token External docs: https://api.slack.com/authentication/basics#scopes
+      scheme: bearer
+      type: http
+    V1Oauth2:
+      description: |
+        Legacy oauth2 user token auth (v1) External docs: https://api.slack.com/legacy/oauth
       flows:
         authorizationCode:
           authorizationUrl: https://slack.com/oauth/authorize
@@ -643,7 +655,7 @@ info:
     tokens blessed with related OAuth scopes.
   title: Slack Web API
   version: 1.7.0
-openapi: 3.0.1
+openapi: 3.0.3
 paths:
   /conversations.list:
     get:
@@ -653,11 +665,6 @@ paths:
         url: https://api.slack.com/methods/conversations.list
       operationId: conversations_list
       parameters:
-      - description: 'Authentication token. Requires scope: `conversations:read`'
-        in: query
-        name: token
-        schema:
-          type: string
       - description: Set to `true` to exclude archived channels from the list
         in: query
         name: exclude_archived
@@ -702,7 +709,12 @@ paths:
                 $ref: '#/components/schemas/conversations.list_ErrorResponseBody'
           description: Typical error response
       security:
-      - slackAuth:
+      - BotTokenAuth:
+        - channels:read
+        - groups:read
+        - im:read
+        - mpim:read
+      - V1Oauth2:
         - channels:read
         - groups:read
         - im:read
@@ -759,7 +771,7 @@ paths:
                 $ref: '#/components/schemas/users.list_ErrorResponseBody'
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - users:read
       tags:
       - users

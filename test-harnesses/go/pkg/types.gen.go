@@ -9,7 +9,13 @@ import (
 )
 
 const (
-	SlackAuthScopes = "slackAuth.Scopes"
+	BotTokenAuthScopes = "BotTokenAuth.Scopes"
+	V1Oauth2Scopes     = "V1Oauth2.Scopes"
+)
+
+// Defines values for ConversationsListChannelIsChannel.
+const (
+	ConversationsListChannelIsChannelTrue ConversationsListChannelIsChannel = true
 )
 
 // Defines values for ConversationsListConversationType.
@@ -23,28 +29,43 @@ const (
 	ConversationsListConversationTypePublicChannel ConversationsListConversationType = "public_channel"
 )
 
+// Defines values for ConversationsListGroupIsGroup.
+const (
+	ConversationsListGroupIsGroupTrue ConversationsListGroupIsGroup = true
+)
+
+// Defines values for ConversationsListImIsIm.
+const (
+	ConversationsListImIsImTrue ConversationsListImIsIm = true
+)
+
+// Defines values for ConversationsListMpimIsMpim.
+const (
+	ConversationsListMpimIsMpimTrue ConversationsListMpimIsMpim = true
+)
+
 // Public slack channel
 type ConversationsListChannel struct {
-	Created            float32                  `json:"created"`
-	Creator            string                   `json:"creator"`
-	Id                 string                   `json:"id"`
-	IsArchived         bool                     `json:"is_archived"`
-	IsChannel          bool                     `json:"is_channel"`
-	IsExtShared        bool                     `json:"is_ext_shared"`
-	IsGeneral          bool                     `json:"is_general"`
-	IsGroup            *bool                    `json:"is_group,omitempty"`
-	IsIm               *bool                    `json:"is_im,omitempty"`
-	IsMember           bool                     `json:"is_member"`
-	IsMpim             *bool                    `json:"is_mpim,omitempty"`
-	IsOrgShared        bool                     `json:"is_org_shared"`
-	IsPendingExtShared bool                     `json:"is_pending_ext_shared"`
-	IsPrivate          bool                     `json:"is_private"`
-	IsShared           bool                     `json:"is_shared"`
-	Name               string                   `json:"name"`
-	NameNormalized     string                   `json:"name_normalized"`
-	NumMembers         float32                  `json:"num_members"`
-	PendingShared      []map[string]interface{} `json:"pending_shared"`
-	PreviousNames      []string                 `json:"previous_names"`
+	Created            float32                           `json:"created"`
+	Creator            string                            `json:"creator"`
+	Id                 string                            `json:"id"`
+	IsArchived         bool                              `json:"is_archived"`
+	IsChannel          ConversationsListChannelIsChannel `json:"is_channel"`
+	IsExtShared        bool                              `json:"is_ext_shared"`
+	IsGeneral          bool                              `json:"is_general"`
+	IsGroup            *bool                             `json:"is_group,omitempty"`
+	IsIm               *bool                             `json:"is_im,omitempty"`
+	IsMember           bool                              `json:"is_member"`
+	IsMpim             *bool                             `json:"is_mpim,omitempty"`
+	IsOrgShared        bool                              `json:"is_org_shared"`
+	IsPendingExtShared bool                              `json:"is_pending_ext_shared"`
+	IsPrivate          bool                              `json:"is_private"`
+	IsShared           bool                              `json:"is_shared"`
+	Name               string                            `json:"name"`
+	NameNormalized     string                            `json:"name_normalized"`
+	NumMembers         *float32                          `json:"num_members,omitempty"`
+	PendingShared      []map[string]interface{}          `json:"pending_shared"`
+	PreviousNames      *[]string                         `json:"previous_names,omitempty"`
 	Purpose            struct {
 		Creator string  `json:"creator"`
 		LastSet float32 `json:"last_set"`
@@ -57,6 +78,9 @@ type ConversationsListChannel struct {
 	} `json:"topic"`
 	Unlinked float32 `json:"unlinked"`
 }
+
+// ConversationsListChannelIsChannel defines model for ConversationsListChannel.IsChannel.
+type ConversationsListChannelIsChannel bool
 
 // ConversationsListConversationType defines model for conversations.list_ConversationType.
 type ConversationsListConversationType string
@@ -70,26 +94,26 @@ type ConversationsListErrorResponseBody struct {
 
 // Private slack channel
 type ConversationsListGroup struct {
-	Created            float32                  `json:"created"`
-	Creator            string                   `json:"creator"`
-	Id                 string                   `json:"id"`
-	IsArchived         bool                     `json:"is_archived"`
-	IsChannel          *bool                    `json:"is_channel,omitempty"`
-	IsExtShared        bool                     `json:"is_ext_shared"`
-	IsGeneral          bool                     `json:"is_general"`
-	IsGroup            bool                     `json:"is_group"`
-	IsIm               *bool                    `json:"is_im,omitempty"`
-	IsMember           bool                     `json:"is_member"`
-	IsMpim             *bool                    `json:"is_mpim,omitempty"`
-	IsOpen             bool                     `json:"is_open"`
-	IsOrgShared        bool                     `json:"is_org_shared"`
-	IsPendingExtShared bool                     `json:"is_pending_ext_shared"`
-	IsPrivate          bool                     `json:"is_private"`
-	IsShared           bool                     `json:"is_shared"`
-	Name               string                   `json:"name"`
-	NameNormalized     string                   `json:"name_normalized"`
-	PendingShared      []map[string]interface{} `json:"pending_shared"`
-	Priority           float32                  `json:"priority"`
+	Created            float32                       `json:"created"`
+	Creator            string                        `json:"creator"`
+	Id                 string                        `json:"id"`
+	IsArchived         bool                          `json:"is_archived"`
+	IsChannel          *bool                         `json:"is_channel,omitempty"`
+	IsExtShared        bool                          `json:"is_ext_shared"`
+	IsGeneral          bool                          `json:"is_general"`
+	IsGroup            ConversationsListGroupIsGroup `json:"is_group"`
+	IsIm               *bool                         `json:"is_im,omitempty"`
+	IsMember           bool                          `json:"is_member"`
+	IsMpim             *bool                         `json:"is_mpim,omitempty"`
+	IsOpen             *bool                         `json:"is_open,omitempty"`
+	IsOrgShared        bool                          `json:"is_org_shared"`
+	IsPendingExtShared bool                          `json:"is_pending_ext_shared"`
+	IsPrivate          bool                          `json:"is_private"`
+	IsShared           bool                          `json:"is_shared"`
+	Name               string                        `json:"name"`
+	NameNormalized     string                        `json:"name_normalized"`
+	PendingShared      []map[string]interface{}      `json:"pending_shared"`
+	Priority           *float32                      `json:"priority,omitempty"`
 	Purpose            struct {
 		Creator string  `json:"creator"`
 		LastSet float32 `json:"last_set"`
@@ -103,28 +127,37 @@ type ConversationsListGroup struct {
 	Unlinked float32 `json:"unlinked"`
 }
 
+// ConversationsListGroupIsGroup defines model for ConversationsListGroup.IsGroup.
+type ConversationsListGroupIsGroup bool
+
 // Single party instant message
 type ConversationsListIm struct {
-	Created       float32 `json:"created"`
-	Id            string  `json:"id"`
-	IsIm          bool    `json:"is_im"`
-	IsOrgShared   bool    `json:"is_org_shared"`
-	IsUserDeleted bool    `json:"is_user_deleted"`
-	Priority      float32 `json:"priority"`
-	User          string  `json:"user"`
+	Created       float32                 `json:"created"`
+	Id            string                  `json:"id"`
+	IsIm          ConversationsListImIsIm `json:"is_im"`
+	IsOrgShared   bool                    `json:"is_org_shared"`
+	IsUserDeleted bool                    `json:"is_user_deleted"`
+	Priority      float32                 `json:"priority"`
+	User          string                  `json:"user"`
 }
+
+// ConversationsListImIsIm defines model for ConversationsListIm.IsIm.
+type ConversationsListImIsIm bool
 
 // Multi party instant message
 type ConversationsListMpim struct {
-	Created   float32 `json:"created"`
-	Creator   string  `json:"creator"`
-	Id        string  `json:"id"`
-	IsChannel *bool   `json:"is_channel,omitempty"`
-	IsGroup   *bool   `json:"is_group,omitempty"`
-	IsIm      *bool   `json:"is_im,omitempty"`
-	IsMpim    bool    `json:"is_mpim"`
-	Name      string  `json:"name"`
+	Created   float32                     `json:"created"`
+	Creator   string                      `json:"creator"`
+	Id        string                      `json:"id"`
+	IsChannel *bool                       `json:"is_channel,omitempty"`
+	IsGroup   *bool                       `json:"is_group,omitempty"`
+	IsIm      *bool                       `json:"is_im,omitempty"`
+	IsMpim    ConversationsListMpimIsMpim `json:"is_mpim"`
+	Name      string                      `json:"name"`
 }
+
+// ConversationsListMpimIsMpim defines model for ConversationsListMpim.IsMpim.
+type ConversationsListMpimIsMpim bool
 
 // Schema for successful response from conversations.list method
 type ConversationsListResponseBody struct {
@@ -205,9 +238,6 @@ type UsersListResponseBody struct {
 
 // ConversationsListParams defines parameters for ConversationsList.
 type ConversationsListParams struct {
-	// Authentication token. Requires scope: `conversations:read`
-	Token *string `json:"token,omitempty"`
-
 	// Set to `true` to exclude archived channels from the list
 	ExcludeArchived *bool `json:"exclude_archived,omitempty"`
 

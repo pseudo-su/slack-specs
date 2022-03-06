@@ -62,7 +62,7 @@ paths:
                   type: object
                 description: Schema for error response from pins.add method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - pins:write
   /pins.list:
     get:
@@ -106,7 +106,7 @@ paths:
                   type: object
                 description: Schema for error response from pins.list method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - pins:read
   /pins.remove:
     post:
@@ -171,5 +171,5 @@ paths:
                   type: object
                 description: Schema for error response from pins.remove method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - pins:write

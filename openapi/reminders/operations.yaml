@@ -82,7 +82,7 @@ paths:
                   type: object
                 description: Schema for error response from reminders.add method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - reminders:write
   /reminders.complete:
     post:
@@ -137,7 +137,7 @@ paths:
                   type: object
                 description: Schema for error response from reminders.complete method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - reminders:write
   /reminders.delete:
     post:
@@ -192,7 +192,7 @@ paths:
                   type: object
                 description: Schema for error response from reminders.delete method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - reminders:write
   /reminders.info:
     get:
@@ -236,7 +236,7 @@ paths:
                   type: object
                 description: Schema for error response from reminders.info method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - reminders:read
   /reminders.list:
     get:
@@ -275,5 +275,5 @@ paths:
                   type: object
                 description: Schema for error response from reminders.list method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - reminders:read

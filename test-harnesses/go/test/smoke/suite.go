@@ -3,16 +3,19 @@ package suite
 import (
 	"fmt"
 
-	"github.com/caarlos0/env"
 	"slack-specs-test-harness-go/pkg"
+	"slack-specs-test-harness-go/test/utils"
+
+	"github.com/caarlos0/env"
 	log "github.com/sirupsen/logrus"
+	"github.com/stretchr/testify/require"
 	"github.com/stretchr/testify/suite"
 )
 
 type Suite struct {
 	suite.Suite
 	Context  *SuiteContext
-	ApiClient *pkg.ClientWithResponses
+	ApiClient pkg.ClientWithResponsesInterface
 }
 
 //nolint:stylecheck
@@ -20,9 +23,9 @@ func (s *Suite) SetupSuite() {
 	s.Context = ParseSuiteConfig()
 	serverBaseURL := buildBaseURL(s.Context)
 
-	apiClient, err := pkg.NewClientWithResponses(serverBaseURL)
+	apiClient, err := utils.NewClientWithResponses(serverBaseURL)
 	if err != nil {
-		panic(err)
+		require.NoError(s.T(), err)
 	}
 
 	s.ApiClient = apiClient

@@ -140,22 +140,6 @@ func NewConversationsListRequest(server string, params *ConversationsListParams)
 
 	queryValues := queryURL.Query()
 
-	if params.Token != nil {
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "token", runtime.ParamLocationQuery, *params.Token); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-	}
-
 	if params.ExcludeArchived != nil {
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "exclude_archived", runtime.ParamLocationQuery, *params.ExcludeArchived); err != nil {

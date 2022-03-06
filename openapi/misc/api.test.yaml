@@ -43,5 +43,5 @@ paths:
                   properties: {}
                 description: Schema for error response api.test method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - none

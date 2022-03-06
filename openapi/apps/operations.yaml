@@ -66,7 +66,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.apps:write
   /admin.apps.approved.list:
     get:
@@ -133,7 +133,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.apps:read
   /admin.apps.requests.list:
     get:
@@ -196,7 +196,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.apps:read
   /admin.apps.restrict:
     post:
@@ -265,7 +265,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.apps:write
   /admin.apps.restricted.list:
     get:
@@ -332,7 +332,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.apps:read
   /apps.event.authorizations.list:
     get:
@@ -392,7 +392,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - authorizations:read
   /apps.permissions.info:
     get:
@@ -436,7 +436,7 @@ paths:
                   Schema for error response from apps.permissions.info
                   method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - none
   /apps.permissions.request:
     get:
@@ -493,7 +493,7 @@ paths:
                   Schema for error response from apps.permissions.request
                   method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - none
   /apps.permissions.resources.list:
     get:
@@ -552,7 +552,7 @@ paths:
                   Schema for error response from apps.permissions.resources.list
                   method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - none
   /apps.permissions.scopes.list:
     get:
@@ -597,7 +597,7 @@ paths:
                   Schema for error response from apps.permissions.scopes.list
                   method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - none
   /apps.permissions.users.list:
     get:
@@ -658,7 +658,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - none
   /apps.permissions.users.request:
     get:
@@ -723,7 +723,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - none
   /apps.uninstall:
     get:
@@ -772,5 +772,5 @@ paths:
                   type: object
                 description: Schema for error response from apps.uninstall method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - none

@@ -57,7 +57,7 @@ paths:
                   type: object
                 description: Schema for error response from admin.conversations.archive
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.conversations:write
   /admin.conversations.convertToPrivate:
     post:
@@ -117,7 +117,7 @@ paths:
                   type: object
                 description: Schema for error response from admin.conversations.convertToPrivate
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.conversations:write
   /admin.conversations.create:
     post:
@@ -217,7 +217,7 @@ paths:
                   type: object
                 description: Schema for error response from admin.conversations.create
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.conversations:write
   /admin.conversations.delete:
     post:
@@ -277,7 +277,7 @@ paths:
                   type: object
                 description: Schema for error response from admin.conversations.delete
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.conversations:write
   /admin.conversations.disconnectShared:
     post:
@@ -347,7 +347,7 @@ paths:
                   type: object
                 description: Schema for error response from admin.conversations.disconnectShared
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.conversations:write
   /admin.conversations.ekm.listOriginalConnectedChannelInfo:
     get:
@@ -421,7 +421,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.conversations:read
   /admin.conversations.getConversationPrefs:
     get:
@@ -468,7 +468,7 @@ paths:
                   type: object
                 description: Schema for error response from admin.conversations.getConversationPrefs
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.conversations:read
   /admin.conversations.getTeams:
     get:
@@ -533,7 +533,7 @@ paths:
                   type: object
                 description: Schema for error response from admin.conversations.getTeams
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.conversations:read
   /admin.conversations.invite:
     post:
@@ -601,7 +601,7 @@ paths:
                   type: object
                 description: Schema for error response from admin.conversations.invite
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.conversations:write
   /admin.conversations.rename:
     post:
@@ -667,7 +667,7 @@ paths:
                   type: object
                 description: Schema for error response from admin.conversations.rename
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.conversations:write
   /admin.conversations.restrictAccess.addGroup:
     post:
@@ -732,7 +732,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.conversations:write
   /admin.conversations.restrictAccess.listGroups:
     get:
@@ -790,7 +790,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.conversations:read
   /admin.conversations.restrictAccess.removeGroup:
     post:
@@ -856,7 +856,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.conversations:write
   /admin.conversations.search:
     get:
@@ -948,7 +948,7 @@ paths:
                   type: object
                 description: Schema for error response from admin.conversations.search
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.conversations:read
   /admin.conversations.setConversationPrefs:
     post:
@@ -1016,7 +1016,7 @@ paths:
                   type: object
                 description: Schema for error response from admin.conversations.setConversationPrefs
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.conversations:write
   /admin.conversations.setTeams:
     post:
@@ -1110,7 +1110,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.conversations:write
   /admin.conversations.unarchive:
     post:
@@ -1170,7 +1170,7 @@ paths:
                   type: object
                 description: Schema for error response from admin.conversations.unarchive
       security:
-        - slackAuth:
+        - V1Oauth2:
             - admin.conversations:write
   /conversations.archive:
     post:
@@ -1227,7 +1227,7 @@ paths:
                   Schema for error response from conversations.archive
                   method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - channels:write
             - groups:write
             - im:write
@@ -1283,7 +1283,7 @@ paths:
                   type: object
                 description: Schema for error response from conversations.close method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - channels:write
             - groups:write
             - im:write
@@ -1347,7 +1347,7 @@ paths:
                   type: object
                 description: Schema for error response from conversations.create method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - channels:write
             - groups:write
             - im:write
@@ -1432,7 +1432,7 @@ paths:
                   Schema for error response from conversations.history
                   method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - channels:history
             - groups:history
             - im:history
@@ -1495,7 +1495,7 @@ paths:
                   type: object
                 description: Schema for error response from conversations.info method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - channels:read
             - groups:read
             - im:read
@@ -1569,7 +1569,7 @@ paths:
                   type: object
                 description: Schema for error response from conversations.invite method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - channels:write
             - groups:write
             - im:write
@@ -1629,7 +1629,7 @@ paths:
                   type: object
                 description: Schema for error response from conversations.join method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - channels:write
   /conversations.kick:
     post:
@@ -1690,7 +1690,7 @@ paths:
                   type: object
                 description: Schema for error response conversations.kick method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - channels:write
             - groups:write
             - im:write
@@ -1750,7 +1750,7 @@ paths:
                   type: object
                 description: Schema for error response from conversations.leave method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - channels:write
             - groups:write
             - im:write
@@ -1816,7 +1816,7 @@ paths:
                   type: object
                 description: Schema for error response from conversations.mark method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - channels:write
             - groups:write
             - im:write
@@ -1882,7 +1882,7 @@ paths:
                   type: object
                 description: Schema for error response conversations.members method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - channels:read
             - groups:read
             - im:read
@@ -1968,7 +1968,7 @@ paths:
                   type: object
                 description: Schema for error response from conversations.open method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - channels:write
             - groups:write
             - im:write
@@ -2034,7 +2034,7 @@ paths:
                   type: object
                 description: Schema for error response from conversations.rename method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - channels:write
             - groups:write
             - im:write
@@ -2128,7 +2128,7 @@ paths:
                   Schema for error response from conversations.replies
                   method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - channels:history
             - groups:history
             - im:history
@@ -2194,7 +2194,7 @@ paths:
                   Schema for error response from conversations.setPurpose
                   method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - channels:write
             - groups:write
             - im:write
@@ -2264,7 +2264,7 @@ paths:
                   Schema for error response from conversations.setTopic
                   method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - channels:write
             - groups:write
             - im:write
@@ -2324,7 +2324,7 @@ paths:
                   Schema for error response from conversations.unarchive
                   method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - channels:write
             - groups:write
             - im:write

@@ -1,7 +1,26 @@
 components:
   securitySchemes:
-    slackAuth:
+    BotTokenAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: xoxb-XXXXXXXXXXXX-XXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXX
+      description: >
+        Slack app bot user token
+        External docs: https://api.slack.com/authentication/basics#scopes
+
+    # TODO: Figure out the correct definition for the V2Oauth2 secrity scheme
+    # And make sure we have a way to verify it.
+    # V2Oauth2:
+    #   type: oauth2
+    #   description: >
+    #     oauth2 user token auth (v2)
+    #     External docs: https://api.slack.com/authentication/oauth-v2
+
+    V1Oauth2:
       type: oauth2
+      description: >
+        Legacy oauth2 user token auth (v1)
+        External docs: https://api.slack.com/legacy/oauth
       flows:
         authorizationCode:
           authorizationUrl: https://slack.com/oauth/authorize

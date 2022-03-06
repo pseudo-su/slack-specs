@@ -31,6 +31,8 @@ components:
           example: false
           type: boolean
         is_channel:
+          enum:
+          - true
           example: true
           type: boolean
         is_ext_shared:
@@ -136,8 +138,6 @@ components:
       - is_private
       - topic
       - purpose
-      - previous_names
-      - num_members
       type: object
     conversations.list_ConversationType:
       enum:
@@ -186,6 +186,8 @@ components:
           example: false
           type: boolean
         is_group:
+          enum:
+          - true
           example: true
           type: boolean
         is_im:
@@ -278,10 +280,8 @@ components:
       - is_pending_ext_shared
       - is_member
       - is_private
-      - is_open
       - topic
       - purpose
-      - priority
       type: object
     conversations.list_Im:
       description: Single party instant message
@@ -293,6 +293,8 @@ components:
           example: D0C0F7S8Y
           type: string
         is_im:
+          enum:
+          - true
           example: true
           type: boolean
         is_org_shared:
@@ -338,6 +340,8 @@ components:
           example: false
           type: boolean
         is_mpim:
+          enum:
+          - true
           example: true
           type: boolean
         name:
@@ -1710,7 +1714,15 @@ components:
       title: users.list schema
       type: object
   securitySchemes:
-    slackAuth:
+    BotTokenAuth:
+      bearerFormat: xoxb-XXXXXXXXXXXX-XXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXX
+      description: |
+        Slack app bot user token External docs: https://api.slack.com/authentication/basics#scopes
+      scheme: bearer
+      type: http
+    V1Oauth2:
+      description: |
+        Legacy oauth2 user token auth (v1) External docs: https://api.slack.com/legacy/oauth
       flows:
         authorizationCode:
           authorizationUrl: https://slack.com/oauth/authorize
@@ -1797,7 +1809,7 @@ info:
     tokens blessed with related OAuth scopes.
   title: Slack Web API
   version: 1.7.0
-openapi: 3.0.1
+openapi: 3.0.3
 paths:
   /admin.apps.approve:
     post:
@@ -1861,7 +1873,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.apps:write
       tags:
       - admin.apps
@@ -1924,7 +1936,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.apps:read
       tags:
       - admin.apps.approved
@@ -1983,7 +1995,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.apps:read
       tags:
       - admin.apps.requests
@@ -2050,7 +2062,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.apps:write
       tags:
       - admin.apps
@@ -2113,7 +2125,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.apps:read
       tags:
       - admin.apps.restricted
@@ -2173,7 +2185,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.conversations:write
       tags:
       - admin.conversations
@@ -2233,7 +2245,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.conversations:write
       tags:
       - admin.conversations
@@ -2327,7 +2339,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.conversations:write
       tags:
       - admin.conversations
@@ -2387,7 +2399,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.conversations:write
       tags:
       - admin.conversations
@@ -2455,7 +2467,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.conversations:write
       tags:
       - admin.conversations
@@ -2523,7 +2535,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.conversations:read
       tags:
       - admin.conversations.ekm
@@ -2570,7 +2582,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.conversations:read
       tags:
       - admin.conversations
@@ -2631,7 +2643,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.conversations:read
       tags:
       - admin.conversations
@@ -2699,7 +2711,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.conversations:write
       tags:
       - admin.conversations
@@ -2765,7 +2777,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.conversations:write
       tags:
       - admin.conversations
@@ -2826,7 +2838,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.conversations:write
       tags:
       - admin.conversations.restrictAccess
@@ -2881,7 +2893,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.conversations:read
       tags:
       - admin.conversations.restrictAccess
@@ -2943,7 +2955,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.conversations:write
       tags:
       - admin.conversations.restrictAccess
@@ -3029,7 +3041,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.conversations:read
       tags:
       - admin.conversations
@@ -3097,7 +3109,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.conversations:write
       tags:
       - admin.conversations
@@ -3184,7 +3196,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.conversations:write
       tags:
       - admin.conversations
@@ -3244,7 +3256,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.conversations:write
       tags:
       - admin.conversations
@@ -3312,7 +3324,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.invites:write
       tags:
       - admin.inviteRequests
@@ -3372,7 +3384,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.invites:read
       tags:
       - admin.inviteRequests.approved
@@ -3432,7 +3444,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.invites:read
       tags:
       - admin.inviteRequests.denied
@@ -3500,7 +3512,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.invites:write
       tags:
       - admin.inviteRequests
@@ -3560,7 +3572,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.invites:read
       tags:
       - admin.inviteRequests
@@ -3619,7 +3631,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.teams:read
       tags:
       - admin.teams.admins
@@ -3703,7 +3715,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.teams:write
       tags:
       - admin.teams
@@ -3758,7 +3770,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.teams:read
       tags:
       - admin.teams
@@ -3818,7 +3830,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.teams:read
       tags:
       - admin.teams.owners
@@ -3866,7 +3878,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.teams:read
       tags:
       - admin.teams.settings
@@ -3921,7 +3933,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.teams:write
       tags:
       - admin.teams.settings
@@ -3991,7 +4003,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.teams:write
       tags:
       - admin.teams.settings
@@ -4064,7 +4076,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.teams:write
       tags:
       - admin.teams.settings
@@ -4119,7 +4131,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.teams:write
       tags:
       - admin.teams.settings
@@ -4189,7 +4201,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.teams:write
       tags:
       - admin.teams.settings
@@ -4266,7 +4278,7 @@ paths:
           description: Typical error response if the token provided is not associated
             with an Org Admin or Owner
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.usergroups:write
       tags:
       - admin.usergroups
@@ -4349,7 +4361,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.teams:write
       tags:
       - admin.usergroups
@@ -4409,7 +4421,7 @@ paths:
           description: Typical error response if the token provided is not associated
             with an Org Admin or Owner
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.usergroups:read
       tags:
       - admin.usergroups
@@ -4481,7 +4493,7 @@ paths:
           description: Typical error response if the token provided is not associated
             with an Org Admin or Owner
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.usergroups:write
       tags:
       - admin.usergroups
@@ -4575,7 +4587,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.users:write
       tags:
       - admin.users
@@ -4703,7 +4715,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.users:write
       tags:
       - admin.users
@@ -4763,7 +4775,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.users:read
       tags:
       - admin.users
@@ -4833,7 +4845,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.users:write
       tags:
       - admin.users
@@ -4903,7 +4915,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.users:write
       tags:
       - admin.users.session
@@ -4977,7 +4989,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.users:write
       tags:
       - admin.users.session
@@ -5047,7 +5059,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.users:write
       tags:
       - admin.users
@@ -5127,7 +5139,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.users:write
       tags:
       - admin.users
@@ -5198,7 +5210,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.users:write
       tags:
       - admin.users
@@ -5269,7 +5281,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin.users:write
       tags:
       - admin.users
@@ -5316,7 +5328,7 @@ paths:
                 type: object
           description: Artificial error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - none
       tags:
       - api
@@ -5372,7 +5384,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - authorizations:read
       tags:
       - apps.event.authorizations
@@ -5414,7 +5426,7 @@ paths:
                 type: object
           description: Standard failure response when used with an invalid token
       security:
-      - slackAuth:
+      - V1Oauth2:
         - none
       tags:
       - apps.permissions
@@ -5469,7 +5481,7 @@ paths:
                 type: object
           description: Standard failure response when trigger_id is invalid
       security:
-      - slackAuth:
+      - V1Oauth2:
         - none
       tags:
       - apps.permissions
@@ -5525,7 +5537,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - none
       tags:
       - apps.permissions.resources
@@ -5568,7 +5580,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - none
       tags:
       - apps.permissions.scopes
@@ -5625,7 +5637,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - none
       tags:
       - apps.permissions.users
@@ -5687,7 +5699,7 @@ paths:
                 type: object
           description: Standard failure response when trigger_id is invalid
       security:
-      - slackAuth:
+      - V1Oauth2:
         - none
       tags:
       - apps.permissions.users
@@ -5737,7 +5749,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - none
       tags:
       - apps
@@ -5783,7 +5795,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - none
       tags:
       - auth
@@ -5823,7 +5835,7 @@ paths:
                 type: object
           description: Standard failure response when used with an invalid token
       security:
-      - slackAuth:
+      - V1Oauth2:
         - none
       tags:
       - auth
@@ -5868,7 +5880,7 @@ paths:
                 type: object
           description: When no bot can be found, it returns an error.
       security:
-      - slackAuth:
+      - V1Oauth2:
         - users:read
       tags:
       - bots
@@ -5991,7 +6003,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - calls:write
       tags:
       - calls
@@ -6062,7 +6074,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - calls:write
       tags:
       - calls
@@ -6111,7 +6123,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - calls:read
       tags:
       - calls
@@ -6184,7 +6196,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - calls:write
       tags:
       - calls.participants
@@ -6258,7 +6270,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - calls:write
       tags:
       - calls.participants
@@ -6342,7 +6354,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - calls:write
       tags:
       - calls
@@ -6413,7 +6425,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - chat:write:user
         - chat:write:bot
       tags:
@@ -6495,7 +6507,7 @@ paths:
                 type: object
           description: Typical error response if no message is found
       security:
-      - slackAuth:
+      - V1Oauth2:
         - chat:write:user
         - chat:write:bot
       tags:
@@ -6548,7 +6560,7 @@ paths:
                 type: object
           description: Error response when channel cannot be found
       security:
-      - slackAuth:
+      - V1Oauth2:
         - none
       tags:
       - chat
@@ -6609,7 +6621,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - chat:write:user
         - chat:write:bot
       tags:
@@ -6774,7 +6786,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - chat:write:user
         - chat:write:bot
       tags:
@@ -6958,7 +6970,7 @@ paths:
                 type: object
           description: Typical error response if too many attachments are included
       security:
-      - slackAuth:
+      - V1Oauth2:
         - chat:write:user
         - chat:write:bot
       tags:
@@ -7106,7 +7118,7 @@ paths:
           description: Typical error response if the `post_at` is invalid (ex. in
             the past or too far into the future)
       security:
-      - slackAuth:
+      - V1Oauth2:
         - chat:write:user
         - chat:write:bot
       tags:
@@ -7175,7 +7187,7 @@ paths:
                 type: object
           description: Typical error response if the channel passed is invalid
       security:
-      - slackAuth:
+      - V1Oauth2:
         - none
       tags:
       - chat.scheduledMessages
@@ -7281,7 +7293,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - links:write
       tags:
       - chat
@@ -7418,7 +7430,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - chat:write:user
         - chat:write:bot
       tags:
@@ -7474,7 +7486,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - channels:write
         - groups:write
         - im:write
@@ -7530,7 +7542,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - channels:write
         - groups:write
         - im:write
@@ -7593,7 +7605,7 @@ paths:
                 type: object
           description: Typical error response when name already in use
       security:
-      - slackAuth:
+      - V1Oauth2:
         - channels:write
         - groups:write
         - im:write
@@ -7673,7 +7685,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - channels:history
         - groups:history
         - im:history
@@ -7733,7 +7745,7 @@ paths:
                 type: object
           description: Typical error response when a channel cannot be found
       security:
-      - slackAuth:
+      - V1Oauth2:
         - channels:read
         - groups:read
         - im:read
@@ -7801,7 +7813,7 @@ paths:
           description: Typical error response when an invite is attempted on a conversation
             type that does not support it
       security:
-      - slackAuth:
+      - V1Oauth2:
         - channels:write
         - groups:write
         - im:write
@@ -7859,7 +7871,7 @@ paths:
           description: Typical error response if the conversation is archived and
             cannot be joined
       security:
-      - slackAuth:
+      - V1Oauth2:
         - channels:write
       tags:
       - conversations
@@ -7919,7 +7931,7 @@ paths:
           description: Typical error response when you attempt to kick yourself from
             a channel
       security:
-      - slackAuth:
+      - V1Oauth2:
         - channels:write
         - groups:write
         - im:write
@@ -7977,7 +7989,7 @@ paths:
           description: Typical error response when attempting to leave a workspace's
             "general" channel
       security:
-      - slackAuth:
+      - V1Oauth2:
         - channels:write
         - groups:write
         - im:write
@@ -7992,11 +8004,6 @@ paths:
         url: https://api.slack.com/methods/conversations.list
       operationId: conversations_list
       parameters:
-      - description: 'Authentication token. Requires scope: `conversations:read`'
-        in: query
-        name: token
-        schema:
-          type: string
       - description: Set to `true` to exclude archived channels from the list
         in: query
         name: exclude_archived
@@ -8041,7 +8048,12 @@ paths:
                 $ref: '#/components/schemas/conversations.list_ErrorResponseBody'
           description: Typical error response
       security:
-      - slackAuth:
+      - BotTokenAuth:
+        - channels:read
+        - groups:read
+        - im:read
+        - mpim:read
+      - V1Oauth2:
         - channels:read
         - groups:read
         - im:read
@@ -8105,7 +8117,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - channels:write
         - groups:write
         - im:write
@@ -8168,7 +8180,7 @@ paths:
                 type: object
           description: Typical error response when an invalid cursor is provided
       security:
-      - slackAuth:
+      - V1Oauth2:
         - channels:read
         - groups:read
         - im:read
@@ -8247,7 +8259,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - channels:write
         - groups:write
         - im:write
@@ -8311,7 +8323,7 @@ paths:
           description: Typical error response when the calling user is not a member
             of the conversation
       security:
-      - slackAuth:
+      - V1Oauth2:
         - channels:write
         - groups:write
         - im:write
@@ -8399,7 +8411,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - channels:history
         - groups:history
         - im:history
@@ -8463,7 +8475,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - channels:write
         - groups:write
         - im:write
@@ -8529,7 +8541,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - channels:write
         - groups:write
         - im:write
@@ -8587,7 +8599,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - channels:write
         - groups:write
         - im:write
@@ -8643,7 +8655,7 @@ paths:
           description: Typical error response, before getting to any possible validation
             errors.
       security:
-      - slackAuth:
+      - V1Oauth2:
         - none
       tags:
       - dialog
@@ -8683,7 +8695,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - dnd:write
       tags:
       - dnd
@@ -8723,7 +8735,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - dnd:write
       tags:
       - dnd
@@ -8767,7 +8779,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - dnd:read
       tags:
       - dnd
@@ -8816,7 +8828,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - dnd:write
       tags:
       - dnd
@@ -8863,7 +8875,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - dnd:read
       tags:
       - dnd
@@ -8923,7 +8935,7 @@ paths:
                 type: object
           description: Standard failure response when used with an invalid token
       security:
-      - slackAuth:
+      - V1Oauth2:
         - files:write:user
       tags:
       - files.comments
@@ -8977,7 +8989,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - files:write:user
       tags:
       - files
@@ -9046,7 +9058,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - files:read
       tags:
       - files
@@ -9127,7 +9139,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - files:read
       tags:
       - files
@@ -9190,7 +9202,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - remote_files:write
       tags:
       - files.remote
@@ -9242,7 +9254,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - remote_files:read
       tags:
       - files.remote
@@ -9313,7 +9325,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - remote_files:read
       tags:
       - files.remote
@@ -9363,7 +9375,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - remote_files:write
       tags:
       - files.remote
@@ -9423,7 +9435,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - remote_files:share
       tags:
       - files.remote
@@ -9489,7 +9501,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - remote_files:write
       tags:
       - files.remote
@@ -9545,7 +9557,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - files:write:user
       tags:
       - files
@@ -9600,7 +9612,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - files:write:user
       tags:
       - files
@@ -9672,7 +9684,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - files:write:user
       tags:
       - files
@@ -9732,7 +9744,7 @@ paths:
                 type: object
           description: Typical error response when there are no mappings to provide
       security:
-      - slackAuth:
+      - V1Oauth2:
         - tokens.basic
       tags:
       - migration
@@ -9794,7 +9806,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - none
       tags:
       - oauth
@@ -9856,7 +9868,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - none
       tags:
       - oauth
@@ -9914,7 +9926,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - none
       tags:
       - oauth.v2
@@ -9980,7 +9992,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - pins:write
       tags:
       - pins
@@ -10024,7 +10036,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - pins:read
       tags:
       - pins
@@ -10089,7 +10101,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - pins:write
       tags:
       - pins
@@ -10164,7 +10176,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - reactions:write
       tags:
       - reactions
@@ -10276,7 +10288,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - reactions:read
       tags:
       - reactions
@@ -10350,7 +10362,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - reactions:read
       tags:
       - reactions
@@ -10436,7 +10448,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - reactions:write
       tags:
       - reactions
@@ -10517,7 +10529,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - reminders:write
       tags:
       - reminders
@@ -10571,7 +10583,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - reminders:write
       tags:
       - reminders
@@ -10625,7 +10637,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - reminders:write
       tags:
       - reminders
@@ -10669,7 +10681,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - reminders:read
       tags:
       - reminders
@@ -10708,7 +10720,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - reminders:read
       tags:
       - reminders
@@ -10760,7 +10772,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - rtm:stream
       tags:
       - rtm
@@ -10833,7 +10845,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - search:read
       tags:
       - search
@@ -10907,7 +10919,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - stars:write
       tags:
       - stars
@@ -10970,7 +10982,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - stars:read
       tags:
       - stars
@@ -11044,7 +11056,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - stars:write
       tags:
       - stars
@@ -11098,7 +11110,7 @@ paths:
           description: 'A workspace must be on a paid plan to use this method, otherwise
             the `paid_only` error is thrown:'
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin
       tags:
       - team
@@ -11146,7 +11158,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin
       tags:
       - team
@@ -11193,7 +11205,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - team:read
       tags:
       - team
@@ -11263,7 +11275,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - admin
       tags:
       - team
@@ -11309,7 +11321,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - users.profile:read
       tags:
       - team.profile
@@ -11400,7 +11412,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - usergroups:write
       tags:
       - usergroups
@@ -11466,7 +11478,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - usergroups:write
       tags:
       - usergroups
@@ -11532,7 +11544,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - usergroups:write
       tags:
       - usergroups
@@ -11587,7 +11599,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - usergroups:read
       tags:
       - usergroups
@@ -11683,7 +11695,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - usergroups:write
       tags:
       - usergroups
@@ -11736,7 +11748,7 @@ paths:
                 type: object
           description: Standard failure response when used with an invalid token
       security:
-      - slackAuth:
+      - V1Oauth2:
         - usergroups:read
       tags:
       - usergroups.users
@@ -11814,7 +11826,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - usergroups:write
       tags:
       - usergroups.users
@@ -11890,7 +11902,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - channels:read
         - groups:read
         - im:read
@@ -11938,7 +11950,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - users.profile:write
       tags:
       - users
@@ -11985,7 +11997,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - users:read
       tags:
       - users
@@ -12196,7 +12208,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - identity.basic
       tags:
       - users
@@ -12247,7 +12259,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - users:read
       tags:
       - users
@@ -12301,7 +12313,7 @@ paths:
                 $ref: '#/components/schemas/users.list_ErrorResponseBody'
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - users:read
       tags:
       - users
@@ -12348,7 +12360,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - users:read.email
       tags:
       - users
@@ -12399,7 +12411,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - users.profile:read
       tags:
       - users.profile
@@ -12483,7 +12495,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - users.profile:write
       tags:
       - users.profile
@@ -12524,7 +12536,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - users:write
       tags:
       - users
@@ -12580,7 +12592,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - users.profile:write
       tags:
       - users
@@ -12640,7 +12652,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - users:write
       tags:
       - users
@@ -12696,7 +12708,7 @@ paths:
           description: Typical error response, before getting to any possible validation
             errors.
       security:
-      - slackAuth:
+      - V1Oauth2:
         - none
       tags:
       - views
@@ -12758,7 +12770,7 @@ paths:
           description: Typical error response, before getting to any possible validation
             errors.
       security:
-      - slackAuth:
+      - V1Oauth2:
         - none
       tags:
       - views
@@ -12813,7 +12825,7 @@ paths:
                 type: object
           description: Typical error response.
       security:
-      - slackAuth:
+      - V1Oauth2:
         - none
       tags:
       - views
@@ -12880,7 +12892,7 @@ paths:
                 type: object
           description: Typical error response.
       security:
-      - slackAuth:
+      - V1Oauth2:
         - none
       tags:
       - views
@@ -12935,7 +12947,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - workflow.steps:execute
       tags:
       - workflows
@@ -12990,7 +13002,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - workflow.steps:execute
       tags:
       - workflows
@@ -13066,7 +13078,7 @@ paths:
                 type: object
           description: Typical error response
       security:
-      - slackAuth:
+      - V1Oauth2:
         - workflow.steps:execute
       tags:
       - workflows

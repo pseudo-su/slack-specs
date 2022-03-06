@@ -9,17 +9,17 @@ paths:
         description: API method documentation
         url: https://api.slack.com/methods/conversations.list
       security:
-        - slackAuth:
+        - BotTokenAuth:
+            - channels:read
+            - groups:read
+            - im:read
+            - mpim:read
+        - V1Oauth2:
             - channels:read
             - groups:read
             - im:read
             - mpim:read
       parameters:
-        - name: token
-          in: query
-          description: "Authentication token. Requires scope: `conversations:read`"
-          schema:
-            type: string
         - name: exclude_archived
           in: query
           description: Set to `true` to exclude archived channels from the list
@@ -101,8 +101,8 @@ components:
         - is_private
         - topic
         - purpose
-        - previous_names
-        - num_members
+        # - previous_names
+        # - num_members
       properties:
         id:
           type: string
@@ -113,8 +113,8 @@ components:
         is_channel:
           type: boolean
           example: true
-          # enum:
-          #   - true
+          enum:
+            - true
         is_group:
           type: boolean
           example: false
@@ -231,10 +231,10 @@ components:
         - is_pending_ext_shared
         - is_member
         - is_private
-        - is_open
+        # - is_open
         - topic
         - purpose
-        - priority
+        # - priority
       properties:
         id:
           type: string
@@ -248,8 +248,8 @@ components:
         is_group:
           type: boolean
           example: true
-          # enum:
-          #   - true
+          enum:
+            - true
         is_im:
           type: boolean
           example: false
@@ -362,8 +362,8 @@ components:
         is_im:
           type: boolean
           example: true
-          # enum:
-          #   - true
+          enum:
+            - true
         is_org_shared:
           type: boolean
           example: false
@@ -408,8 +408,8 @@ components:
         is_mpim:
           type: boolean
           example: true
-          # enum:
-          #   - true
+          enum:
+            - true
         created:
           type: number
           example: 1493657761

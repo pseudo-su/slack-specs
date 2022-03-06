@@ -37,7 +37,7 @@ paths:
                   type: object
                 description: Schema for error response from dnd.endDnd method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - dnd:write
   /dnd.endSnooze:
     post:
@@ -77,7 +77,7 @@ paths:
                   type: object
                 description: Schema for error response from dnd.endSnooze method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - dnd:write
   /dnd.info:
     get:
@@ -121,7 +121,7 @@ paths:
                   type: object
                 description: Schema for error response from dnd.info method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - dnd:read
   /dnd.setSnooze:
     post:
@@ -171,7 +171,7 @@ paths:
                   type: object
                 description: Schema for error response from dnd.setSnooze method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - dnd:write
   /dnd.teamInfo:
     get:
@@ -221,5 +221,5 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - dnd:read

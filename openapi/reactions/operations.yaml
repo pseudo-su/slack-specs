@@ -72,7 +72,7 @@ paths:
                   type: object
                 description: Schema for error response from reactions.add method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - reactions:write
   /reactions.get:
     get:
@@ -184,7 +184,7 @@ paths:
                   type: object
                 description: Schema for error response from reactions.get method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - reactions:read
   /reactions.list:
     get:
@@ -260,7 +260,7 @@ paths:
                   type: object
                 description: Schema for error response from reactions.list method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - reactions:read
   /reactions.remove:
     post:
@@ -349,5 +349,5 @@ paths:
                   type: object
                 description: Schema for error response from reactions.remove method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - reactions:write

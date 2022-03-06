@@ -59,7 +59,7 @@ paths:
                   type: object
                 description: Schema for error response files.comments.delete method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - files:write:user
   /files.delete:
     post:
@@ -112,7 +112,7 @@ paths:
                   type: object
                 description: Schema for error response files.delete method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - files:write:user
   /files.info:
     get:
@@ -183,7 +183,7 @@ paths:
                   type: object
                 description: Schema for error response from files.info method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - files:read
   /files.list:
     get:
@@ -267,7 +267,7 @@ paths:
                   type: object
                 description: Schema for error response from files.list method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - files:read
   /files.remote.add:
     post:
@@ -334,7 +334,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - remote_files:write
   /files.remote.info:
     get:
@@ -388,7 +388,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - remote_files:read
   /files.remote.list:
     get:
@@ -463,7 +463,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - remote_files:read
   /files.remote.remove:
     post:
@@ -515,7 +515,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - remote_files:write
   /files.remote.share:
     get:
@@ -579,7 +579,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - remote_files:share
   /files.remote.update:
     post:
@@ -648,7 +648,7 @@ paths:
                   This method either only returns a brief _not OK_ response
                   or a verbose schema is not available for this method.
       security:
-        - slackAuth:
+        - V1Oauth2:
             - remote_files:write
   /files.revokePublicURL:
     post:
@@ -705,7 +705,7 @@ paths:
                   Schema for error response from files.revokePublicURL
                   method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - files:write:user
   /files.sharedPublicURL:
     post:
@@ -762,7 +762,7 @@ paths:
                   Schema for error response from files.sharedPublicURL
                   method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - files:write:user
   /files.upload:
     post:
@@ -840,5 +840,5 @@ paths:
                   type: object
                 description: Schema for error response files.upload method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - files:write:user

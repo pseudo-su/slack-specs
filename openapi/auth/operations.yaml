@@ -44,7 +44,7 @@ paths:
                   type: object
                 description: Schema for error response from auth.revoke method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - none
   /auth.test:
     get:
@@ -84,5 +84,5 @@ paths:
                   type: object
                 description: Schema for error response auth.test method
       security:
-        - slackAuth:
+        - V1Oauth2:
             - none

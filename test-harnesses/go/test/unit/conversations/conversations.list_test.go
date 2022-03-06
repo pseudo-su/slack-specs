@@ -3,6 +3,7 @@ package conversations
 import (
 	"bytes"
 	"context"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"testing"
@@ -12,49 +13,42 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/mock"
+	"github.com/stretchr/testify/require"
 )
 
 func TestListConversationsCommonSuccess(t *testing.T) {
-	mockClient := new(utils.MockClient)
-	apiClient, err := pkg.NewClientWithResponses("https://fake-url", pkg.WithHTTPClient(mockClient))
-	if err != nil {
-		panic(err)
-	}
+	httpClientMock, apiClient := utils.NewMockedClientWithResponses(t)
 
 	// setup mock
 	responseFixture := utils.LoadFixture(t, "conversations.list", "ResponseBody", "common")
-	mockClient.On("Do", mock.Anything).Return(&http.Response{
+	body := io.NopCloser(bytes.NewReader(responseFixture))
+	httpClientMock.On("Do", mock.Anything).Return(&http.Response{
 		Status: "200 OK",
 		StatusCode: 200,
 		Header: http.Header{
 			"Content-Type": []string{"application/json"},
 		},
-		Body: ioutil.NopCloser(bytes.NewReader(responseFixture)),
+		Body: body,
 	}, nil)
 
 	// make request
 	ctx := context.Background()
-	token := "fake-token"
-	params := pkg.ConversationsListParams{
-		Token: &token,
-	}
-	r, err := apiClient.ConversationsListWithResponse(ctx, &params)
+	params := pkg.ConversationsListParams{}
+	r, err := apiClient.ConversationsListWithResponse(ctx, &params, func(ctx context.Context, req *http.Request) error {
+		req.Header.Add("Authorization", "Bearer xoxb-XXXXXXXXXXXX-XXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXX")
+		return nil
+	})
 
 	// assert response
-	assert.Equal(t, nil, err)
+	require.NoError(t, err)
 	assert.NotNil(t, r.JSON200)
 	assert.Nil(t, r.JSONDefault)
 }
 func TestListConversationsAlternateSuccess(t *testing.T) {
-	mockClient := new(utils.MockClient)
-	apiClient, err := pkg.NewClientWithResponses("https://fake-url", pkg.WithHTTPClient(mockClient))
-	if err != nil {
-		panic(err)
-	}
-
+	httpClientMock, apiClient := utils.NewMockedClientWithResponses(t)
 	// setup mock
 	responseFixture := utils.LoadFixture(t, "conversations.list", "ResponseBody", "alternate")
-	mockClient.On("Do", mock.Anything).Return(&http.Response{
+	httpClientMock.On("Do", mock.Anything).Return(&http.Response{
 		Status: "200 OK",
 		StatusCode: 200,
 		Header: http.Header{
@@ -65,11 +59,11 @@ func TestListConversationsAlternateSuccess(t *testing.T) {
 
 	// make request
 	ctx := context.Background()
-	token := "fake-token"
-	params := pkg.ConversationsListParams{
-		Token: &token,
-	}
-	r, err := apiClient.ConversationsListWithResponse(ctx, &params)
+	params := pkg.ConversationsListParams{}
+	r, err := apiClient.ConversationsListWithResponse(ctx, &params, func(ctx context.Context, req *http.Request) error {
+		req.Header.Add("Authorization", "Bearer xoxb-XXXXXXXXXXXX-XXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXX")
+		return nil
+	})
 
 	// assert response
 	assert.Equal(t, nil, err)
@@ -78,15 +72,11 @@ func TestListConversationsAlternateSuccess(t *testing.T) {
 }
 
 func TestListConversationsCommonError(t *testing.T) {
-	mockClient := new(utils.MockClient)
-	apiClient, err := pkg.NewClientWithResponses("https://fake-url", pkg.WithHTTPClient(mockClient))
-	if err != nil {
-		panic(err)
-	}
+	httpClientMock, apiClient := utils.NewMockedClientWithResponses(t)
 
 	// setup mock
 	responseFixture := utils.LoadFixture(t, "conversations.list", "ErrorResponseBody", "common")
-	mockClient.On("Do", mock.Anything).Return(&http.Response{
+	httpClientMock.On("Do", mock.Anything).Return(&http.Response{
 		Status: "200 OK",
 		StatusCode: 403,
 		Header: http.Header{
@@ -97,11 +87,11 @@ func TestListConversationsCommonError(t *testing.T) {
 
 	// make request
 	ctx := context.Background()
-	token := "fake-token"
-	params := pkg.ConversationsListParams{
-		Token: &token,
-	}
-	r, err := apiClient.ConversationsListWithResponse(ctx, &params)
+	params := pkg.ConversationsListParams{}
+	r, err := apiClient.ConversationsListWithResponse(ctx, &params, func(ctx context.Context, req *http.Request) error {
+		req.Header.Add("Authorization", "Bearer xoxb-XXXXXXXXXXXX-XXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXXX")
+		return nil
+	})
 
 	// assert response
 	assert.Equal(t, nil, err)

@@ -13,9 +13,7 @@ import (
 func (suite *TestSuite) TestListConversations() {
 	t := suite.T()
 	ctx := context.Background()
-	params := pkg.ConversationsListParams{
-		Token: &suite.Context.EnvValues.APIToken,
-	}
+	params := pkg.ConversationsListParams{}
 	r, err := suite.ApiClient.ConversationsListWithResponse(ctx, &params)
 
 	// fmt.Println(s.PrettyJSON(t, r.Body))
