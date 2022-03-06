@@ -1,4 +1,4 @@
-HARNESSES := go rust
+HARNESSES := dart go kotlin rust
 TARGETS := deps.install deps.update deps.upgrade verify verify.fix generate test test.unit test.smoke test.report test.unit.report test.smoke.report
 
 define make-target
