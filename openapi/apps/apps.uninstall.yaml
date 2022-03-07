@@ -1,0 +1,50 @@
+paths:
+  /apps.uninstall:
+    get:
+      tags:
+        - apps
+      description: Uninstalls your app from a workspace.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/apps.uninstall
+      operationId: apps_uninstall
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `none`"
+          schema:
+            type: string
+        - name: client_id
+          in: query
+          description: Issued when you created your application.
+          schema:
+            type: string
+        - name: client_secret
+          in: query
+          description: Issued when you created your application.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: apps.uninstall schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from apps.uninstall method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: apps.uninstall error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from apps.uninstall method
+      security:
+        - V1Oauth2:
+            - none

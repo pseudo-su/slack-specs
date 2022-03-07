@@ -1,0 +1,60 @@
+paths:
+  /apps.permissions.resources.list:
+    get:
+      tags:
+        - apps.permissions.resources
+        - apps
+      description: Returns list of resource grants this app has on a team.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/apps.permissions.resources.list
+      operationId: apps_permissions_resources_list
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `none`"
+          required: true
+          schema:
+            type: string
+        - name: cursor
+          in: query
+          description:
+            Paginate through collections of data by setting the `cursor`
+            parameter to a `next_cursor` attribute returned by a previous request's
+            `response_metadata`. Default value fetches the first "page" of the collection.
+            See [pagination](/docs/pagination) for more detail.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: The maximum number of items to return.
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Typical successful paginated response
+          content:
+            application/json:
+              schema:
+                title: apps.permissions.resources.list success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for successful response apps.permissions.resources.list
+                  method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: apps.permissions.resources.list error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for error response from apps.permissions.resources.list
+                  method
+      security:
+        - V1Oauth2:
+            - none

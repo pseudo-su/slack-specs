@@ -1,2 +1,14 @@
 includes:
-  - operations.yaml
+  - admin.apps.approve.yaml
+  - admin.apps.approved.list.yaml
+  - admin.apps.requests.list.yaml
+  - admin.apps.restrict.yaml
+  - admin.apps.restricted.list.yaml
+  - apps.event.authorizations.list.yaml
+  - apps.permissions.info.yaml
+  - apps.permissions.request.yaml
+  - apps.permissions.resources.list.yaml
+  - apps.permissions.scopes.list.yaml
+  - apps.permissions.users.list.yaml
+  - apps.permissions.users.request.yaml
+  - apps.uninstall.yaml

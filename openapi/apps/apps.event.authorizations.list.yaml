@@ -1,0 +1,61 @@
+paths:
+  /apps.event.authorizations.list:
+    get:
+      tags:
+        - apps.event.authorizations
+        - apps
+      description:
+        Get a list of authorizations for the given event context. Each
+        authorization represents an app installation that the event is visible to.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/apps.event.authorizations.list
+      operationId: apps_event_authorizations_list
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `authorizations:read`"
+          required: true
+          schema:
+            type: string
+        - name: event_context
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: cursor
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+        - V1Oauth2:
+            - authorizations:read

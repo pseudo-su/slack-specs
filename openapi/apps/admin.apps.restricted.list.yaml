@@ -1,0 +1,68 @@
+paths:
+  /admin.apps.restricted.list:
+    get:
+      tags:
+        - admin.apps.restricted
+        - admin
+      description: List restricted apps for an org or workspace.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.apps.restricted.list
+      operationId: admin_apps_restricted_list
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `admin.apps:read`"
+          required: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description:
+            The maximum number of items to return. Must be between 1 - 1000
+            both inclusive.
+          schema:
+            type: integer
+        - name: cursor
+          in: query
+          description:
+            Set `cursor` to `next_cursor` returned by the previous call to
+            list items in the next page
+          schema:
+            type: string
+        - name: team_id
+          in: query
+          schema:
+            type: string
+        - name: enterprise_id
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+        - V1Oauth2:
+            - admin.apps:read

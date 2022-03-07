@@ -1,2 +1,3 @@
 includes:
-  - operations.yaml
+  - auth.revoke.yaml
+  - auth.test.yaml

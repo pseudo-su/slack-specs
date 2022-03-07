@@ -1,0 +1,58 @@
+paths:
+  /apps.permissions.request:
+    get:
+      tags:
+        - apps.permissions
+        - apps
+      description: Allows an app to request additional scopes
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/apps.permissions.request
+      operationId: apps_permissions_request
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `none`"
+          required: true
+          schema:
+            type: string
+        - name: scopes
+          in: query
+          description: A comma separated list of scopes to request for
+          required: true
+          schema:
+            type: string
+        - name: trigger_id
+          in: query
+          description: Token used to trigger the permissions API
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Standard success response when used with a user token
+          content:
+            application/json:
+              schema:
+                title: apps.permissions.request schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for successful response from apps.permissions.request
+                  method
+        default:
+          description: Standard failure response when trigger_id is invalid
+          content:
+            application/json:
+              schema:
+                title: apps.permissions.request error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for error response from apps.permissions.request
+                  method
+      security:
+        - V1Oauth2:
+            - none

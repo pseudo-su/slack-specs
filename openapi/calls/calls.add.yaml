@@ -1,0 +1,136 @@
+paths:
+  /calls.add:
+    post:
+      tags:
+        - calls
+      description: Registers a new Call.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/calls.add
+      operationId: calls_add
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `calls:write`"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - external_unique_id
+                - join_url
+              properties:
+                external_unique_id:
+                  type: string
+                  description:
+                    An ID supplied by the 3rd-party Call provider. It must
+                    be unique across all Calls from that service.
+                external_display_id:
+                  type: string
+                  description:
+                    An optional, human-readable ID supplied by the 3rd-party
+                    Call provider. If supplied, this ID will be displayed in the Call
+                    object.
+                join_url:
+                  type: string
+                  description: The URL required for a client to join the Call.
+                desktop_app_join_url:
+                  type: string
+                  description:
+                    When supplied, available Slack clients will attempt
+                    to directly launch the 3rd-party Call with this URL.
+                date_start:
+                  type: integer
+                  description: Call start time in UTC UNIX timestamp format
+                  format: int32
+                title:
+                  type: string
+                  description: The name of the Call.
+                created_by:
+                  type: string
+                  description:
+                    The valid Slack user ID of the user who created this
+                    Call. When this method is called with a user token, the `created_by`
+                    field is optional and defaults to the authed user of the token.
+                    Otherwise, the field is required.
+                users:
+                  type: string
+                  description:
+                    The list of users to register as participants in the
+                    Call. [Read more on how to specify users here](/apis/calls#users).
+          application/json:
+            schema:
+              required:
+                - external_unique_id
+                - join_url
+              properties:
+                external_unique_id:
+                  type: string
+                  description:
+                    An ID supplied by the 3rd-party Call provider. It must
+                    be unique across all Calls from that service.
+                external_display_id:
+                  type: string
+                  description:
+                    An optional, human-readable ID supplied by the 3rd-party
+                    Call provider. If supplied, this ID will be displayed in the Call
+                    object.
+                join_url:
+                  type: string
+                  description: The URL required for a client to join the Call.
+                desktop_app_join_url:
+                  type: string
+                  description:
+                    When supplied, available Slack clients will attempt
+                    to directly launch the 3rd-party Call with this URL.
+                date_start:
+                  type: integer
+                  description: Call start time in UTC UNIX timestamp format
+                  format: int32
+                title:
+                  type: string
+                  description: The name of the Call.
+                created_by:
+                  type: string
+                  description:
+                    The valid Slack user ID of the user who created this
+                    Call. When this method is called with a user token, the `created_by`
+                    field is optional and defaults to the authed user of the token.
+                    Otherwise, the field is required.
+                users:
+                  type: string
+                  description:
+                    The list of users to register as participants in the
+                    Call. [Read more on how to specify users here](/apis/calls#users).
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+        - V1Oauth2:
+            - calls:write

@@ -1,0 +1,66 @@
+paths:
+  /apps.permissions.users.request:
+    get:
+      tags:
+        - apps.permissions.users
+        - apps
+      description:
+        Enables an app to trigger a permissions modal to grant an app access
+        to a user access scope.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/apps.permissions.users.request
+      operationId: apps_permissions_users_request
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `none`"
+          required: true
+          schema:
+            type: string
+        - name: scopes
+          in: query
+          description: A comma separated list of user scopes to request for
+          required: true
+          schema:
+            type: string
+        - name: trigger_id
+          in: query
+          description: Token used to trigger the request
+          required: true
+          schema:
+            type: string
+        - name: user
+          in: query
+          description: The user this scope is being requested for
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Standard success response when used with a user token
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Standard failure response when trigger_id is invalid
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+        - V1Oauth2:
+            - none

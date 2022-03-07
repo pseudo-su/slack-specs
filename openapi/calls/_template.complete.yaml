@@ -1,2 +1,7 @@
 includes:
-  - operations.yaml
+  - calls.add.yaml
+  - calls.end.yaml
+  - calls.info.yaml
+  - calls.participants.add.yaml
+  - calls.participants.remove.yaml
+  - calls.update.yaml

@@ -1,0 +1,45 @@
+paths:
+  /apps.permissions.info:
+    get:
+      tags:
+        - apps.permissions
+        - apps
+      description: Returns list of permissions this app has on a team.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/apps.permissions.info
+      operationId: apps_permissions_info
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `none`"
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Standard success response when used with a user token
+          content:
+            application/json:
+              schema:
+                title: apps.permissions.info schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for successful response from apps.permissions.info
+                  method
+        default:
+          description: Standard failure response when used with an invalid token
+          content:
+            application/json:
+              schema:
+                title: apps.permissions.info error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for error response from apps.permissions.info
+                  method
+      security:
+        - V1Oauth2:
+            - none
