@@ -36,8 +36,8 @@ test.report: test.unit.report test.smoke.report test.report.lift
 
 ## Lift reports up into the project root
 test.report.lift:
-	mkdir -p ../../reports/rust
-	cp -r ./reports/ ../../reports/rust
+	mkdir -p ../../reports/dart
+	cp -r ./reports/ ../../reports/dart
 .PHONY: test.report.lift
 
 ## Run unit tests

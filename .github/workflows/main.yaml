@@ -1,44 +1,81 @@
 on:
   push:
     branches:
-      - 'main'
+      - "main"
 
 name: main
 jobs:
   build-and-verify:
-    name: Build, verify and unit test
+    name: Build and verify
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/setup-go@v3
-      with:
-        go-version: 1.17.x
-    - uses: actions/checkout@v3
-    - name: Install project dependencies
-      shell: bash
-      run: make deps.install
+      - uses: actions/setup-go@v3
+        with:
+          go-version: 1.17.x
+      - uses: actions/checkout@v3
+      - name: Install project dependencies
+        shell: bash
+        run: make deps.install
 
-    # Ensure generated code is checked-in to git
-    - name: Generate specs
-      shell: bash
-      run: make generate
-    - name: Ensure there's no uncommited git changes after generating code
-      shell: bash
-      run: |
-        if [[ `git status --porcelain` ]]; then
-          echo "ERROR: uncommited codegen changes detected!";
-          git status --porcelain;
-          exit 1;
-        else
-          echo "No uncommited changes detected";
-        fi
+      # Ensure generated code is checked-in to git
+      - name: Generate specs
+        shell: bash
+        run: make generate
+      - name: Ensure there's no uncommited git changes after generating code
+        shell: bash
+        run: |
+          if [[ `git status --porcelain` ]]; then
+            echo "ERROR: uncommited codegen changes detected!";
+            git status --porcelain;
+            exit 1;
+          else
+            echo "No uncommited changes detected";
+          fi
 
-    # Verify
-    - name: Verify specs and code
-      shell: bash
-      run: |
-        make verify
+      # Verify
+      - name: Verify specs and code
+        shell: bash
+        run: |
+          make verify
 
-    - name: Run unit tests
-      shell: bash
-      run: |
-        make test.unit
+  unit-test:
+    name: Run unit tests
+    runs-on: ubuntu-latest
+    needs:
+      - build-and-verify
+    strategy:
+      matrix:
+        test-harness: [go, rust, kotlin, dart]
+    steps:
+      - uses: actions/setup-go@v3
+        with:
+          go-version: 1.17.x
+      - uses: actions/checkout@v3
+      - name: Run unit tests
+        shell: bash
+        run: |
+          cd "test-harnesses/${{ matrix.test-harness }}";
+          make deps.install;
+          make test.unit.report;
+
+  smoke-test:
+    name: Run smoke tests
+    runs-on: ubuntu-latest
+    needs:
+      - unit-test
+    strategy:
+      matrix:
+        test-harness: [go, rust, kotlin, dart]
+    steps:
+      - uses: actions/setup-go@v3
+        with:
+          go-version: 1.17.x
+      - uses: actions/checkout@v3
+      - name: Run smoke tests
+        shell: bash
+        env:
+          SLACK_OAUTH_ACCESS_TOKEN: ${{ secrets.SLACK_OAUTH_ACCESS_TOKEN }}
+        run: |
+          cd "test-harnesses/${{ matrix.test-harness }}";
+          make deps.install;
+          make test.smoke.report;
