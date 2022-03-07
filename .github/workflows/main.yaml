@@ -5,10 +5,40 @@ on:
 
 name: main
 jobs:
-  test:
+  build-and-verify:
+    name: Build, verify and unit test
     runs-on: ubuntu-latest
     steps:
     - uses: actions/setup-go@v3
       with:
         go-version: 1.17.x
     - uses: actions/checkout@v3
+    - name: Install project dependencies
+      shell: bash
+      run: make deps.install
+
+    # Ensure generated code is checked-in to git
+    - name: Generate specs
+      shell: bash
+      run: make generate
+    - name: Ensure there's no uncommited git changes after generating code
+      shell: bash
+      run: |
+        if [[ `git status --porcelain` ]]; then
+          echo "ERROR: uncommited codegen changes detected!";
+          git status --porcelain;
+          exit 1;
+        else
+          echo "No uncommited changes detected";
+        fi
+
+    # Verify
+    - name: Verify specs and code
+      shell: bash
+      run: |
+        make verify
+
+    - name: Run unit tests
+      shell: bash
+      run: |
+        make test.unit
