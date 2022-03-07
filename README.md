@@ -61,8 +61,14 @@ make generate
 # Verify OpenAPI specs and test harnesses client librarires using static analysis tools
 make verify
 
-# Test OpenAPI specs and test harnesses client librarires and generate reports
-make test
+# Run the unit tests that verify OpenAPI specs & generated code using hardcoded fixtures
+make test.unit
+
+# NOTE: before running smoke tests you will need to configure your `.env.local` config
+# file with appropriate values.
+
+# Run the unit tests that verify OpenAPI specs & generated code using a real slack workspace
+make test.smoke
 ```
 
 For more details and before opening pull requests please read the full [./CONTRIBUTING.md](CONTRIBUTING.md)
