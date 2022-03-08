@@ -1,2 +1,6 @@
 includes:
-  - operations.yaml
+  - reminders.add.yaml
+  - reminders.complete.yaml
+  - reminders.delete.yaml
+  - reminders.info.yaml
+  - reminders.list.yaml

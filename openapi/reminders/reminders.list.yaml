@@ -1,0 +1,40 @@
+paths:
+  /reminders.list:
+    get:
+      tags:
+        - reminders
+      description: Lists all reminders created by or for a given user.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/reminders.list
+      operationId: reminders_list
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `reminders:read`"
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: reminders.list schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from reminders.list method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: reminders.list error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from reminders.list method
+      security:
+        - V1Oauth2:
+            - reminders:read

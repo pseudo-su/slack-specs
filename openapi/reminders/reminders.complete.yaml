@@ -1,0 +1,56 @@
+paths:
+  /reminders.complete:
+    post:
+      tags:
+        - reminders
+      description: Marks a reminder as complete.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/reminders.complete
+      operationId: reminders_complete
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `reminders:write`"
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                reminder:
+                  type: string
+                  description: The ID of the reminder to be marked as complete
+          application/json:
+            schema:
+              properties:
+                reminder:
+                  type: string
+                  description: The ID of the reminder to be marked as complete
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: reminders.complete schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for successful response from reminders.complete
+                  method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: reminders.complete error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from reminders.complete method
+      security:
+        - V1Oauth2:
+            - reminders:write

@@ -1,0 +1,56 @@
+paths:
+  /reminders.delete:
+    post:
+      tags:
+        - reminders
+      description: Deletes a reminder.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/reminders.delete
+      operationId: reminders_delete
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `reminders:write`"
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                reminder:
+                  type: string
+                  description: The ID of the reminder
+          application/json:
+            schema:
+              properties:
+                reminder:
+                  type: string
+                  description: The ID of the reminder
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: reminders.delete schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for successful response from reminders.delete
+                  method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: reminders.delete error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from reminders.delete method
+      security:
+        - V1Oauth2:
+            - reminders:write

@@ -1,0 +1,45 @@
+paths:
+  /reminders.info:
+    get:
+      tags:
+        - reminders
+      description: Gets information about a reminder.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/reminders.info
+      operationId: reminders_info
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `reminders:read`"
+          schema:
+            type: string
+        - name: reminder
+          in: query
+          description: The ID of the reminder
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: reminders.info schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from reminders.info method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: reminders.info error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from reminders.info method
+      security:
+        - V1Oauth2:
+            - reminders:read

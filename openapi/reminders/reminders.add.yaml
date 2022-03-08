@@ -1,0 +1,86 @@
+paths:
+  /reminders.add:
+    post:
+      tags:
+        - reminders
+      description: Creates a reminder.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/reminders.add
+      operationId: reminders_add
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `reminders:write`"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - text
+                - time
+              properties:
+                text:
+                  type: string
+                  description: The content of the reminder
+                time:
+                  type: string
+                  description:
+                    'When this reminder should happen: the Unix timestamp
+                    (up to five years from now), the number of seconds until the reminder
+                    (if within 24 hours), or a natural language description (Ex. "in
+                    15 minutes," or "every Thursday")'
+                user:
+                  type: string
+                  description:
+                    The user who will receive the reminder. If no user
+                    is specified, the reminder will go to user who created it.
+          application/json:
+            schema:
+              required:
+                - text
+                - time
+              properties:
+                text:
+                  type: string
+                  description: The content of the reminder
+                time:
+                  type: string
+                  description:
+                    'When this reminder should happen: the Unix timestamp
+                    (up to five years from now), the number of seconds until the reminder
+                    (if within 24 hours), or a natural language description (Ex. "in
+                    15 minutes," or "every Thursday")'
+                user:
+                  type: string
+                  description:
+                    The user who will receive the reminder. If no user
+                    is specified, the reminder will go to user who created it.
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: reminders.add schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from reminders.add method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: reminders.add error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from reminders.add method
+      security:
+        - V1Oauth2:
+            - reminders:write
