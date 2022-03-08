@@ -1,0 +1,98 @@
+paths:
+  /usergroups.create:
+    post:
+      tags:
+        - usergroups
+      description: Create a User Group
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/usergroups.create
+      operationId: usergroups_create
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `usergroups:write`"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - name
+              properties:
+                channels:
+                  type: string
+                  description:
+                    A comma separated string of encoded channel IDs for
+                    which the User Group uses as a default.
+                description:
+                  type: string
+                  description: A short description of the User Group.
+                handle:
+                  type: string
+                  description:
+                    A mention handle. Must be unique among channels, users
+                    and User Groups.
+                include_count:
+                  type: boolean
+                  description: Include the number of users in each User Group.
+                name:
+                  type: string
+                  description:
+                    A name for the User Group. Must be unique among User
+                    Groups.
+          application/json:
+            schema:
+              required:
+                - name
+              properties:
+                channels:
+                  type: string
+                  description:
+                    A comma separated string of encoded channel IDs for
+                    which the User Group uses as a default.
+                description:
+                  type: string
+                  description: A short description of the User Group.
+                handle:
+                  type: string
+                  description:
+                    A mention handle. Must be unique among channels, users
+                    and User Groups.
+                include_count:
+                  type: boolean
+                  description: Include the number of users in each User Group.
+                name:
+                  type: string
+                  description:
+                    A name for the User Group. Must be unique among User
+                    Groups.
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: usergroups.create schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for successful response from usergroups.create
+                  method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: usergroups.create error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from usergroups.create method
+      security:
+        - V1Oauth2:
+            - usergroups:write

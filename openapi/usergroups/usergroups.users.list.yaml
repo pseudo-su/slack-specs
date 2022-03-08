@@ -1,0 +1,57 @@
+paths:
+  /usergroups.users.list:
+    get:
+      tags:
+        - usergroups.users
+        - usergroups
+      description: List all users in a User Group
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/usergroups.users.list
+      operationId: usergroups_users_list
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `usergroups:read`"
+          required: true
+          schema:
+            type: string
+        - name: include_disabled
+          in: query
+          description: Allow results that involve disabled User Groups.
+          schema:
+            type: boolean
+        - name: usergroup
+          in: query
+          description: The encoded ID of the User Group to update.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Standard success response when used with a user token
+          content:
+            application/json:
+              schema:
+                title: usergroups.users.list schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for successful response from usergroups.users.list
+                  method
+        default:
+          description: Standard failure response when used with an invalid token
+          content:
+            application/json:
+              schema:
+                title: usergroups.users.list error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for error response from usergroups.users.list
+                  method
+      security:
+        - V1Oauth2:
+            - usergroups:read

@@ -1,0 +1,83 @@
+paths:
+  /usergroups.users.update:
+    post:
+      tags:
+        - usergroups.users
+        - usergroups
+      description: Update the list of users for a User Group
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/usergroups.users.update
+      operationId: usergroups_users_update
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `usergroups:write`"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - usergroup
+                - users
+              properties:
+                include_count:
+                  type: boolean
+                  description: Include the number of users in the User Group.
+                usergroup:
+                  type: string
+                  description: The encoded ID of the User Group to update.
+                users:
+                  type: string
+                  description:
+                    A comma separated string of encoded user IDs that represent
+                    the entire list of users for the User Group.
+          application/json:
+            schema:
+              required:
+                - usergroup
+                - users
+              properties:
+                include_count:
+                  type: boolean
+                  description: Include the number of users in the User Group.
+                usergroup:
+                  type: string
+                  description: The encoded ID of the User Group to update.
+                users:
+                  type: string
+                  description:
+                    A comma separated string of encoded user IDs that represent
+                    the entire list of users for the User Group.
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: usergroups.users.update schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for successful response from usergroups.users.update
+                  method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: usergroups.users.update error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for error response from usergroups.users.update
+                  method
+      security:
+        - V1Oauth2:
+            - usergroups:write

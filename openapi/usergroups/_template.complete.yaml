@@ -1,2 +1,13 @@
 includes:
-  - operations.yaml
+  - admin.usergroups.addChannels.yaml
+  - admin.usergroups.addTeams.yaml
+  - admin.usergroups.listChannels.yaml
+  - admin.usergroups.removeChannels.yaml
+
+  - usergroups.create.yaml
+  - usergroups.disable.yaml
+  - usergroups.enable.yaml
+  - usergroups.list.yaml
+  - usergroups.update.yaml
+  - usergroups.users.list.yaml
+  - usergroups.users.update.yaml

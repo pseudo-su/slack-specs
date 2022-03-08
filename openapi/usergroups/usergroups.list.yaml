@@ -1,0 +1,56 @@
+paths:
+  /usergroups.list:
+    get:
+      tags:
+        - usergroups
+      description: List all User Groups for a team
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/usergroups.list
+      operationId: usergroups_list
+      parameters:
+        - name: include_users
+          in: query
+          description: Include the list of users for each User Group.
+          schema:
+            type: boolean
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `usergroups:read`"
+          required: true
+          schema:
+            type: string
+        - name: include_count
+          in: query
+          description: Include the number of users in each User Group.
+          schema:
+            type: boolean
+        - name: include_disabled
+          in: query
+          description: Include disabled User Groups.
+          schema:
+            type: boolean
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: usergroups.list schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from usergroups.list method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: usergroups.list error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from usergroups.list method
+      security:
+        - V1Oauth2:
+            - usergroups:read

@@ -1,0 +1,68 @@
+paths:
+  /usergroups.enable:
+    post:
+      tags:
+        - usergroups
+      description: Enable a User Group
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/usergroups.enable
+      operationId: usergroups_enable
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `usergroups:write`"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - usergroup
+              properties:
+                include_count:
+                  type: boolean
+                  description: Include the number of users in the User Group.
+                usergroup:
+                  type: string
+                  description: The encoded ID of the User Group to enable.
+          application/json:
+            schema:
+              required:
+                - usergroup
+              properties:
+                include_count:
+                  type: boolean
+                  description: Include the number of users in the User Group.
+                usergroup:
+                  type: string
+                  description: The encoded ID of the User Group to enable.
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: usergroups.enable schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for successful response from usergroups.enable
+                  method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: usergroups.enable error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from usergroups.enable method
+      security:
+        - V1Oauth2:
+            - usergroups:write

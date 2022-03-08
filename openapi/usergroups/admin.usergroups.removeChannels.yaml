@@ -1,0 +1,77 @@
+paths:
+  /admin.usergroups.removeChannels:
+    post:
+      tags:
+        - admin.usergroups
+        - admin
+      description:
+        Remove one or more default channels from an org-level IDP group
+        (user group).
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.usergroups.removeChannels
+      operationId: admin_usergroups_removeChannels
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `admin.usergroups:write`"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - channel_ids
+                - usergroup_id
+              properties:
+                usergroup_id:
+                  type: string
+                  description: ID of the IDP Group
+                channel_ids:
+                  type: string
+                  description: Comma-separated string of channel IDs
+          application/json:
+            schema:
+              required:
+                - channel_ids
+                - usergroup_id
+              properties:
+                usergroup_id:
+                  type: string
+                  description: ID of the IDP Group
+                channel_ids:
+                  type: string
+                  description: Comma-separated string of channel IDs
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description:
+            Typical error response if the token provided is not associated
+            with an Org Admin or Owner
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+        - V1Oauth2:
+            - admin.usergroups:write

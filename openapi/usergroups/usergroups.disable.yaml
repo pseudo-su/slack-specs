@@ -1,0 +1,68 @@
+paths:
+  /usergroups.disable:
+    post:
+      tags:
+        - usergroups
+      description: Disable an existing User Group
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/usergroups.disable
+      operationId: usergroups_disable
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `usergroups:write`"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - usergroup
+              properties:
+                include_count:
+                  type: boolean
+                  description: Include the number of users in the User Group.
+                usergroup:
+                  type: string
+                  description: The encoded ID of the User Group to disable.
+          application/json:
+            schema:
+              required:
+                - usergroup
+              properties:
+                include_count:
+                  type: boolean
+                  description: Include the number of users in the User Group.
+                usergroup:
+                  type: string
+                  description: The encoded ID of the User Group to disable.
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: usergroups.disable schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for successful response from usergroups.disable
+                  method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: usergroups.disable error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from usergroups.disable method
+      security:
+        - V1Oauth2:
+            - usergroups:write
