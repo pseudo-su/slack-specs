@@ -1,0 +1,59 @@
+paths:
+  /workflows.stepFailed:
+    get:
+      tags:
+        - workflows
+      description: Indicate that an app's step in a workflow failed to execute.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/workflows.stepFailed
+      operationId: workflows_stepFailed
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `workflow.steps:execute`"
+          required: true
+          schema:
+            type: string
+        - name: workflow_step_execute_id
+          in: query
+          description: Context identifier that maps to the correct workflow step execution.
+          required: true
+          schema:
+            type: string
+        - name: error
+          in: query
+          description:
+            A JSON-based object with a `message` property that should contain
+            a human readable error message.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+        - V1Oauth2:
+            - workflow.steps:execute

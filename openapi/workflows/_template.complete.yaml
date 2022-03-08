@@ -1,2 +1,4 @@
 includes:
-  - operations.yaml
+  - workflows.stepCompleted.yaml
+  - workflows.stepFailed.yaml
+  - workflows.updateStep.yaml

@@ -1,0 +1,84 @@
+paths:
+  /workflows.updateStep:
+    get:
+      tags:
+        - workflows
+      description: Update the configuration for a workflow extension step.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/workflows.updateStep
+      operationId: workflows_updateStep
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `workflow.steps:execute`"
+          required: true
+          schema:
+            type: string
+        - name: workflow_step_edit_id
+          in: query
+          description:
+            A context identifier provided with `view_submission` payloads
+            used to call back to `workflows.updateStep`.
+          required: true
+          schema:
+            type: string
+        - name: inputs
+          in: query
+          description:
+            "A JSON key-value map of inputs required from a user during configuration.
+            This is the data your app expects to receive when the workflow step starts.
+            **Please note**: the embedded variable format is set and replaced by the
+            workflow system. You cannot create custom variables that will be replaced
+            at runtime. [Read more about variables in workflow steps here](/workflows/steps#variables)."
+          schema:
+            type: string
+        - name: outputs
+          in: query
+          description:
+            An JSON array of output objects used during step execution. This
+            is the data your app agrees to provide when your workflow step was executed.
+          schema:
+            type: string
+        - name: step_name
+          in: query
+          description:
+            An optional field that can be used to override the step name
+            that is shown in the Workflow Builder.
+          schema:
+            type: string
+        - name: step_image_url
+          in: query
+          description:
+            An optional field that can be used to override app image that
+            is shown in the Workflow Builder.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+        - V1Oauth2:
+            - workflow.steps:execute
