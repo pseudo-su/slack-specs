@@ -1,7 +1,5 @@
 includes: []
-  # - api.test.yaml
-  # - bots.info.yaml
-  # - dialog.open.yaml
-  # - migration.exchange.yaml
-  # - rtm.connect.yaml
-  # - search.messages.yaml
+  # - reactions.add.yaml
+  # - reactions.get.yaml
+  # - reactions.list.yaml
+  # - reactions.remove.yaml

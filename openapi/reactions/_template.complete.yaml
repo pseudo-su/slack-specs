@@ -1,2 +1,5 @@
 includes:
-  - operations.yaml
+  - reactions.add.yaml
+  - reactions.get.yaml
+  - reactions.list.yaml
+  - reactions.remove.yaml

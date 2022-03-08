@@ -1,0 +1,90 @@
+paths:
+  /reactions.remove:
+    post:
+      tags:
+        - reactions
+      description: Removes a reaction from an item.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/reactions.remove
+      operationId: reactions_remove
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `reactions:write`"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  description: Reaction (emoji) name.
+                file:
+                  type: string
+                  description: File to remove reaction from.
+                file_comment:
+                  type: string
+                  description: File comment to remove reaction from.
+                channel:
+                  type: string
+                  description:
+                    Channel where the message to remove reaction from was
+                    posted.
+                timestamp:
+                  type: string
+                  description: Timestamp of the message to remove reaction from.
+          application/json:
+            schema:
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  description: Reaction (emoji) name.
+                file:
+                  type: string
+                  description: File to remove reaction from.
+                file_comment:
+                  type: string
+                  description: File comment to remove reaction from.
+                channel:
+                  type: string
+                  description:
+                    Channel where the message to remove reaction from was
+                    posted.
+                timestamp:
+                  type: string
+                  description: Timestamp of the message to remove reaction from.
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: reactions.remove schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for successful response from reactions.remove
+                  method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: reactions.remove error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from reactions.remove method
+      security:
+        - V1Oauth2:
+            - reactions:write

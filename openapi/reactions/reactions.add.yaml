@@ -1,0 +1,76 @@
+paths:
+  /reactions.add:
+    post:
+      tags:
+        - reactions
+      description: Adds a reaction to an item.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/reactions.add
+      operationId: reactions_add
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `reactions:write`"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - channel
+                - name
+                - timestamp
+              properties:
+                channel:
+                  type: string
+                  description: Channel where the message to add reaction to was posted.
+                name:
+                  type: string
+                  description: Reaction (emoji) name.
+                timestamp:
+                  type: string
+                  description: Timestamp of the message to add reaction to.
+          application/json:
+            schema:
+              required:
+                - channel
+                - name
+                - timestamp
+              properties:
+                channel:
+                  type: string
+                  description: Channel where the message to add reaction to was posted.
+                name:
+                  type: string
+                  description: Reaction (emoji) name.
+                timestamp:
+                  type: string
+                  description: Timestamp of the message to add reaction to.
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: reactions.add schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from reactions.add method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: reactions.add error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from reactions.add method
+      security:
+        - V1Oauth2:
+            - reactions:write
