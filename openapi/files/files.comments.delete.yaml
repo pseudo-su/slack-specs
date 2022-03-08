@@ -1,0 +1,63 @@
+paths:
+  /files.comments.delete:
+    post:
+      tags:
+        - files.comments
+        - files
+      description: Deletes an existing comment on a file.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/files.comments.delete
+      operationId: files_comments_delete
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `files:write:user`"
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                file:
+                  type: string
+                  description: File to delete a comment from.
+                id:
+                  type: string
+                  description: The comment to delete.
+          application/json:
+            schema:
+              properties:
+                file:
+                  type: string
+                  description: File to delete a comment from.
+                id:
+                  type: string
+                  description: The comment to delete.
+      responses:
+        "200":
+          description: Standard success response is very simple
+          content:
+            application/json:
+              schema:
+                title: files.comments.delete schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for successful response files.comments.delete
+                  method
+        default:
+          description: Standard failure response when used with an invalid token
+          content:
+            application/json:
+              schema:
+                title: files.comments.delete error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response files.comments.delete method
+      security:
+        - V1Oauth2:
+            - files:write:user

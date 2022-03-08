@@ -1,0 +1,65 @@
+paths:
+  /files.remote.share:
+    get:
+      tags:
+        - files.remote
+        - files
+      description: Share a remote file into a channel.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/files.remote.share
+      operationId: files_remote_share
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `remote_files:share`"
+          schema:
+            type: string
+        - name: file
+          in: query
+          description:
+            Specify a file registered with Slack by providing its ID. Either
+            this field or `external_id` or both are required.
+          schema:
+            type: string
+        - name: external_id
+          in: query
+          description:
+            The globally unique identifier (GUID) for the file, as set by
+            the app registering the file with Slack.  Either this field or `file` or
+            both are required.
+          schema:
+            type: string
+        - name: channels
+          in: query
+          description: Comma-separated list of channel IDs where the file will be shared.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+        - V1Oauth2:
+            - remote_files:share

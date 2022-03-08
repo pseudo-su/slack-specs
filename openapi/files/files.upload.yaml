@@ -1,0 +1,79 @@
+paths:
+  /files.upload:
+    post:
+      tags:
+        - files
+      description: Uploads or creates a file.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/files.upload
+      operationId: files_upload
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                token:
+                  type: string
+                  description: "Authentication token. Requires scope: `files:write:user`"
+                file:
+                  type: string
+                  description:
+                    File contents via `multipart/form-data`. If omitting
+                    this parameter, you must submit `content`.
+                content:
+                  type: string
+                  description:
+                    File contents via a POST variable. If omitting this
+                    parameter, you must provide a `file`.
+                filetype:
+                  type: string
+                  description: A [file type](/types/file#file_types) identifier.
+                filename:
+                  type: string
+                  description: Filename of file.
+                title:
+                  type: string
+                  description: Title of file.
+                initial_comment:
+                  type: string
+                  description:
+                    The message text introducing the file in specified
+                    `channels`.
+                channels:
+                  type: string
+                  description:
+                    Comma-separated list of channel names or IDs where
+                    the file will be shared.
+                thread_ts:
+                  type: number
+                  description:
+                    Provide another message's `ts` value to upload this
+                    file as a reply. Never use a reply's `ts` value; use its parent
+                    instead.
+      responses:
+        "200":
+          description:
+            Success response after uploading a file to a channel with an
+            initial message
+          content:
+            application/json:
+              schema:
+                title: files.upload schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response files.upload method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: files.upload error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response files.upload method
+      security:
+        - V1Oauth2:
+            - files:write:user

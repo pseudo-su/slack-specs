@@ -1,0 +1,76 @@
+paths:
+  /files.remote.list:
+    get:
+      tags:
+        - files.remote
+        - files
+      description: Retrieve information about a remote file added to Slack
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/files.remote.list
+      operationId: files_remote_list
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `remote_files:read`"
+          schema:
+            type: string
+        - name: channel
+          in: query
+          description:
+            Filter files appearing in a specific channel, indicated by its
+            ID.
+          schema:
+            type: string
+        - name: ts_from
+          in: query
+          description: Filter files created after this timestamp (inclusive).
+          schema:
+            type: number
+        - name: ts_to
+          in: query
+          description: Filter files created before this timestamp (inclusive).
+          schema:
+            type: number
+        - name: limit
+          in: query
+          description: The maximum number of items to return.
+          schema:
+            type: integer
+        - name: cursor
+          in: query
+          description:
+            Paginate through collections of data by setting the `cursor`
+            parameter to a `next_cursor` attribute returned by a previous request's
+            `response_metadata`. Default value fetches the first "page" of the collection.
+            See [pagination](/docs/pagination) for more detail.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+        - V1Oauth2:
+            - remote_files:read

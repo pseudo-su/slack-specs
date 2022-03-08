@@ -1,0 +1,54 @@
+paths:
+  /files.delete:
+    post:
+      tags:
+        - files
+      description: Deletes a file.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/files.delete
+      operationId: files_delete
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `files:write:user`"
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                file:
+                  type: string
+                  description: ID of file to delete.
+          application/json:
+            schema:
+              properties:
+                file:
+                  type: string
+                  description: ID of file to delete.
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: files.delete schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response files.delete method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: files.delete error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response files.delete method
+      security:
+        - V1Oauth2:
+            - files:write:user

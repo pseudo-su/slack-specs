@@ -1,0 +1,85 @@
+paths:
+  /files.list:
+    get:
+      tags:
+        - files
+      description: List for a team, in a channel, or from a user with applied filters.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/files.list
+      operationId: files_list
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `files:read`"
+          schema:
+            type: string
+        - name: user
+          in: query
+          description: Filter files created by a single user.
+          schema:
+            type: string
+        - name: channel
+          in: query
+          description:
+            Filter files appearing in a specific channel, indicated by its
+            ID.
+          schema:
+            type: string
+        - name: ts_from
+          in: query
+          description: Filter files created after this timestamp (inclusive).
+          schema:
+            type: number
+        - name: ts_to
+          in: query
+          description: Filter files created before this timestamp (inclusive).
+          schema:
+            type: number
+        - name: types
+          in: query
+          description:
+            Filter files by type ([see below](#file_types)). You can pass
+            multiple values in the types argument, like `types=spaces,snippets`.The
+            default value is `all`, which does not filter the list.
+          schema:
+            type: string
+        - name: count
+          in: query
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: string
+        - name: show_files_hidden_by_limit
+          in: query
+          description:
+            Show truncated file info for files hidden due to being too old,
+            and the team who owns the file being over the file limit.
+          schema:
+            type: boolean
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: files.list schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from files.list method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: files.list error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from files.list method
+      security:
+        - V1Oauth2:
+            - files:read

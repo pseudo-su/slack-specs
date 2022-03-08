@@ -1,2 +1,14 @@
 includes:
-  - operations.yaml
+  - files.comments.delete.yaml
+  - files.delete.yaml
+  - files.info.yaml
+  - files.list.yaml
+  - files.remote.add.yaml
+  - files.remote.info.yaml
+  - files.remote.list.yaml
+  - files.remote.remove.yaml
+  - files.remote.share.yaml
+  - files.remote.update.yaml
+  - files.revokePublicURL.yaml
+  - files.sharedPublicURL.yaml
+  - files.upload.yaml

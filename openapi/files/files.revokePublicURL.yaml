@@ -1,0 +1,58 @@
+paths:
+  /files.revokePublicURL:
+    post:
+      tags:
+        - files
+      description: Revokes public/external sharing access for a file
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/files.revokePublicURL
+      operationId: files_revokePublicURL
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `files:write:user`"
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                file:
+                  type: string
+                  description: File to revoke
+          application/json:
+            schema:
+              properties:
+                file:
+                  type: string
+                  description: File to revoke
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: files.revokePublicURL schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for successful response from files.revokePublicURL
+                  method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: files.revokePublicURL error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for error response from files.revokePublicURL
+                  method
+      security:
+        - V1Oauth2:
+            - files:write:user

@@ -1,0 +1,72 @@
+paths:
+  /files.info:
+    get:
+      tags:
+        - files
+      description: Gets information about a file.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/files.info
+      operationId: files_info
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `files:read`"
+          schema:
+            type: string
+        - name: file
+          in: query
+          description: Specify a file by providing its ID.
+          schema:
+            type: string
+        - name: count
+          in: query
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description:
+            The maximum number of items to return. Fewer than the requested
+            number of items may be returned, even if the end of the list hasn't been
+            reached.
+          schema:
+            type: integer
+        - name: cursor
+          in: query
+          description:
+            'Parameter for pagination. File comments are paginated for a
+            single file. Set `cursor` equal to the `next_cursor` attribute returned
+            by the previous request''s `response_metadata`. This parameter is optional,
+            but pagination is mandatory: the default value simply fetches the first
+            "page" of the collection of comments. See [pagination](/docs/pagination)
+            for more details.'
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: files.info schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from files.info method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: files.info error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from files.info method
+      security:
+        - V1Oauth2:
+            - files:read

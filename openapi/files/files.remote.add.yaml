@@ -1,0 +1,68 @@
+paths:
+  /files.remote.add:
+    post:
+      tags:
+        - files.remote
+        - files
+      description: Adds a file from a remote service
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/files.remote.add
+      operationId: files_remote_add
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                token:
+                  type: string
+                  description: "Authentication token. Requires scope: `remote_files:write`"
+                external_id:
+                  type: string
+                  description: Creator defined GUID for the file.
+                title:
+                  type: string
+                  description: Title of the file being shared.
+                filetype:
+                  type: string
+                  description: type of file
+                external_url:
+                  type: string
+                  description: URL of the remote file.
+                preview_image:
+                  type: string
+                  description: Preview of the document via `multipart/form-data`.
+                indexable_file_contents:
+                  type: string
+                  description:
+                    A text file (txt, pdf, doc, etc.) containing textual
+                    search terms that are used to improve discovery of the remote
+                    file.
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+        - V1Oauth2:
+            - remote_files:write

@@ -1,0 +1,53 @@
+paths:
+  /files.remote.remove:
+    post:
+      tags:
+        - files.remote
+        - files
+      description: Remove a remote file.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/files.remote.remove
+      operationId: files_remote_remove
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                token:
+                  type: string
+                  description: "Authentication token. Requires scope: `remote_files:write`"
+                file:
+                  type: string
+                  description: Specify a file by providing its ID.
+                external_id:
+                  type: string
+                  description: Creator defined GUID for the file.
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+        - V1Oauth2:
+            - remote_files:write
