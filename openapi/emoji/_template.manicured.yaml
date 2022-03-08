@@ -1,7 +1,7 @@
 includes: []
-  # - api.test.yaml
-  # - bots.info.yaml
-  # - dialog.open.yaml
-  # - migration.exchange.yaml
-  # - rtm.connect.yaml
-  # - search.messages.yaml
+  # - admin.emoji.add
+  # - admin.emoji.addAlias
+  # - admin.emoji.list
+  # - admin.emoji.remove
+  # - admin.emoji.rename
+  # - emoji.list

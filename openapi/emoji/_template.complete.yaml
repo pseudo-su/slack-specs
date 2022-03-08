@@ -1,2 +1,7 @@
 includes:
-  - operations.yaml
+  - admin.emoji.add
+  - admin.emoji.addAlias
+  - admin.emoji.list
+  - admin.emoji.remove
+  - admin.emoji.rename
+  - emoji.list

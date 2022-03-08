@@ -1,0 +1,60 @@
+paths:
+  /admin.emoji.list:
+    get:
+      tags:
+        - admin.emoji
+        - admin
+      description: List emoji for an Enterprise Grid organization.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.emoji.list
+      operationId: admin_emoji_list
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `admin.teams:read`"
+          required: true
+          schema:
+            type: string
+        - name: cursor
+          in: query
+          description:
+            Set `cursor` to `next_cursor` returned by the previous call to
+            list items in the next page
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description:
+            The maximum number of items to return. Must be between 1 - 1000
+            both inclusive.
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+        - V1Oauth2:
+            - admin.teams:read

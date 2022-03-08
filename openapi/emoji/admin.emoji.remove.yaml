@@ -1,0 +1,56 @@
+paths:
+  /admin.emoji.remove:
+    post:
+      tags:
+        - admin.emoji
+        - admin
+      description: Remove an emoji across an Enterprise Grid organization
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.emoji.remove
+      operationId: admin_emoji_remove
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - name
+                - token
+              properties:
+                token:
+                  type: string
+                  description: "Authentication token. Requires scope: `admin.teams:write`"
+                name:
+                  type: string
+                  description:
+                    The name of the emoji to be removed. Colons (`:myemoji:`)
+                    around the value are not required, although they may be included.
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+        - V1Oauth2:
+            - admin.teams:write
