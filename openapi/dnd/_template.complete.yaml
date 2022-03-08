@@ -1,2 +1,6 @@
 includes:
-  - operations.yaml
+  - dnd.endDnd.yaml
+  - dnd.endSnooze.yaml
+  - dnd.info.yaml
+  - dnd.setSnooze.yaml
+  - dnd.teamInfo.yaml

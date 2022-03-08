@@ -1,0 +1,45 @@
+paths:
+  /dnd.info:
+    get:
+      tags:
+        - dnd
+      description: Retrieves a user's current Do Not Disturb status.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/dnd.info
+      operationId: dnd_info
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `dnd:read`"
+          schema:
+            type: string
+        - name: user
+          in: query
+          description: User to fetch status for (defaults to current user)
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: dnd.info schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from dnd.info method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: dnd.info error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from dnd.info method
+      security:
+        - V1Oauth2:
+            - dnd:read

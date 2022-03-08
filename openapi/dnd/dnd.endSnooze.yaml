@@ -1,0 +1,41 @@
+paths:
+  /dnd.endSnooze:
+    post:
+      tags:
+        - dnd
+      description: Ends the current user's snooze mode immediately.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/dnd.endSnooze
+      operationId: dnd_endSnooze
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `dnd:write`"
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: dnd.endSnooze schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from dnd.endSnooze method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: dnd.endSnooze error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from dnd.endSnooze method
+      security:
+        - V1Oauth2:
+            - dnd:write

@@ -1,0 +1,41 @@
+paths:
+  /dnd.endDnd:
+    post:
+      tags:
+        - dnd
+      description: Ends the current user's Do Not Disturb session immediately.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/dnd.endDnd
+      operationId: dnd_endDnd
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `dnd:write`"
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: dnd.endDnd schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from dnd.endDnd method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: dnd.endDnd error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from dnd.endDnd method
+      security:
+        - V1Oauth2:
+            - dnd:write

@@ -1,7 +1,7 @@
 includes: []
-  # - api.test.yaml
-  # - bots.info.yaml
-  # - dialog.open.yaml
-  # - migration.exchange.yaml
-  # - rtm.connect.yaml
-  # - search.messages.yaml
+  # - dnd.endDnd.yaml
+  # - dnd.endSnooze.yaml
+  # - dnd.info.yaml
+  # - dnd.setSnooze.yaml
+  # - dnd.teamInfo.yaml
+

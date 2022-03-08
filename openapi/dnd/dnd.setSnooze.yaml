@@ -1,0 +1,51 @@
+paths:
+  /dnd.setSnooze:
+    post:
+      tags:
+        - dnd
+      description:
+        Turns on Do Not Disturb mode for the current user, or changes its
+        duration.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/dnd.setSnooze
+      operationId: dnd_setSnooze
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - num_minutes
+                - token
+              properties:
+                token:
+                  type: string
+                  description: "Authentication token. Requires scope: `dnd:write`"
+                num_minutes:
+                  type: string
+                  description: Number of minutes, from now, to snooze until.
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: dnd.setSnooze schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from dnd.setSnooze method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: dnd.setSnooze error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from dnd.setSnooze method
+      security:
+        - V1Oauth2:
+            - dnd:write
