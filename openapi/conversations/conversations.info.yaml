@@ -1,0 +1,64 @@
+paths:
+  /conversations.info:
+    get:
+      tags:
+        - conversations
+      description: Retrieve information about a conversation.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/conversations.info
+      operationId: conversations_info
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `conversations:read`"
+          schema:
+            type: string
+        - name: channel
+          in: query
+          description: Conversation ID to learn more about
+          schema:
+            type: string
+        - name: include_locale
+          in: query
+          description:
+            Set this to `true` to receive the locale for this conversation.
+            Defaults to `false`
+          schema:
+            type: boolean
+        - name: include_num_members
+          in: query
+          description:
+            Set to `true` to include the member count for the specified conversation.
+            Defaults to `false`
+          schema:
+            type: boolean
+      responses:
+        "200":
+          description:
+            Typical success response for a public channel. (Also, a response
+            from a private channel and a multi-party IM is very similar to this example.)
+          content:
+            application/json:
+              schema:
+                title: conversations.info success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response conversations.info
+        default:
+          description: Typical error response when a channel cannot be found
+          content:
+            application/json:
+              schema:
+                title: conversations.info error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from conversations.info method
+      security:
+        - V1Oauth2:
+            - channels:read
+            - groups:read
+            - im:read
+            - mpim:read

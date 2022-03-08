@@ -1,0 +1,65 @@
+paths:
+  /conversations.kick:
+    post:
+      tags:
+        - conversations
+      description: Removes a user from a conversation.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/conversations.kick
+      operationId: conversations_kick
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `conversations:write`"
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                channel:
+                  type: string
+                  description: ID of conversation to remove user from.
+                user:
+                  type: string
+                  description: User ID to be removed.
+          application/json:
+            schema:
+              properties:
+                channel:
+                  type: string
+                  description: ID of conversation to remove user from.
+                user:
+                  type: string
+                  description: User ID to be removed.
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: conversations.kick success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response conversations.kick method
+        default:
+          description:
+            Typical error response when you attempt to kick yourself from
+            a channel
+          content:
+            application/json:
+              schema:
+                title: conversations.kick error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response conversations.kick method
+      security:
+        - V1Oauth2:
+            - channels:write
+            - groups:write
+            - im:write
+            - mpim:write

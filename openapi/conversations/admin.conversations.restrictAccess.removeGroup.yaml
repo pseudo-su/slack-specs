@@ -1,0 +1,67 @@
+paths:
+  /admin.conversations.restrictAccess.removeGroup:
+    post:
+      tags:
+        - admin.conversations.restrictAccess
+        - admin
+      description: Remove a linked IDP group linked from a private channel
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.conversations.restrictAccess.removeGroup
+      operationId: admin_conversations_restrictAccess_removeGroup
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - channel_id
+                - group_id
+                - team_id
+                - token
+              properties:
+                token:
+                  type: string
+                  description: "Authentication token. Requires scope: `admin.conversations:write`"
+                team_id:
+                  type: string
+                  description:
+                    The workspace where the channel exists. This argument
+                    is required for channels only tied to one workspace, and optional
+                    for channels that are shared across an organization.
+                group_id:
+                  type: string
+                  description:
+                    The [IDP Group](https://slack.com/help/articles/115001435788-Connect-identity-provider-groups-to-your-Enterprise-Grid-org)
+                    ID to remove from the private channel.
+                channel_id:
+                  type: string
+                  description: The channel to remove the linked group from.
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+        - V1Oauth2:
+            - admin.conversations:write

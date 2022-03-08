@@ -1,0 +1,101 @@
+paths:
+  /admin.conversations.create:
+    post:
+      tags:
+        - admin.conversations
+        - admin
+      description: Create a public or private channel-based conversation.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.conversations.create
+      operationId: admin_conversations_create
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `admin.conversations:write`"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - is_private
+                - name
+              properties:
+                name:
+                  type: string
+                  description: Name of the public or private channel to create.
+                description:
+                  type: string
+                  description: Description of the public or private channel to create.
+                is_private:
+                  type: boolean
+                  description:
+                    When `true`, creates a private channel instead of a
+                    public channel
+                org_wide:
+                  type: boolean
+                  description:
+                    "When `true`, the channel will be available org-wide.
+                    Note: if the channel is not `org_wide=true`, you must specify
+                    a `team_id` for this channel"
+                team_id:
+                  type: string
+                  description:
+                    "The workspace to create the channel in. Note: this
+                    argument is required unless you set `org_wide=true`."
+          application/json:
+            schema:
+              required:
+                - is_private
+                - name
+              properties:
+                name:
+                  type: string
+                  description: Name of the public or private channel to create.
+                description:
+                  type: string
+                  description: Description of the public or private channel to create.
+                is_private:
+                  type: boolean
+                  description:
+                    When `true`, creates a private channel instead of a
+                    public channel
+                org_wide:
+                  type: boolean
+                  description:
+                    "When `true`, the channel will be available org-wide.
+                    Note: if the channel is not `org_wide=true`, you must specify
+                    a `team_id` for this channel"
+                team_id:
+                  type: string
+                  description:
+                    "The workspace to create the channel in. Note: this
+                    argument is required unless you set `org_wide=true`."
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: admin.conversations.create schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response of admin.conversations.create
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: admin.conversations.create error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from admin.conversations.create
+      security:
+        - V1Oauth2:
+            - admin.conversations:write

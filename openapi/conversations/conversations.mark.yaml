@@ -1,0 +1,67 @@
+paths:
+  /conversations.mark:
+    post:
+      tags:
+        - conversations
+      description: Sets the read cursor in a channel.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/conversations.mark
+      operationId: conversations_mark
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `conversations:write`"
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                channel:
+                  type: string
+                  description: Channel or conversation to set the read cursor for.
+                ts:
+                  type: number
+                  description:
+                    Unique identifier of message you want marked as most
+                    recently seen in this conversation.
+          application/json:
+            schema:
+              properties:
+                channel:
+                  type: string
+                  description: Channel or conversation to set the read cursor for.
+                ts:
+                  type: number
+                  description:
+                    Unique identifier of message you want marked as most
+                    recently seen in this conversation.
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: conversations.mark success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response conversations.mark method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: conversations.mark error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from conversations.mark method
+      security:
+        - V1Oauth2:
+            - channels:write
+            - groups:write
+            - im:write
+            - mpim:write

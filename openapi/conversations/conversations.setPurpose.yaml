@@ -1,0 +1,67 @@
+paths:
+  /conversations.setPurpose:
+    post:
+      tags:
+        - conversations
+      description: Sets the purpose for a conversation.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/conversations.setPurpose
+      operationId: conversations_setPurpose
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `conversations:write`"
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                channel:
+                  type: string
+                  description: Conversation to set the purpose of
+                purpose:
+                  type: string
+                  description: A new, specialer purpose
+          application/json:
+            schema:
+              properties:
+                channel:
+                  type: string
+                  description: Conversation to set the purpose of
+                purpose:
+                  type: string
+                  description: A new, specialer purpose
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: conversations.setPurpose success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for successful response from conversations.setPurpose
+                  method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: conversations.setPurpose error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for error response from conversations.setPurpose
+                  method
+      security:
+        - V1Oauth2:
+            - channels:write
+            - groups:write
+            - im:write
+            - mpim:write

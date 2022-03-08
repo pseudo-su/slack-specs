@@ -1,0 +1,71 @@
+paths:
+  /admin.conversations.disconnectShared:
+    post:
+      tags:
+        - admin.conversations
+        - admin
+      description: Disconnect a connected channel from one or more workspaces.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.conversations.disconnectShared
+      operationId: admin_conversations_disconnectShared
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `admin.conversations:write`"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - channel_id
+              properties:
+                channel_id:
+                  type: string
+                  description: The channel to be disconnected from some workspaces.
+                leaving_team_ids:
+                  type: string
+                  description:
+                    The team to be removed from the channel. Currently
+                    only a single team id can be specified.
+          application/json:
+            schema:
+              required:
+                - channel_id
+              properties:
+                channel_id:
+                  type: string
+                  description: The channel to be disconnected from some workspaces.
+                leaving_team_ids:
+                  type: string
+                  description:
+                    The team to be removed from the channel. Currently
+                    only a single team id can be specified.
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: admin.conversations.rename schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response of admin.conversations.disconnectShared
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: admin.conversations.disconnectShared error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from admin.conversations.disconnectShared
+      security:
+        - V1Oauth2:
+            - admin.conversations:write

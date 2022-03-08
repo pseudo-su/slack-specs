@@ -1,0 +1,65 @@
+paths:
+  /conversations.create:
+    post:
+      tags:
+        - conversations
+      description: Initiates a public or private channel-based conversation
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/conversations.create
+      operationId: conversations_create
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `conversations:write`"
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                name:
+                  type: string
+                  description: Name of the public or private channel to create
+                is_private:
+                  type: boolean
+                  description: Create a private channel instead of a public one
+          application/json:
+            schema:
+              properties:
+                name:
+                  type: string
+                  description: Name of the public or private channel to create
+                is_private:
+                  type: boolean
+                  description: Create a private channel instead of a public one
+      responses:
+        "200":
+          description:
+            If successful, the command returns a rather stark [conversation
+            object](/types/conversation)
+          content:
+            application/json:
+              schema:
+                title: conversations.create success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response conversations.create method
+        default:
+          description: Typical error response when name already in use
+          content:
+            application/json:
+              schema:
+                title: conversations.create error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from conversations.create method
+      security:
+        - V1Oauth2:
+            - channels:write
+            - groups:write
+            - im:write
+            - mpim:write

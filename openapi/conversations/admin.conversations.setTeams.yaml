@@ -1,0 +1,95 @@
+paths:
+  /admin.conversations.setTeams:
+    post:
+      tags:
+        - admin.conversations
+        - admin
+      description:
+        Set the workspaces in an Enterprise grid org that connect to a
+        public or private channel.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.conversations.setTeams
+      operationId: admin_conversations_setTeams
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `admin.conversations:write`"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - channel_id
+              properties:
+                channel_id:
+                  type: string
+                  description: The encoded `channel_id` to add or remove to workspaces.
+                team_id:
+                  type: string
+                  description:
+                    The workspace to which the channel belongs. Omit this
+                    argument if the channel is a cross-workspace shared channel.
+                target_team_ids:
+                  type: string
+                  description:
+                    A comma-separated list of workspaces to which the channel
+                    should be shared. Not required if the channel is being shared
+                    org-wide.
+                org_channel:
+                  type: boolean
+                  description: True if channel has to be converted to an org channel
+          application/json:
+            schema:
+              required:
+                - channel_id
+              properties:
+                channel_id:
+                  type: string
+                  description: The encoded `channel_id` to add or remove to workspaces.
+                team_id:
+                  type: string
+                  description:
+                    The workspace to which the channel belongs. Omit this
+                    argument if the channel is a cross-workspace shared channel.
+                target_team_ids:
+                  type: string
+                  description:
+                    A comma-separated list of workspaces to which the channel
+                    should be shared. Not required if the channel is being shared
+                    org-wide.
+                org_channel:
+                  type: boolean
+                  description: True if channel has to be converted to an org channel
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+        - V1Oauth2:
+            - admin.conversations:write

@@ -1,0 +1,61 @@
+paths:
+  /admin.conversations.convertToPrivate:
+    post:
+      tags:
+        - admin.conversations
+        - admin
+      description: Convert a public channel to a private channel.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.conversations.convertToPrivate
+      operationId: admin_conversations_convertToPrivate
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `admin.conversations:write`"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - channel_id
+              properties:
+                channel_id:
+                  type: string
+                  description: The channel to convert to private.
+          application/json:
+            schema:
+              required:
+                - channel_id
+              properties:
+                channel_id:
+                  type: string
+                  description: The channel to convert to private.
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: admin.conversations.convertToPrivate schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response of admin.conversations.convertToPrivate
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: admin.conversations.convertToPrivate error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from admin.conversations.convertToPrivate
+      security:
+        - V1Oauth2:
+            - admin.conversations:write

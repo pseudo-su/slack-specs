@@ -1,3 +1,37 @@
 includes:
-  - operations.yaml
+  - admin.conversations.archive.yaml
+  - admin.conversations.convertToPrivate.yaml
+  - admin.conversations.create.yaml
+  - admin.conversations.delete.yaml
+  - admin.conversations.disconnectShared.yaml
+  - admin.conversations.ekm.listOriginalConnectedChannelInfo.yaml
+  - admin.conversations.getConversationPrefs.yaml
+  - admin.conversations.getTeams.yaml
+  - admin.conversations.invite.yaml
+  - admin.conversations.rename.yaml
+  - admin.conversations.restrictAccess.addGroup.yaml
+  - admin.conversations.restrictAccess.listGroups.yaml
+  - admin.conversations.restrictAccess.removeGroup.yaml
+  - admin.conversations.search.yaml
+  - admin.conversations.setConversationPrefs.yaml
+  - admin.conversations.setTeams.yaml
+  - admin.conversations.unarchive.yaml
+
+  - conversations.archive.yaml
+  - conversations.close.yaml
+  - conversations.create.yaml
+  - conversations.history.yaml
+  - conversations.info.yaml
+  - conversations.invite.yaml
+  - conversations.join.yaml
+  - conversations.kick.yaml
+  - conversations.leave.yaml
   - conversations.list.yaml
+  - conversations.mark.yaml
+  - conversations.members.yaml
+  - conversations.open.yaml
+  - conversations.rename.yaml
+  - conversations.replies.yaml
+  - conversations.setPurpose.yaml
+  - conversations.setTopic.yaml
+  - conversations.unarchive.yaml

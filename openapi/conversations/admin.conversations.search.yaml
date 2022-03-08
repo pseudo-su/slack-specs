@@ -1,0 +1,93 @@
+paths:
+  /admin.conversations.search:
+    get:
+      tags:
+        - admin.conversations
+        - admin
+      description: Search for public or private channels in an Enterprise organization.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.conversations.search
+      operationId: admin_conversations_search
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `admin.conversations:read`"
+          required: true
+          schema:
+            type: string
+        - name: team_ids
+          in: query
+          description:
+            Comma separated string of team IDs, signifying the workspaces
+            to search through.
+          schema:
+            type: string
+        - name: query
+          in: query
+          description: Name of the the channel to query by.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description:
+            Maximum number of items to be returned. Must be between 1 - 20
+            both inclusive. Default is 10.
+          schema:
+            type: integer
+        - name: cursor
+          in: query
+          description:
+            Set `cursor` to `next_cursor` returned by the previous call to
+            list items in the next page.
+          schema:
+            type: string
+        - name: search_channel_types
+          in: query
+          description:
+            The type of channel to include or exclude in the search. For
+            example `private` will search private channels, while `private_exclude`
+            will exclude them. For a full list of types, check the [Types section](#types).
+          schema:
+            type: string
+        - name: sort
+          in: query
+          description:
+            "Possible values are `relevant` (search ranking based on what
+            we think is closest), `name` (alphabetical), `member_count` (number of users
+            in the channel), and `created` (date channel was created). You can optionally
+            pair this with the `sort_dir` arg to change how it is sorted "
+          schema:
+            type: string
+        - name: sort_dir
+          in: query
+          description:
+            Sort direction. Possible values are `asc` for ascending order
+            like (1, 2, 3) or (a, b, c), and `desc` for descending order like (3, 2,
+            1) or (c, b, a)
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: admin.conversations.search schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response of admin.conversations.search
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: admin.conversations.search error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from admin.conversations.search
+      security:
+        - V1Oauth2:
+            - admin.conversations:read

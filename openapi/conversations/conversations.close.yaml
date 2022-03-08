@@ -1,0 +1,57 @@
+paths:
+  /conversations.close:
+    post:
+      tags:
+        - conversations
+      description: Closes a direct message or multi-person direct message.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/conversations.close
+      operationId: conversations_close
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `conversations:write`"
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                channel:
+                  type: string
+                  description: Conversation to close.
+          application/json:
+            schema:
+              properties:
+                channel:
+                  type: string
+                  description: Conversation to close.
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: conversations.close success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response conversations.close method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: conversations.close error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from conversations.close method
+      security:
+        - V1Oauth2:
+            - channels:write
+            - groups:write
+            - im:write
+            - mpim:write

@@ -1,0 +1,61 @@
+paths:
+  /admin.conversations.delete:
+    post:
+      tags:
+        - admin.conversations
+        - admin
+      description: Delete a public or private channel.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.conversations.delete
+      operationId: admin_conversations_delete
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `admin.conversations:write`"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - channel_id
+              properties:
+                channel_id:
+                  type: string
+                  description: The channel to delete.
+          application/json:
+            schema:
+              required:
+                - channel_id
+              properties:
+                channel_id:
+                  type: string
+                  description: The channel to delete.
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: admin.conversations.delete schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response of admin.conversations.delete
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: admin.conversations.delete error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from admin.conversations.delete
+      security:
+        - V1Oauth2:
+            - admin.conversations:write

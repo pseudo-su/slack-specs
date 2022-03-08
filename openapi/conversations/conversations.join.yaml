@@ -1,0 +1,58 @@
+paths:
+  /conversations.join:
+    post:
+      tags:
+        - conversations
+      description: Joins an existing conversation.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/conversations.join
+      operationId: conversations_join
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `channels:write`"
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                channel:
+                  type: string
+                  description: ID of conversation to join
+          application/json:
+            schema:
+              properties:
+                channel:
+                  type: string
+                  description: ID of conversation to join
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: conversations.join success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for successful response from conversations.join
+                  method
+        default:
+          description:
+            Typical error response if the conversation is archived and
+            cannot be joined
+          content:
+            application/json:
+              schema:
+                title: conversations.join error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from conversations.join method
+      security:
+        - V1Oauth2:
+            - channels:write

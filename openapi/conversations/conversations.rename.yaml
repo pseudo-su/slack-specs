@@ -1,0 +1,67 @@
+paths:
+  /conversations.rename:
+    post:
+      tags:
+        - conversations
+      description: Renames a conversation.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/conversations.rename
+      operationId: conversations_rename
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `conversations:write`"
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                channel:
+                  type: string
+                  description: ID of conversation to rename
+                name:
+                  type: string
+                  description: New name for conversation.
+          application/json:
+            schema:
+              properties:
+                channel:
+                  type: string
+                  description: ID of conversation to rename
+                name:
+                  type: string
+                  description: New name for conversation.
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: conversations.rename success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for successful response from conversations.rename
+                  method
+        default:
+          description:
+            Typical error response when the calling user is not a member
+            of the conversation
+          content:
+            application/json:
+              schema:
+                title: conversations.rename error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from conversations.rename method
+      security:
+        - V1Oauth2:
+            - channels:write
+            - groups:write
+            - im:write
+            - mpim:write

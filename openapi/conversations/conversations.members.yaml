@@ -1,0 +1,67 @@
+paths:
+  /conversations.members:
+    get:
+      tags:
+        - conversations
+      description: Retrieve members of a conversation.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/conversations.members
+      operationId: conversations_members
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `conversations:read`"
+          schema:
+            type: string
+        - name: channel
+          in: query
+          description: ID of the conversation to retrieve members for
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description:
+            The maximum number of items to return. Fewer than the requested
+            number of items may be returned, even if the end of the users list hasn't
+            been reached.
+          schema:
+            type: integer
+        - name: cursor
+          in: query
+          description:
+            Paginate through collections of data by setting the `cursor`
+            parameter to a `next_cursor` attribute returned by a previous request's
+            `response_metadata`. Default value fetches the first "page" of the collection.
+            See [pagination](/docs/pagination) for more detail.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Typical paginated success response
+          content:
+            application/json:
+              schema:
+                title: conversations.members success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for successful response conversations.members
+                  method
+        default:
+          description: Typical error response when an invalid cursor is provided
+          content:
+            application/json:
+              schema:
+                title: conversations.members error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response conversations.members method
+      security:
+        - V1Oauth2:
+            - channels:read
+            - groups:read
+            - im:read
+            - mpim:read

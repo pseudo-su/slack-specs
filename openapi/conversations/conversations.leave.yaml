@@ -1,0 +1,61 @@
+paths:
+  /conversations.leave:
+    post:
+      tags:
+        - conversations
+      description: Leaves a conversation.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/conversations.leave
+      operationId: conversations_leave
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `conversations:write`"
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                channel:
+                  type: string
+                  description: Conversation to leave
+          application/json:
+            schema:
+              properties:
+                channel:
+                  type: string
+                  description: Conversation to leave
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: conversations.leave success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for successful response from conversations.leave
+                  method
+        default:
+          description:
+            Typical error response when attempting to leave a workspace's
+            "general" channel
+          content:
+            application/json:
+              schema:
+                title: conversations.leave error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from conversations.leave method
+      security:
+        - V1Oauth2:
+            - channels:write
+            - groups:write
+            - im:write
+            - mpim:write

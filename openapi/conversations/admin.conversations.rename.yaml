@@ -1,0 +1,67 @@
+paths:
+  /admin.conversations.rename:
+    post:
+      tags:
+        - admin.conversations
+        - admin
+      description: Rename a public or private channel.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.conversations.rename
+      operationId: admin_conversations_rename
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `admin.conversations:write`"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - channel_id
+                - name
+              properties:
+                channel_id:
+                  type: string
+                  description: The channel to rename.
+                name:
+                  type: string
+          application/json:
+            schema:
+              required:
+                - channel_id
+                - name
+              properties:
+                channel_id:
+                  type: string
+                  description: The channel to rename.
+                name:
+                  type: string
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: admin.conversations.rename schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response of admin.conversations.rename
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: admin.conversations.unarchive error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from admin.conversations.rename
+      security:
+        - V1Oauth2:
+            - admin.conversations:write

@@ -1,0 +1,48 @@
+paths:
+  /admin.conversations.getConversationPrefs:
+    get:
+      tags:
+        - admin.conversations
+        - admin
+      description: Get conversation preferences for a public or private channel.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.conversations.getConversationPrefs
+      operationId: admin_conversations_getConversationPrefs
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `admin.conversations:read`"
+          required: true
+          schema:
+            type: string
+        - name: channel_id
+          in: query
+          description: The channel to get preferences for.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: admin.conversations.getConversationPrefs schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response of admin.conversations.getConversationPrefs
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: admin.conversations.unarchive error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from admin.conversations.getConversationPrefs
+      security:
+        - V1Oauth2:
+            - admin.conversations:read

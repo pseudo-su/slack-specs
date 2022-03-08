@@ -1,0 +1,75 @@
+paths:
+  /conversations.invite:
+    post:
+      tags:
+        - conversations
+      description: Invites users to a channel.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/conversations.invite
+      operationId: conversations_invite
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `conversations:write`"
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                channel:
+                  type: string
+                  description:
+                    The ID of the public or private channel to invite user(s)
+                    to.
+                users:
+                  type: string
+                  description:
+                    A comma separated list of user IDs. Up to 1000 users
+                    may be listed.
+          application/json:
+            schema:
+              properties:
+                channel:
+                  type: string
+                  description:
+                    The ID of the public or private channel to invite user(s)
+                    to.
+                users:
+                  type: string
+                  description:
+                    A comma separated list of user IDs. Up to 1000 users
+                    may be listed.
+      responses:
+        "200":
+          description: Typical success response when an invitation is extended
+          content:
+            application/json:
+              schema:
+                title: conversations.invite error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for successful response from conversations.invite
+                  method
+        default:
+          description:
+            Typical error response when an invite is attempted on a conversation
+            type that does not support it
+          content:
+            application/json:
+              schema:
+                title: conversations.invite error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from conversations.invite method
+      security:
+        - V1Oauth2:
+            - channels:write
+            - groups:write
+            - im:write
+            - mpim:write

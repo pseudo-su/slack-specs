@@ -1,0 +1,87 @@
+paths:
+  /conversations.open:
+    post:
+      tags:
+        - conversations
+      description: Opens or resumes a direct message or multi-person direct message.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/conversations.open
+      operationId: conversations_open
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `conversations:write`"
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                channel:
+                  type: string
+                  description:
+                    Resume a conversation by supplying an `im` or `mpim`'s
+                    ID. Or provide the `users` field instead.
+                users:
+                  type: string
+                  description:
+                    Comma separated lists of users. If only one user is
+                    included, this creates a 1:1 DM.  The ordering of the users is
+                    preserved whenever a multi-person direct message is returned.
+                    Supply a `channel` when not supplying `users`.
+                return_im:
+                  type: boolean
+                  description:
+                    Boolean, indicates you want the full IM channel definition
+                    in the response.
+          application/json:
+            schema:
+              properties:
+                channel:
+                  type: string
+                  description:
+                    Resume a conversation by supplying an `im` or `mpim`'s
+                    ID. Or provide the `users` field instead.
+                users:
+                  type: string
+                  description:
+                    Comma separated lists of users. If only one user is
+                    included, this creates a 1:1 DM.  The ordering of the users is
+                    preserved whenever a multi-person direct message is returned.
+                    Supply a `channel` when not supplying `users`.
+                return_im:
+                  type: boolean
+                  description:
+                    Boolean, indicates you want the full IM channel definition
+                    in the response.
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: conversations.open success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for successful response from conversations.open
+                  method when opening channels, ims, mpims
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: conversations.open error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from conversations.open method
+      security:
+        - V1Oauth2:
+            - channels:write
+            - groups:write
+            - im:write
+            - mpim:write
