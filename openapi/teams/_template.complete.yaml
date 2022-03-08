@@ -1,2 +1,11 @@
 includes:
-  - operations.yaml
+  - admin.teams.admins.list.yaml
+  - admin.teams.create.yaml
+  - admin.teams.list.yaml
+  - admin.teams.owners.list.yaml
+  - admin.teams.settings.info.yaml
+  - admin.teams.settings.setDefaultChannels.yaml
+  - admin.teams.settings.setDescription.yaml
+  - admin.teams.settings.setDiscoverability.yaml
+  - admin.teams.settings.setIcon.yaml
+  - admin.teams.settings.setName.yaml
