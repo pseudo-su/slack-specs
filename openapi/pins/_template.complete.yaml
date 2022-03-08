@@ -1,2 +1,4 @@
 includes:
-  - operations.yaml
+  - pins.add.yaml
+  - pins.list.yaml
+  - pins.remove.yaml

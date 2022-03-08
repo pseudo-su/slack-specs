@@ -1,0 +1,45 @@
+paths:
+  /pins.list:
+    get:
+      tags:
+        - pins
+      description: Lists items pinned to a channel.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/pins.list
+      operationId: pins_list
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `pins:read`"
+          required: true
+          schema:
+            type: string
+        - name: channel
+          in: query
+          description: Channel to get pinned items for.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: pins.list success schema
+                type: object
+                description: Schema for successful response from pins.list method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: pins.list error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from pins.list method
+      security:
+        - V1Oauth2:
+            - pins:read
