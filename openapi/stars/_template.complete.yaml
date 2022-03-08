@@ -1,2 +1,4 @@
 includes:
-  - operations.yaml
+  - stars.add.yaml
+  - stars.list.yaml
+  - stars.remove.yaml

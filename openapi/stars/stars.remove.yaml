@@ -1,0 +1,77 @@
+paths:
+  /stars.remove:
+    post:
+      tags:
+        - stars
+      description: Removes a star from an item.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/stars.remove
+      operationId: stars_remove
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `stars:write`"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                channel:
+                  type: string
+                  description:
+                    Channel to remove star from, or channel where the message
+                    to remove star from was posted (used with `timestamp`).
+                file:
+                  type: string
+                  description: File to remove star from.
+                file_comment:
+                  type: string
+                  description: File comment to remove star from.
+                timestamp:
+                  type: string
+                  description: Timestamp of the message to remove star from.
+          application/json:
+            schema:
+              properties:
+                channel:
+                  type: string
+                  description:
+                    Channel to remove star from, or channel where the message
+                    to remove star from was posted (used with `timestamp`).
+                file:
+                  type: string
+                  description: File to remove star from.
+                file_comment:
+                  type: string
+                  description: File comment to remove star from.
+                timestamp:
+                  type: string
+                  description: Timestamp of the message to remove star from.
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: stars.remove schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from stars.remove method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: stars.remove error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from stars.remove method
+      security:
+        - V1Oauth2:
+            - stars:write
