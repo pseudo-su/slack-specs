@@ -1,0 +1,87 @@
+paths:
+  /chat.deleteScheduledMessage:
+    post:
+      tags:
+        - chat
+      description: Deletes a pending scheduled message from the queue.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/chat.deleteScheduledMessage
+      operationId: chat_deleteScheduledMessage
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `chat:write`"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - channel
+                - scheduled_message_id
+              properties:
+                as_user:
+                  type: boolean
+                  description:
+                    Pass true to delete the message as the authed user
+                    with `chat:write:user` scope. [Bot users](/bot-users) in this
+                    context are considered authed users. If unused or false, the message
+                    will be deleted with `chat:write:bot` scope.
+                channel:
+                  type: string
+                  description: The channel the scheduled_message is posting to
+                scheduled_message_id:
+                  type: string
+                  description: "`scheduled_message_id` returned from call to chat.scheduleMessage"
+          application/json:
+            schema:
+              required:
+                - channel
+                - scheduled_message_id
+              properties:
+                as_user:
+                  type: boolean
+                  description:
+                    Pass true to delete the message as the authed user
+                    with `chat:write:user` scope. [Bot users](/bot-users) in this
+                    context are considered authed users. If unused or false, the message
+                    will be deleted with `chat:write:bot` scope.
+                channel:
+                  type: string
+                  description: The channel the scheduled_message is posting to
+                scheduled_message_id:
+                  type: string
+                  description: "`scheduled_message_id` returned from call to chat.scheduleMessage"
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: chat.deleteScheduledMessage schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for successful response from chat.deleteScheduledMessage
+                  method
+        default:
+          description: Typical error response if no message is found
+          content:
+            application/json:
+              schema:
+                title: chat.deleteScheduledMessage error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for error response from chat.deleteScheduledMessage
+                  method
+      security:
+        - V1Oauth2:
+            - chat:write:user
+            - chat:write:bot

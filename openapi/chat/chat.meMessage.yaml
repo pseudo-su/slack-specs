@@ -1,0 +1,65 @@
+paths:
+  /chat.meMessage:
+    post:
+      tags:
+        - chat
+      description: Share a me message into a channel.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/chat.meMessage
+      operationId: chat_meMessage
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `chat:write`"
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                channel:
+                  type: string
+                  description:
+                    Channel to send message to. Can be a public channel,
+                    private group or IM channel. Can be an encoded ID, or a name.
+                text:
+                  type: string
+                  description: Text of the message to send.
+          application/json:
+            schema:
+              properties:
+                channel:
+                  type: string
+                  description:
+                    Channel to send message to. Can be a public channel,
+                    private group or IM channel. Can be an encoded ID, or a name.
+                text:
+                  type: string
+                  description: Text of the message to send.
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: chat.meMessage schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from chat.meMessage method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: chat.meMessage error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from chat.meMessage method
+      security:
+        - V1Oauth2:
+            - chat:write:user
+            - chat:write:bot

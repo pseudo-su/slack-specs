@@ -1,0 +1,75 @@
+paths:
+  /chat.delete:
+    post:
+      tags:
+        - chat
+      description: Deletes a message.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/chat.delete
+      operationId: chat_delete
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `chat:write`"
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                ts:
+                  type: number
+                  description: Timestamp of the message to be deleted.
+                channel:
+                  type: string
+                  description: Channel containing the message to be deleted.
+                as_user:
+                  type: boolean
+                  description:
+                    Pass true to delete the message as the authed user
+                    with `chat:write:user` scope. [Bot users](/bot-users) in this
+                    context are considered authed users. If unused or false, the message
+                    will be deleted with `chat:write:bot` scope.
+          application/json:
+            schema:
+              properties:
+                ts:
+                  type: number
+                  description: Timestamp of the message to be deleted.
+                channel:
+                  type: string
+                  description: Channel containing the message to be deleted.
+                as_user:
+                  type: boolean
+                  description:
+                    Pass true to delete the message as the authed user
+                    with `chat:write:user` scope. [Bot users](/bot-users) in this
+                    context are considered authed users. If unused or false, the message
+                    will be deleted with `chat:write:bot` scope.
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: chat.delete success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response of chat.delete method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: chat.delete error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from chat.delete method
+      security:
+        - V1Oauth2:
+            - chat:write:user
+            - chat:write:bot

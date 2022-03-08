@@ -1,2 +1,11 @@
 includes:
-  - operations.yaml
+  - chat.delete.yaml
+  - chat.deleteScheduledMessage.yaml
+  - chat.getPermalink.yaml
+  - chat.meMessage.yaml
+  - chat.postEphemeral.yaml
+  - chat.postMessage.yaml
+  - chat.scheduleMessage.yaml
+  - chat.scheduledMessages.list.yaml
+  - chat.unfurl.yaml
+  - chat.update.yaml

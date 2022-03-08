@@ -1,0 +1,53 @@
+paths:
+  /chat.getPermalink:
+    get:
+      tags:
+        - chat
+      description: Retrieve a permalink URL for a specific extant message
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/chat.getPermalink
+      operationId: chat_getPermalink
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `none`"
+          required: true
+          schema:
+            type: string
+        - name: channel
+          in: query
+          description: The ID of the conversation or channel containing the message
+          required: true
+          schema:
+            type: string
+        - name: message_ts
+          in: query
+          description: A message's `ts` value, uniquely identifying it within a channel
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Standard success response
+          content:
+            application/json:
+              schema:
+                title: chat.getPermalink success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response chat.getPermalink
+        default:
+          description: Error response when channel cannot be found
+          content:
+            application/json:
+              schema:
+                title: chat.getPermalink error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from chat.getPermalink method
+      security:
+        - V1Oauth2:
+            - none

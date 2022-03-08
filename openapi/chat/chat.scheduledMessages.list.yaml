@@ -1,0 +1,73 @@
+paths:
+  /chat.scheduledMessages.list:
+    get:
+      tags:
+        - chat.scheduledMessages
+        - chat
+      description: Returns a list of scheduled messages.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/chat.scheduledMessages.list
+      operationId: chat_scheduledMessages_list
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `none`"
+          schema:
+            type: string
+        - name: channel
+          in: query
+          description: The channel of the scheduled messages
+          schema:
+            type: string
+        - name: latest
+          in: query
+          description: A UNIX timestamp of the latest value in the time range
+          schema:
+            type: number
+        - name: oldest
+          in: query
+          description: A UNIX timestamp of the oldest value in the time range
+          schema:
+            type: number
+        - name: limit
+          in: query
+          description: Maximum number of original entries to return.
+          schema:
+            type: integer
+        - name: cursor
+          in: query
+          description:
+            For pagination purposes, this is the `cursor` value returned
+            from a previous call to `chat.scheduledmessages.list` indicating where you
+            want to start this call from.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: chat.scheduledMessages.list schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for successful response from chat.scheduledMessages.list
+                  method
+        default:
+          description: Typical error response if the channel passed is invalid
+          content:
+            application/json:
+              schema:
+                title: chat.scheduledMessages.list error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for error response from chat.scheduledMessages.list
+                  method
+      security:
+        - V1Oauth2:
+            - none
