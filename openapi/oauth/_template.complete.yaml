@@ -1,2 +1,4 @@
 includes:
-  - operations.yaml
+  - oauth.access.yaml
+  - oauth.token.yaml
+  - oauth.v2.access.yaml

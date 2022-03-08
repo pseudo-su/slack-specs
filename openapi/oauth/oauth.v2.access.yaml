@@ -1,0 +1,63 @@
+paths:
+  /oauth.v2.access:
+    get:
+      tags:
+        - oauth.v2
+        - oauth
+      description: Exchanges a temporary OAuth verifier code for an access token.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/oauth.v2.access
+      operationId: oauth_v2_access
+      parameters:
+        - name: client_id
+          in: query
+          description: Issued when you created your application.
+          schema:
+            type: string
+        - name: client_secret
+          in: query
+          description: Issued when you created your application.
+          schema:
+            type: string
+        - name: code
+          in: query
+          description: The `code` param returned via the OAuth callback.
+          required: true
+          schema:
+            type: string
+        - name: redirect_uri
+          in: query
+          description: This must match the originally submitted URI (if one was sent).
+          schema:
+            type: string
+      responses:
+        "200":
+          description:
+            Successful token request with scopes for both a bot user and
+            a user token
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+        - V1Oauth2:
+            - none
