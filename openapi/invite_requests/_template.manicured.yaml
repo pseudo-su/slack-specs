@@ -1,7 +1,6 @@
 includes: []
-  # - api.test.yaml
-  # - bots.info.yaml
-  # - dialog.open.yaml
-  # - migration.exchange.yaml
-  # - rtm.connect.yaml
-  # - search.messages.yaml
+  # - admin.inviteRequests.approve
+  # - admin.inviteRequests.approved.list
+  # - admin.inviteRequests.denied.list
+  # - admin.inviteRequests.deny
+  # - admin.inviteRequests.list

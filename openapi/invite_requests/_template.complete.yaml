@@ -1,2 +1,6 @@
 includes:
-  - operations.yaml
+  - admin.inviteRequests.approve.yaml
+  - admin.inviteRequests.approved.list.yaml
+  - admin.inviteRequests.denied.list.yaml
+  - admin.inviteRequests.deny.yaml
+  - admin.inviteRequests.list.yaml
