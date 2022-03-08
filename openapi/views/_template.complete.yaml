@@ -1,2 +1,5 @@
 includes:
-  - operations.yaml
+  - views.open.yaml
+  - views.publish.yaml
+  - views.push.yaml
+  - views.update.yaml

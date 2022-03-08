@@ -1,0 +1,74 @@
+paths:
+  /views.update:
+    get:
+      tags:
+        - views
+      description: Update an existing view.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/views.update
+      operationId: views_update
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `none`"
+          required: true
+          schema:
+            type: string
+        - name: view_id
+          in: query
+          description:
+            A unique identifier of the view to be updated. Either `view_id`
+            or `external_id` is required.
+          schema:
+            type: string
+        - name: external_id
+          in: query
+          description:
+            A unique identifier of the view set by the developer. Must be
+            unique for all views on a team. Max length of 255 characters. Either `view_id`
+            or `external_id` is required.
+          schema:
+            type: string
+        - name: view
+          in: query
+          description:
+            A [view object](/reference/surfaces/views). This must be a JSON-encoded
+            string.
+          schema:
+            type: string
+        - name: hash
+          in: query
+          description:
+            A string that represents view state to protect against possible
+            race conditions.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Typical success response includes the updated view payload.
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response.
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+        - V1Oauth2:
+            - none

@@ -1,0 +1,61 @@
+paths:
+  /views.open:
+    get:
+      tags:
+        - views
+      description: Open a view for a user.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/views.open
+      operationId: views_open
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `none`"
+          required: true
+          schema:
+            type: string
+        - name: trigger_id
+          in: query
+          description: Exchange a trigger to post to the user.
+          required: true
+          schema:
+            type: string
+        - name: view
+          in: query
+          description:
+            A [view payload](/reference/surfaces/views). This must be a JSON-encoded
+            string.
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Typical success response includes the opened view payload.
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description:
+            Typical error response, before getting to any possible validation
+            errors.
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+        - V1Oauth2:
+            - none
