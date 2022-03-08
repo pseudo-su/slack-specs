@@ -1,0 +1,75 @@
+paths:
+  /admin.users.setRegular:
+    post:
+      tags:
+        - admin.users
+        - admin
+      description:
+        Set an existing guest user, admin user, or owner to be a regular
+        user.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.users.setRegular
+      operationId: admin_users_setRegular
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `admin.users:write`"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - team_id
+                - user_id
+              properties:
+                team_id:
+                  type: string
+                  description: The ID (`T1234`) of the workspace.
+                user_id:
+                  type: string
+                  description: The ID of the user to designate as a regular user.
+          application/json:
+            schema:
+              required:
+                - team_id
+                - user_id
+              properties:
+                team_id:
+                  type: string
+                  description: The ID (`T1234`) of the workspace.
+                user_id:
+                  type: string
+                  description: The ID of the user to designate as a regular user.
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+        - V1Oauth2:
+            - admin.users:write

@@ -1,0 +1,53 @@
+paths:
+  /users.info:
+    get:
+      tags:
+        - users
+      description: Gets information about a user.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/users.info
+      operationId: users_info
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `users:read`"
+          required: true
+          schema:
+            type: string
+        - name: include_locale
+          in: query
+          description:
+            Set this to `true` to receive the locale for this user. Defaults
+            to `false`
+          schema:
+            type: boolean
+        - name: user
+          in: query
+          description: User to get info on
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: users.info success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from users.info method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: users.info error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from users.info method
+      security:
+        - V1Oauth2:
+            - users:read

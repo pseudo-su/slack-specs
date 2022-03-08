@@ -1,0 +1,94 @@
+paths:
+  /users.profile.set:
+    post:
+      tags:
+        - users.profile
+        - users
+      description: Set the profile information for a user.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/users.profile.set
+      operationId: users_profile_set
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `users.profile:write`"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              properties:
+                name:
+                  type: string
+                  description:
+                    Name of a single key to set. Usable only if `profile`
+                    is not passed.
+                profile:
+                  type: string
+                  description:
+                    Collection of key:value pairs presented as a URL-encoded
+                    JSON hash. At most 50 fields may be set. Each field name is limited
+                    to 255 characters.
+                user:
+                  type: string
+                  description:
+                    ID of user to change. This argument may only be specified
+                    by team admins on paid teams.
+                value:
+                  type: string
+                  description:
+                    Value to set a single key to. Usable only if `profile`
+                    is not passed.
+          application/json:
+            schema:
+              properties:
+                name:
+                  type: string
+                  description:
+                    Name of a single key to set. Usable only if `profile`
+                    is not passed.
+                profile:
+                  type: string
+                  description:
+                    Collection of key:value pairs presented as a URL-encoded
+                    JSON hash. At most 50 fields may be set. Each field name is limited
+                    to 255 characters.
+                user:
+                  type: string
+                  description:
+                    ID of user to change. This argument may only be specified
+                    by team admins on paid teams.
+                value:
+                  type: string
+                  description:
+                    Value to set a single key to. Usable only if `profile`
+                    is not passed.
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: users.profile.set schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for successful response from users.profile.set
+                  method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: users.profile.set error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from users.profile.set method
+      security:
+        - V1Oauth2:
+            - users.profile:write

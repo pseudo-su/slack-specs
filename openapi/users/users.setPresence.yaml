@@ -1,0 +1,62 @@
+paths:
+  /users.setPresence:
+    post:
+      tags:
+        - users
+      description: Manually sets user presence.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/users.setPresence
+      operationId: users_setPresence
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `users:write`"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - presence
+              properties:
+                presence:
+                  type: string
+                  description: Either `auto` or `away`
+          application/json:
+            schema:
+              required:
+                - presence
+              properties:
+                presence:
+                  type: string
+                  description: Either `auto` or `away`
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: users.setPresence schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for successful response from users.setPresence
+                  method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: users.setPresence error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from users.setPresence method
+      security:
+        - V1Oauth2:
+            - users:write

@@ -1,0 +1,212 @@
+paths:
+  /users.identity:
+    get:
+      tags:
+        - users
+      description: Get a user's identity.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/users.identity
+      operationId: users_identity
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `identity.basic`"
+          schema:
+            type: string
+      responses:
+        "200":
+          description: "You will receive at a minimum the following information:"
+          content:
+            application/json:
+              schema:
+                title: users.identity schema
+                type: object
+                properties:
+                  temp_oneof_00:
+                    required:
+                      - ok
+                      - team
+                      - user
+                    type: object
+                    properties:
+                      ok:
+                        $ref: "#/components/schemas/defs_ok_true"
+                      team:
+                        required:
+                          - id
+                        type: object
+                        properties:
+                          id:
+                            $ref: "#/components/schemas/defs_team"
+                      user:
+                        required:
+                          - id
+                          - name
+                        type: object
+                        properties:
+                          id:
+                            $ref: "#/components/schemas/defs_user_id"
+                          name:
+                            type: string
+                    description: Schema for 'identity.basic' scope
+                  temp_oneof_01:
+                    required:
+                      - ok
+                      - team
+                      - user
+                    type: object
+                    properties:
+                      ok:
+                        $ref: "#/components/schemas/defs_ok_true"
+                      team:
+                        required:
+                          - id
+                        type: object
+                        properties:
+                          id:
+                            $ref: "#/components/schemas/defs_team"
+                      user:
+                        required:
+                          - email
+                          - id
+                          - name
+                        type: object
+                        properties:
+                          email:
+                            type: string
+                            format: email
+                          id:
+                            $ref: "#/components/schemas/defs_user_id"
+                          name:
+                            type: string
+                    description: Schema for 'identity.basic,identity.email' scopes
+                  temp_oneof_02:
+                    required:
+                      - ok
+                      - team
+                      - user
+                    type: object
+                    properties:
+                      ok:
+                        $ref: "#/components/schemas/defs_ok_true"
+                      team:
+                        required:
+                          - id
+                        type: object
+                        properties:
+                          id:
+                            $ref: "#/components/schemas/defs_team"
+                      user:
+                        required:
+                          - id
+                          - image_192
+                          - image_24
+                          - image_32
+                          - image_48
+                          - image_512
+                          - image_72
+                          - name
+                        type: object
+                        properties:
+                          id:
+                            $ref: "#/components/schemas/defs_user_id"
+                          image_192:
+                            type: string
+                            format: url
+                          image_24:
+                            type: string
+                            format: url
+                          image_32:
+                            type: string
+                            format: url
+                          image_48:
+                            type: string
+                            format: url
+                          image_512:
+                            type: string
+                            format: url
+                          image_72:
+                            type: string
+                            format: url
+                          name:
+                            type: string
+                    description: Schema for 'identity.basic,identity.avatar' scopes
+                  temp_oneof_03:
+                    required:
+                      - ok
+                      - team
+                      - user
+                    type: object
+                    properties:
+                      ok:
+                        $ref: "#/components/schemas/defs_ok_true"
+                      team:
+                        required:
+                          - domain
+                          - id
+                          - image_102
+                          - image_132
+                          - image_230
+                          - image_34
+                          - image_44
+                          - image_68
+                          - image_88
+                          - image_default
+                          - name
+                        type: object
+                        properties:
+                          domain:
+                            type: string
+                          id:
+                            $ref: "#/components/schemas/defs_team"
+                          image_102:
+                            type: string
+                            format: url
+                          image_132:
+                            type: string
+                            format: url
+                          image_230:
+                            type: string
+                            format: url
+                          image_34:
+                            type: string
+                            format: url
+                          image_44:
+                            type: string
+                            format: url
+                          image_68:
+                            type: string
+                            format: url
+                          image_88:
+                            type: string
+                            format: url
+                          image_default:
+                            type: boolean
+                          name:
+                            type: string
+                      user:
+                        required:
+                          - id
+                          - name
+                        type: object
+                        properties:
+                          id:
+                            $ref: "#/components/schemas/defs_user_id"
+                          name:
+                            type: string
+                    description: Schema for 'identity.basic,identity.team' scopes
+                description: Schema for successful response from users.identity method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: users.identity error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from users.identity method
+      security:
+        - V1Oauth2:
+            - identity.basic

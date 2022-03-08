@@ -1,0 +1,57 @@
+paths:
+  /users.setPhoto:
+    post:
+      tags:
+        - users
+      description: Set the user profile photo
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/users.setPhoto
+      operationId: users_setPhoto
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - token
+              properties:
+                token:
+                  type: string
+                  description: "Authentication token. Requires scope: `users.profile:write`"
+                crop_w:
+                  type: string
+                  description: Width/height of crop box (always square)
+                crop_x:
+                  type: string
+                  description: X coordinate of top-left corner of crop box
+                crop_y:
+                  type: string
+                  description: Y coordinate of top-left corner of crop box
+                image:
+                  type: string
+                  description: File contents via `multipart/form-data`.
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: users.setPhoto schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from users.setPhoto method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: users.setPhoto error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from users.setPhoto method
+      security:
+        - V1Oauth2:
+            - users.profile:write

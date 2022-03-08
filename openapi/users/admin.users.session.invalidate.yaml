@@ -1,0 +1,73 @@
+paths:
+  /admin.users.session.invalidate:
+    post:
+      tags:
+        - admin.users.session
+        - admin
+      description: Invalidate a single session for a user by session_id
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.users.session.invalidate
+      operationId: admin_users_session_invalidate
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `admin.users:write`"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - session_id
+                - team_id
+              properties:
+                team_id:
+                  type: string
+                  description: ID of the team that the session belongs to
+                session_id:
+                  type: integer
+                  format: int32
+          application/json:
+            schema:
+              required:
+                - session_id
+                - team_id
+              properties:
+                team_id:
+                  type: string
+                  description: ID of the team that the session belongs to
+                session_id:
+                  type: integer
+                  format: int32
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+        - V1Oauth2:
+            - admin.users:write

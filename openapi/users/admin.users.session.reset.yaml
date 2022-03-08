@@ -1,0 +1,77 @@
+paths:
+  /admin.users.session.reset:
+    post:
+      tags:
+        - admin.users.session
+        - admin
+      description: Wipes all valid sessions on all devices for a given user
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/admin.users.session.reset
+      operationId: admin_users_session_reset
+      parameters:
+        - name: token
+          in: header
+          description: "Authentication token. Requires scope: `admin.users:write`"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+                - user_id
+              properties:
+                user_id:
+                  type: string
+                  description: The ID of the user to wipe sessions for
+                mobile_only:
+                  type: boolean
+                  description: "Only expire mobile sessions (default: false)"
+                web_only:
+                  type: boolean
+                  description: "Only expire web sessions (default: false)"
+          application/json:
+            schema:
+              required:
+                - user_id
+              properties:
+                user_id:
+                  type: string
+                  description: The ID of the user to wipe sessions for
+                mobile_only:
+                  type: boolean
+                  description: "Only expire mobile sessions (default: false)"
+                web_only:
+                  type: boolean
+                  description: "Only expire web sessions (default: false)"
+        required: true
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+        - V1Oauth2:
+            - admin.users:write

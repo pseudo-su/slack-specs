@@ -1,0 +1,49 @@
+paths:
+  /users.lookupByEmail:
+    get:
+      tags:
+        - users
+      description: Find a user with an email address.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/users.lookupByEmail
+      operationId: users_lookupByEmail
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `users:read.email`"
+          required: true
+          schema:
+            type: string
+        - name: email
+          in: query
+          description: An email address belonging to a user in the workspace
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: users.lookupByEmail success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for successful response from users.lookupByEmail
+                  method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: users.lookupByEmail error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from users.lookupByEmail method
+      security:
+        - V1Oauth2:
+            - users:read.email

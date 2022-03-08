@@ -1,3 +1,23 @@
 includes:
-  - operations.yaml
+  - admin.users.assign.yaml
+  - admin.users.invite.yaml
+  - admin.users.list.yaml
+  - admin.users.remove.yaml
+  - admin.users.session.invalidate.yaml
+  - admin.users.session.reset.yaml
+  - admin.users.setAdmin.yaml
+  - admin.users.setExpiration.yaml
+  - admin.users.setOwner.yaml
+  - admin.users.setRegular.yaml
+  - users.conversations.yaml
+  - users.deletePhoto.yaml
+  - users.getPresence.yaml
+  - users.identity.yaml
+  - users.info.yaml
   - users.list.yaml
+  - users.lookupByEmail.yaml
+  - users.profile.get.yaml
+  - users.profile.set.yaml
+  - users.setActive.yaml
+  - users.setPhoto.yaml
+  - users.setPresence.yaml
