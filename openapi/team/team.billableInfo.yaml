@@ -1,0 +1,52 @@
+paths:
+  /team.billableInfo:
+    get:
+      tags:
+        - team
+      description: Gets billable users information for the current team.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/team.billableInfo
+      operationId: team_billableInfo
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `admin`"
+          required: true
+          schema:
+            type: string
+        - name: user
+          in: query
+          description:
+            A user to retrieve the billable information for. Defaults to
+            all users.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: Default success template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _OK_ response
+                  or a verbose schema is not available for this method.
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: Default error template
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  This method either only returns a brief _not OK_ response
+                  or a verbose schema is not available for this method.
+      security:
+        - V1Oauth2:
+            - admin

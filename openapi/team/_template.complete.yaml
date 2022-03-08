@@ -1,2 +1,6 @@
 includes:
-  - operations.yaml
+  - team.accessLogs.yaml
+  - team.billableInfo.yaml
+  - team.info.yaml
+  - team.integrationLogs.yaml
+  - team.profile.get.yaml

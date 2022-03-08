@@ -1,0 +1,49 @@
+paths:
+  /team.info:
+    get:
+      tags:
+        - team
+      description: Gets information about the current team.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/team.info
+      operationId: team_info
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `team:read`"
+          required: true
+          schema:
+            type: string
+        - name: team
+          in: query
+          description:
+            Team to get info on, if omitted, will return information about
+            the current team. Will only return team that the authenticated token is
+            allowed to see through external shared channels
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: team.info schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from team.info method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: team.info error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from team.info method
+      security:
+        - V1Oauth2:
+            - team:read

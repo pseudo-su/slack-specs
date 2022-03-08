@@ -1,7 +1,6 @@
 includes: []
-  # - api.test.yaml
-  # - bots.info.yaml
-  # - dialog.open.yaml
-  # - migration.exchange.yaml
-  # - rtm.connect.yaml
-  # - search.messages.yaml
+  # - team.accessLogs.yaml
+  # - team.billableInfo.yaml
+  # - team.info.yaml
+  # - team.integrationLogs.yaml
+  # - team.profile.get.yaml

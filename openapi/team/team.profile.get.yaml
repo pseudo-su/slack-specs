@@ -1,0 +1,49 @@
+paths:
+  /team.profile.get:
+    get:
+      tags:
+        - team.profile
+        - team
+      description: Retrieve a team's profile.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/team.profile.get
+      operationId: team_profile_get
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `users.profile:read`"
+          required: true
+          schema:
+            type: string
+        - name: visibility
+          in: query
+          description: Filter by visibility.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Typical success response
+          content:
+            application/json:
+              schema:
+                title: team.profile.get success schema
+                type: object
+                additionalProperties:
+                  type: object
+                description:
+                  Schema for successful response from team.profile.get
+                  method
+        default:
+          description: Typical error response
+          content:
+            application/json:
+              schema:
+                title: team.profile.get error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from team.profile.get method
+      security:
+        - V1Oauth2:
+            - users.profile:read

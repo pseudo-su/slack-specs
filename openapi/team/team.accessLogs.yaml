@@ -1,0 +1,56 @@
+paths:
+  /team.accessLogs:
+    get:
+      tags:
+        - team
+      description: Gets the access logs for the current team.
+      externalDocs:
+        description: API method documentation
+        url: https://api.slack.com/methods/team.accessLogs
+      operationId: team_accessLogs
+      parameters:
+        - name: token
+          in: query
+          description: "Authentication token. Requires scope: `admin`"
+          required: true
+          schema:
+            type: string
+        - name: before
+          in: query
+          description: End of time range of logs to include in results (inclusive).
+          schema:
+            type: string
+        - name: count
+          in: query
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: This response demonstrates pagination and two access log entries.
+          content:
+            application/json:
+              schema:
+                title: team.accessLogs schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for successful response from team.accessLogs method
+        default:
+          description:
+            "A workspace must be on a paid plan to use this method, otherwise
+            the `paid_only` error is thrown:"
+          content:
+            application/json:
+              schema:
+                title: team.accessLogs error schema
+                type: object
+                additionalProperties:
+                  type: object
+                description: Schema for error response from team.accessLogs method
+      security:
+        - V1Oauth2:
+            - admin
