@@ -91,12 +91,27 @@ type ClientInterface interface {
 	// ConversationsList request
 	ConversationsList(ctx context.Context, params *ConversationsListParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// ConversationsMembers request
+	ConversationsMembers(ctx context.Context, params *ConversationsMembersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// UsersList request
 	UsersList(ctx context.Context, params *UsersListParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 }
 
 func (c *Client) ConversationsList(ctx context.Context, params *ConversationsListParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewConversationsListRequest(c.Server, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) ConversationsMembers(ctx context.Context, params *ConversationsMembersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewConversationsMembersRequest(c.Server, params)
 	if err != nil {
 		return nil, err
 	}
@@ -159,6 +174,85 @@ func NewConversationsListRequest(server string, params *ConversationsListParams)
 	if params.Types != nil {
 
 		if queryFrag, err := runtime.StyleParamWithLocation("form", false, "types", runtime.ParamLocationQuery, *params.Types); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.Limit != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	if params.Cursor != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "cursor", runtime.ParamLocationQuery, *params.Cursor); err != nil {
+			return nil, err
+		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
+			return nil, err
+		} else {
+			for k, v := range parsed {
+				for _, v2 := range v {
+					queryValues.Add(k, v2)
+				}
+			}
+		}
+
+	}
+
+	queryURL.RawQuery = queryValues.Encode()
+
+	req, err := http.NewRequest("GET", queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewConversationsMembersRequest generates requests for ConversationsMembers
+func NewConversationsMembersRequest(server string, params *ConversationsMembersParams) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/conversations.members")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	queryValues := queryURL.Query()
+
+	if params.Channel != nil {
+
+		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "channel", runtime.ParamLocationQuery, *params.Channel); err != nil {
 			return nil, err
 		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
 			return nil, err
@@ -355,6 +449,9 @@ type ClientWithResponsesInterface interface {
 	// ConversationsList request
 	ConversationsListWithResponse(ctx context.Context, params *ConversationsListParams, reqEditors ...RequestEditorFn) (*ConversationsListResponse, error)
 
+	// ConversationsMembers request
+	ConversationsMembersWithResponse(ctx context.Context, params *ConversationsMembersParams, reqEditors ...RequestEditorFn) (*ConversationsMembersResponse, error)
+
 	// UsersList request
 	UsersListWithResponse(ctx context.Context, params *UsersListParams, reqEditors ...RequestEditorFn) (*UsersListResponse, error)
 }
@@ -376,6 +473,29 @@ func (r ConversationsListResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r ConversationsListResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+type ConversationsMembersResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	JSON200      *ConversationsMembersResponseBody
+	JSONDefault  *ConversationsMembersErrorResponseBody
+}
+
+// Status returns HTTPResponse.Status
+func (r ConversationsMembersResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r ConversationsMembersResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -414,6 +534,15 @@ func (c *ClientWithResponses) ConversationsListWithResponse(ctx context.Context,
 	return ParseConversationsListResponse(rsp)
 }
 
+// ConversationsMembersWithResponse request returning *ConversationsMembersResponse
+func (c *ClientWithResponses) ConversationsMembersWithResponse(ctx context.Context, params *ConversationsMembersParams, reqEditors ...RequestEditorFn) (*ConversationsMembersResponse, error) {
+	rsp, err := c.ConversationsMembers(ctx, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseConversationsMembersResponse(rsp)
+}
+
 // UsersListWithResponse request returning *UsersListResponse
 func (c *ClientWithResponses) UsersListWithResponse(ctx context.Context, params *UsersListParams, reqEditors ...RequestEditorFn) (*UsersListResponse, error) {
 	rsp, err := c.UsersList(ctx, params, reqEditors...)
@@ -446,6 +575,39 @@ func ParseConversationsListResponse(rsp *http.Response) (*ConversationsListRespo
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && true:
 		var dest ConversationsListErrorResponseBody
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSONDefault = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseConversationsMembersResponse parses an HTTP response from a ConversationsMembersWithResponse call
+func ParseConversationsMembersResponse(rsp *http.Response) (*ConversationsMembersResponse, error) {
+	bodyBytes, err := ioutil.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &ConversationsMembersResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest ConversationsMembersResponseBody
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && true:
+		var dest ConversationsMembersErrorResponseBody
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

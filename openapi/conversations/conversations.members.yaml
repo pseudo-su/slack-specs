@@ -1,19 +1,25 @@
 paths:
   /conversations.members:
     get:
+      operationId: conversations.members
       tags:
         - conversations
       description: Retrieve members of a conversation.
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/conversations.members
-      operationId: conversations_members
+      security:
+        - BotTokenAuth:
+            - channels:read
+            - groups:read
+            - im:read
+            - mpim:read
+        - V1Oauth2:
+            - channels:read
+            - groups:read
+            - im:read
+            - mpim:read
       parameters:
-        - name: token
-          in: query
-          description: "Authentication token. Requires scope: `conversations:read`"
-          schema:
-            type: string
         - name: channel
           in: query
           description: ID of the conversation to retrieve members for
@@ -38,30 +44,60 @@ paths:
             type: string
       responses:
         "200":
-          description: Typical paginated success response
+          description: Typical success response with only public channels
           content:
             application/json:
               schema:
-                title: conversations.members success schema
-                type: object
-                additionalProperties:
-                  type: object
-                description:
-                  Schema for successful response conversations.members
-                  method
+                $ref: "#/components/schemas/conversations.members_ResponseBody"
         default:
-          description: Typical error response when an invalid cursor is provided
+          description: Typical error response
           content:
             application/json:
               schema:
-                title: conversations.members error schema
-                type: object
-                additionalProperties:
-                  type: object
-                description: Schema for error response conversations.members method
-      security:
-        - V1Oauth2:
-            - channels:read
-            - groups:read
-            - im:read
-            - mpim:read
+                $ref: "#/components/schemas/conversations.members_ErrorResponseBody"
+
+components:
+  schemas:
+    conversations.members_ResponseBody:
+      type: object
+      title: conversations.members success schema
+      additionalProperties: true
+      description: Schema for successful response from conversations.members
+        method
+      required:
+        - ok
+        - channels
+        - response_metadata
+      properties:
+        ok:
+          type: boolean
+          example: true
+        channels:
+          type: array
+          items:
+            type: string
+            example: U023BECGF
+        response_metadata:
+          type: object
+          required:
+            - next_cursor
+          properties:
+            next_cursor:
+              type: string
+              example: dGVhbTpDMDYxRkE1UEI=
+
+    conversations.members_ErrorResponseBody:
+      type: object
+      title: conversations.members error schema
+      additionalProperties: true
+      description: Schema for error response from conversations.members method
+      required:
+        - ok
+        - error
+      properties:
+        ok:
+          type: boolean
+          example: false
+        error:
+          type: string
+          example: invalid_cursor

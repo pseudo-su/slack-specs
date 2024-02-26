@@ -387,6 +387,47 @@ components:
       - response_metadata
       title: conversations.list success schema
       type: object
+    conversations.members_ErrorResponseBody:
+      additionalProperties: true
+      description: Schema for error response from conversations.members method
+      properties:
+        error:
+          example: invalid_cursor
+          type: string
+        ok:
+          example: false
+          type: boolean
+      required:
+      - ok
+      - error
+      title: conversations.members error schema
+      type: object
+    conversations.members_ResponseBody:
+      additionalProperties: true
+      description: Schema for successful response from conversations.members method
+      properties:
+        channels:
+          items:
+            example: U023BECGF
+            type: string
+          type: array
+        ok:
+          example: true
+          type: boolean
+        response_metadata:
+          properties:
+            next_cursor:
+              example: dGVhbTpDMDYxRkE1UEI=
+              type: string
+          required:
+          - next_cursor
+          type: object
+      required:
+      - ok
+      - channels
+      - response_metadata
+      title: conversations.members success schema
+      type: object
     defs_app_id:
       pattern: ^A[A-Z0-9]{1,}$
       title: App ID
@@ -8134,13 +8175,8 @@ paths:
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/conversations.members
-      operationId: conversations_members
+      operationId: conversations.members
       parameters:
-      - description: 'Authentication token. Requires scope: `conversations:read`'
-        in: query
-        name: token
-        schema:
-          type: string
       - description: ID of the conversation to retrieve members for
         in: query
         name: channel
@@ -8166,24 +8202,20 @@ paths:
           content:
             application/json:
               schema:
-                additionalProperties:
-                  type: object
-                description: Schema for successful response conversations.members
-                  method
-                title: conversations.members success schema
-                type: object
-          description: Typical paginated success response
+                $ref: '#/components/schemas/conversations.members_ResponseBody'
+          description: Typical success response with only public channels
         default:
           content:
             application/json:
               schema:
-                additionalProperties:
-                  type: object
-                description: Schema for error response conversations.members method
-                title: conversations.members error schema
-                type: object
-          description: Typical error response when an invalid cursor is provided
+                $ref: '#/components/schemas/conversations.members_ErrorResponseBody'
+          description: Typical error response
       security:
+      - BotTokenAuth:
+        - channels:read
+        - groups:read
+        - im:read
+        - mpim:read
       - V1Oauth2:
         - channels:read
         - groups:read

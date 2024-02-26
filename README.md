@@ -175,7 +175,7 @@ For more details and before opening pull requests please read the full [./CONTRI
 | `conversations.leave`                                      | ✅          | ❌           | ❌            | ❌             |
 | `conversations.list`                                       | ✅          | ✅           | ✅            | 🚧             |
 | `conversations.mark`                                       | ✅          | ❌           | ❌            | ❌             |
-| `conversations.members`                                    | ✅          | ❌           | ❌            | ❌             |
+| `conversations.members`                                    | ✅          | ✅           | ❌            | ❌             |
 | `conversations.open`                                       | ✅          | ❌           | ❌            | ❌             |
 | `conversations.rename`                                     | ✅          | ❌           | ❌            | ❌             |
 | `conversations.replies`                                    | ✅          | ❌           | ❌            | ❌             |

@@ -28,7 +28,7 @@ includes:
   # - conversations.leave.yaml
   - conversations.list.yaml
   # - conversations.mark.yaml
-  # - conversations.members.yaml
+  - conversations.members.yaml
   # - conversations.open.yaml
   # - conversations.rename.yaml
   # - conversations.replies.yaml

@@ -170,6 +170,23 @@ type ConversationsListResponseBody struct {
 	AdditionalProperties map[string]interface{} `json:"-"`
 }
 
+// Schema for error response from conversations.members method
+type ConversationsMembersErrorResponseBody struct {
+	Error                string                 `json:"error"`
+	Ok                   bool                   `json:"ok"`
+	AdditionalProperties map[string]interface{} `json:"-"`
+}
+
+// Schema for successful response from conversations.members method
+type ConversationsMembersResponseBody struct {
+	Channels         []string `json:"channels"`
+	Ok               bool     `json:"ok"`
+	ResponseMetadata struct {
+		NextCursor string `json:"next_cursor"`
+	} `json:"response_metadata"`
+	AdditionalProperties map[string]interface{} `json:"-"`
+}
+
 // Schema for error response from users.list method
 type UsersListErrorResponseBody struct {
 	Error                string                 `json:"error"`
@@ -246,6 +263,18 @@ type ConversationsListParams struct {
 	Types *[]ConversationsListConversationType `json:"types,omitempty"`
 
 	// The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the list hasn't been reached. Must be an integer no larger than 1000.
+	Limit *int `json:"limit,omitempty"`
+
+	// Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
+	Cursor *string `json:"cursor,omitempty"`
+}
+
+// ConversationsMembersParams defines parameters for ConversationsMembers.
+type ConversationsMembersParams struct {
+	// ID of the conversation to retrieve members for
+	Channel *string `json:"channel,omitempty"`
+
+	// The maximum number of items to return. Fewer than the requested number of items may be returned, even if the end of the users list hasn't been reached.
 	Limit *int `json:"limit,omitempty"`
 
 	// Paginate through collections of data by setting the `cursor` parameter to a `next_cursor` attribute returned by a previous request's `response_metadata`. Default value fetches the first "page" of the collection. See [pagination](/docs/pagination) for more detail.
@@ -411,6 +440,177 @@ func (a *ConversationsListResponseBody) UnmarshalJSON(b []byte) error {
 
 // Override default JSON handling for ConversationsListResponseBody to handle AdditionalProperties
 func (a ConversationsListResponseBody) MarshalJSON() ([]byte, error) {
+	var err error
+	object := make(map[string]json.RawMessage)
+
+	object["channels"], err = json.Marshal(a.Channels)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'channels': %w", err)
+	}
+
+	object["ok"], err = json.Marshal(a.Ok)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'ok': %w", err)
+	}
+
+	object["response_metadata"], err = json.Marshal(a.ResponseMetadata)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'response_metadata': %w", err)
+	}
+
+	for fieldName, field := range a.AdditionalProperties {
+		object[fieldName], err = json.Marshal(field)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling '%s': %w", fieldName, err)
+		}
+	}
+	return json.Marshal(object)
+}
+
+// Getter for additional properties for ConversationsMembersErrorResponseBody. Returns the specified
+// element and whether it was found
+func (a ConversationsMembersErrorResponseBody) Get(fieldName string) (value interface{}, found bool) {
+	if a.AdditionalProperties != nil {
+		value, found = a.AdditionalProperties[fieldName]
+	}
+	return
+}
+
+// Setter for additional properties for ConversationsMembersErrorResponseBody
+func (a *ConversationsMembersErrorResponseBody) Set(fieldName string, value interface{}) {
+	if a.AdditionalProperties == nil {
+		a.AdditionalProperties = make(map[string]interface{})
+	}
+	a.AdditionalProperties[fieldName] = value
+}
+
+// Override default JSON handling for ConversationsMembersErrorResponseBody to handle AdditionalProperties
+func (a *ConversationsMembersErrorResponseBody) UnmarshalJSON(b []byte) error {
+	object := make(map[string]json.RawMessage)
+	err := json.Unmarshal(b, &object)
+	if err != nil {
+		return err
+	}
+
+	if raw, found := object["error"]; found {
+		err = json.Unmarshal(raw, &a.Error)
+		if err != nil {
+			return fmt.Errorf("error reading 'error': %w", err)
+		}
+		delete(object, "error")
+	}
+
+	if raw, found := object["ok"]; found {
+		err = json.Unmarshal(raw, &a.Ok)
+		if err != nil {
+			return fmt.Errorf("error reading 'ok': %w", err)
+		}
+		delete(object, "ok")
+	}
+
+	if len(object) != 0 {
+		a.AdditionalProperties = make(map[string]interface{})
+		for fieldName, fieldBuf := range object {
+			var fieldVal interface{}
+			err := json.Unmarshal(fieldBuf, &fieldVal)
+			if err != nil {
+				return fmt.Errorf("error unmarshaling field %s: %w", fieldName, err)
+			}
+			a.AdditionalProperties[fieldName] = fieldVal
+		}
+	}
+	return nil
+}
+
+// Override default JSON handling for ConversationsMembersErrorResponseBody to handle AdditionalProperties
+func (a ConversationsMembersErrorResponseBody) MarshalJSON() ([]byte, error) {
+	var err error
+	object := make(map[string]json.RawMessage)
+
+	object["error"], err = json.Marshal(a.Error)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'error': %w", err)
+	}
+
+	object["ok"], err = json.Marshal(a.Ok)
+	if err != nil {
+		return nil, fmt.Errorf("error marshaling 'ok': %w", err)
+	}
+
+	for fieldName, field := range a.AdditionalProperties {
+		object[fieldName], err = json.Marshal(field)
+		if err != nil {
+			return nil, fmt.Errorf("error marshaling '%s': %w", fieldName, err)
+		}
+	}
+	return json.Marshal(object)
+}
+
+// Getter for additional properties for ConversationsMembersResponseBody. Returns the specified
+// element and whether it was found
+func (a ConversationsMembersResponseBody) Get(fieldName string) (value interface{}, found bool) {
+	if a.AdditionalProperties != nil {
+		value, found = a.AdditionalProperties[fieldName]
+	}
+	return
+}
+
+// Setter for additional properties for ConversationsMembersResponseBody
+func (a *ConversationsMembersResponseBody) Set(fieldName string, value interface{}) {
+	if a.AdditionalProperties == nil {
+		a.AdditionalProperties = make(map[string]interface{})
+	}
+	a.AdditionalProperties[fieldName] = value
+}
+
+// Override default JSON handling for ConversationsMembersResponseBody to handle AdditionalProperties
+func (a *ConversationsMembersResponseBody) UnmarshalJSON(b []byte) error {
+	object := make(map[string]json.RawMessage)
+	err := json.Unmarshal(b, &object)
+	if err != nil {
+		return err
+	}
+
+	if raw, found := object["channels"]; found {
+		err = json.Unmarshal(raw, &a.Channels)
+		if err != nil {
+			return fmt.Errorf("error reading 'channels': %w", err)
+		}
+		delete(object, "channels")
+	}
+
+	if raw, found := object["ok"]; found {
+		err = json.Unmarshal(raw, &a.Ok)
+		if err != nil {
+			return fmt.Errorf("error reading 'ok': %w", err)
+		}
+		delete(object, "ok")
+	}
+
+	if raw, found := object["response_metadata"]; found {
+		err = json.Unmarshal(raw, &a.ResponseMetadata)
+		if err != nil {
+			return fmt.Errorf("error reading 'response_metadata': %w", err)
+		}
+		delete(object, "response_metadata")
+	}
+
+	if len(object) != 0 {
+		a.AdditionalProperties = make(map[string]interface{})
+		for fieldName, fieldBuf := range object {
+			var fieldVal interface{}
+			err := json.Unmarshal(fieldBuf, &fieldVal)
+			if err != nil {
+				return fmt.Errorf("error unmarshaling field %s: %w", fieldName, err)
+			}
+			a.AdditionalProperties[fieldName] = fieldVal
+		}
+	}
+	return nil
+}
+
+// Override default JSON handling for ConversationsMembersResponseBody to handle AdditionalProperties
+func (a ConversationsMembersResponseBody) MarshalJSON() ([]byte, error) {
 	var err error
 	object := make(map[string]json.RawMessage)
 
