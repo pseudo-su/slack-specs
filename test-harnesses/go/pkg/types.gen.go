@@ -77,6 +77,7 @@ type ConversationsListChannel struct {
 		Value   string  `json:"value"`
 	} `json:"topic"`
 	Unlinked float32 `json:"unlinked"`
+	Updated  float32 `json:"updated"`
 }
 
 // ConversationsListChannelIsChannel defines model for ConversationsListChannel.IsChannel.

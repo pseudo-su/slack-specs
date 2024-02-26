@@ -119,10 +119,14 @@ components:
         unlinked:
           example: 0
           type: number
+        updated:
+          example: 1449252889
+          type: number
       required:
       - id
       - name
       - is_channel
+      - updated
       - created
       - creator
       - is_archived
@@ -8002,7 +8006,7 @@ paths:
       externalDocs:
         description: API method documentation
         url: https://api.slack.com/methods/conversations.list
-      operationId: conversations_list
+      operationId: conversations.list
       parameters:
       - description: Set to `true` to exclude archived channels from the list
         in: query

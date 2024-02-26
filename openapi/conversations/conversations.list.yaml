@@ -1,7 +1,7 @@
 paths:
   /conversations.list:
     get:
-      operationId: conversations_list
+      operationId: conversations.list
       tags:
         - conversations
       description: Lists all channels in a Slack team.
@@ -86,6 +86,7 @@ components:
         # - is_group
         # - is_im
         # - is_mpim
+        - updated
         - created
         - creator
         - is_archived
@@ -124,6 +125,9 @@ components:
         is_mpim:
           type: boolean
           example: false
+        updated:
+          example: 1449252889
+          type: number
         created:
           type: number
           example: 1449252889
