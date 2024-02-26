@@ -66,13 +66,13 @@ components:
         method
       required:
         - ok
-        - channels
+        - members
         - response_metadata
       properties:
         ok:
           type: boolean
           example: true
-        channels:
+        members:
           type: array
           items:
             type: string

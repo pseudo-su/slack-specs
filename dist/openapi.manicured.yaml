@@ -394,7 +394,7 @@ components:
       additionalProperties: true
       description: Schema for successful response from conversations.members method
       properties:
-        channels:
+        members:
           items:
             example: U023BECGF
             type: string
@@ -412,7 +412,7 @@ components:
           type: object
       required:
       - ok
-      - channels
+      - members
       - response_metadata
       title: conversations.members success schema
       type: object

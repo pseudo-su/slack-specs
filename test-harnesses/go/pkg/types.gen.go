@@ -179,7 +179,7 @@ type ConversationsMembersErrorResponseBody struct {
 
 // Schema for successful response from conversations.members method
 type ConversationsMembersResponseBody struct {
-	Channels         []string `json:"channels"`
+	Members          []string `json:"members"`
 	Ok               bool     `json:"ok"`
 	ResponseMetadata struct {
 		NextCursor string `json:"next_cursor"`
@@ -571,12 +571,12 @@ func (a *ConversationsMembersResponseBody) UnmarshalJSON(b []byte) error {
 		return err
 	}
 
-	if raw, found := object["channels"]; found {
-		err = json.Unmarshal(raw, &a.Channels)
+	if raw, found := object["members"]; found {
+		err = json.Unmarshal(raw, &a.Members)
 		if err != nil {
-			return fmt.Errorf("error reading 'channels': %w", err)
+			return fmt.Errorf("error reading 'members': %w", err)
 		}
-		delete(object, "channels")
+		delete(object, "members")
 	}
 
 	if raw, found := object["ok"]; found {
@@ -614,9 +614,9 @@ func (a ConversationsMembersResponseBody) MarshalJSON() ([]byte, error) {
 	var err error
 	object := make(map[string]json.RawMessage)
 
-	object["channels"], err = json.Marshal(a.Channels)
+	object["members"], err = json.Marshal(a.Members)
 	if err != nil {
-		return nil, fmt.Errorf("error marshaling 'channels': %w", err)
+		return nil, fmt.Errorf("error marshaling 'members': %w", err)
 	}
 
 	object["ok"], err = json.Marshal(a.Ok)
